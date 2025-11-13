@@ -74,7 +74,7 @@
 								Don’t have an account?
 							</span>
 
-							<a href="facebook.com" class="txt2">
+							<a href="facebook" class="txt2">
 								Sign up
 							</a>
 						</li>
