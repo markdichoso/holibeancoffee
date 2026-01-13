@@ -45,7 +45,7 @@
 						var longitude = position.coords.longitude;
 						$.ajax({
 							type:'POST',
-							url:"<?= base_url('src/location/getLocation.php') ?>",
+							url:"src/location/getLocation.php",
 							data:{latitude: latitude, longitude: longitude},
 							success:function(msg){
 								if(msg){
