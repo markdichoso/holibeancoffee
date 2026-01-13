@@ -29,6 +29,43 @@
 <!--===============================================================================================-->
 <meta name="robots" content="noindex, follow">
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="src/jquery/jquery-3.2.1.min.js"></script>
+<script>
+					$(document).ready(function(){
+    				if(navigator.geolocation){
+       				 navigator.geolocation.getCurrentPosition(showLocation);
+    					}else{ 
+        			$('#location').html('Geolocation is not supported by this browser.');
+   							 }
+					});
+
+					function showLocation(position){
+						var latitude = position.coords.latitude;
+						var longitude = position.coords.longitude;
+						$.ajax({
+							type:'POST',
+							url:"<?= base_url('src/location/getLocation.php') ?>",
+							data:{latitude: latitude, longitude: longitude},
+							success:function(msg){
+								if(msg){
+								$("#location").val(msg);
+								}else{
+									$("#location").val('Not Available');
+								}
+							}
+						});
+					}
+                    function timeIn() {
+					alert('ok');
+                    //    if (navigator.geolocation) {
+                     //       navigator.geolocation.getCurrentPosition(success, error);
+                     //   } else {
+                     //       document.getElementById('status').innerText = "Geolocation is not supported by this browser.";
+                     //   }
+                    }
+
+                </script>
 <body>
 
 	<div class="limiter">
@@ -42,49 +79,25 @@
                 <form class="login100-form validate-form" id="timeInForm" method="POST" action="save_timein.php">
                     
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Branch Location">
-						<input class="input100" type="text" name="branch_loc">
-						<span class="focus-input100" data-placeholder="Branch Location"></span>
+						<input class="input100" id="location" type="text" name="branch_loc">
+						
 					</div>
-                    <input type="hidden" name="latitude" id="latitude">
-                    <input type="hidden" name="longitude" id="longitude">
+                    <input type="hidden" name="location" id="location">
                     <input type="hidden" name="time_in" id="time_in">
                     <button type="button" class="login100-form-btn" onclick="timeIn()">Time In</button>
                 </form>
 
-                <script>
-                    function timeIn() {
-                        if (navigator.geolocation) {
-                            navigator.geolocation.getCurrentPosition(success, error);
-                        } else {
-                            document.getElementById('status').innerText = "Geolocation is not supported by this browser.";
-                        }
-                    }
-
-                    function success(position) {
-                        const latitude = position.coords.latitude;
-                        const longitude = position.coords.longitude;
-                        const now = new Date();
-
-                        document.getElementById('latitude').value = latitude;
-                        document.getElementById('longitude').value = longitude;
-                        document.getElementById('time_in').value = now.toISOString();
-
-                        document.getElementById('timeInForm').submit();
-                    }
-
-                    function error() {
-                        document.getElementById('status').innerText = "Unable to retrieve your location.";
-                    }
-                </script>
-			</div>
+                </div>
 		</div>
 	</div>
 
 
 	<div id="dropDownSelect1"></div>
 
-<!--===============================================================================================-->
-	<script src="src/jquery/jquery-3.2.1.min.js"></script>
+	
+
+<!--===============================================================================================
+
 <!--===============================================================================================-->
 	<script src="src/css/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
@@ -101,6 +114,7 @@
 	<script src="src/jquery/main.js"></script>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	
 	<script>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
@@ -108,5 +122,8 @@
 
 	  gtag('config', 'UA-23581568-13');
 	</script>
+
+	
 </body>
 </html>
+<?= base_url() ?>

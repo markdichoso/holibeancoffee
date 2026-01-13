@@ -8,3 +8,5 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->get('/timein', 'AttendanceController::TimeIn');
 $routes->get('/timeout', 'AttendanceController::TimeOut');
+$routes->get('/location', 'AttendanceController::Location');
+
