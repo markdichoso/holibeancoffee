@@ -7,8 +7,7 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     $url = 'https://us1.locationiq.com/v1/reverse?key=pk.35a6dfbc6fb83f3e2bf972bcfdd6ac50&lat='.trim($_POST['latitude']).'&lon='.trim($_POST['longitude']).'&format=json&';
     $json = @file_get_contents($url);
     $data = json_decode($json);
-   // $status = $data->status;
-   
+      
     //if request status is successful
     if($data){
         //get address from json data
@@ -19,8 +18,6 @@ if(!empty($_POST['latitude']) && !empty($_POST['longitude'])){
     
     //return address to ajax 
     echo $location;
-   // print_r($data);
- //  echo $data->display_name;
 }
-//echo "Test";
+
 ?>
