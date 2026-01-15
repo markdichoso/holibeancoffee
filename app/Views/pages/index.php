@@ -34,7 +34,9 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-85 p-b-20">
-				<form class="login100-form validate-form">
+				<?= validation_list_errors() ?>
+				<?= form_open('form') ?>
+				<!-- < class="login100-form validate-form"> -->
 					<span class="login100-form-title p-b-70">
 						Welcome to HBIS
 					</span>

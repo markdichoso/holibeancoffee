@@ -9,5 +9,5 @@ $routes->get('/', 'Home::index');
 $routes->get('/timein', 'AttendanceController::TimeIn');
 $routes->get('/timeout', 'AttendanceController::TimeOut');
 $routes->get('/location', 'AttendanceController::Location');
-$routes->get('/login', 'LoginController::Sign_in');
+$routes->get('/loginvalidation', 'LoginValidation::Sign_in');
 
