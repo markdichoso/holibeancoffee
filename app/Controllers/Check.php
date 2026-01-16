@@ -8,21 +8,13 @@ class Check extends BaseController
 {
     public function index()
     {
-        helper('form','url');
-        $data = $this->request->getPost();
+     //   helper('form','url');
+       // $data = $this->request->getPost();
         //if($data){
-            print_r($data);
+        //    print_r($data);
         //}
        // return view('pages/index');
+       echo "test";
     }
 
-    public function check()
-    {
-        helper('form','url');
-        $data = $this->request->getPost();
-        //if($data){
-           print_r($data);
-        //}
-        //return view('pages/index',$data);
-    }
 }

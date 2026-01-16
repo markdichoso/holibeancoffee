@@ -8,7 +8,7 @@ class Home extends BaseController
 {
     public function index()
     {
-        helper(['form']);
+        helper('form','url');
         $data = $this->request->getPost();
         if($data){
             print_r($data); return false;
