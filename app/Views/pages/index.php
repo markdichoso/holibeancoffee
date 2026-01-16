@@ -34,8 +34,8 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-85 p-b-20">
-				<?= validation_list_errors() ?>
-				<?= form_open('home') ?>
+				
+				<?= form_open('') ?>
 				<!-- < class="login100-form validate-form"> -->
 					<span class="login100-form-title p-b-70">
 						Welcome to HBIS
@@ -50,15 +50,16 @@
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Enter password">
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100" data-placeholder="Password"></span>
+						<input class="input100" type="password" name="password">
+						<span class="focus-input100" data-placeholder="Password" ></span>
 					</div>
 
 					<div class="container-login100-form-btn">
 						<input type="submit" class="login100-form-btn" value="Submit"/>
-							
+						<br />
+						<?= validation_list_errors() ?>	
 					</div>
-
+					
 					<ul class="login-more p-t-190">
 						<li class="m-b-8">
 							<span class="txt1">

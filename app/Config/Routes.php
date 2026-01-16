@@ -6,7 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->post('/home', 'Home::index');
+$routes->post('/', 'Home::index');
 $routes->get('/timein', 'AttendanceController::TimeIn');
 $routes->get('/timeout', 'AttendanceController::TimeOut');
 $routes->get('/location', 'AttendanceController::Location');
