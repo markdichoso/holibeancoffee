@@ -4,16 +4,16 @@ namespace App\Controllers;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 
-class Home extends BaseController
+class Check extends BaseController
 {
     public function index()
     {
-        helper(['form']);
+        helper('form','url');
         $data = $this->request->getPost();
-        if($data){
-            print_r($data); return false;
-        }
-        return view('pages/index');
+        //if($data){
+            print_r($data);
+        //}
+       // return view('pages/index');
     }
 
     public function check()

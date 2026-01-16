@@ -35,7 +35,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-85 p-b-20">
 				<?= validation_list_errors() ?>
-				<?= form_open('form') ?>
+				<?= form_open('home') ?>
 				<!-- < class="login100-form validate-form"> -->
 					<span class="login100-form-title p-b-70">
 						Welcome to HBIS
@@ -55,9 +55,8 @@
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Login
-						</button>
+						<input type="submit" class="login100-form-btn" value="Submit"/>
+							
 					</div>
 
 					<ul class="login-more p-t-190">
@@ -81,7 +80,7 @@
 							</a>
 						</li>
 					</ul>
-				</form>
+				<?= form_close() ?>
 			</div>
 		</div>
 	</div>
@@ -114,5 +113,5 @@
 
 	  gtag('config', 'UA-23581568-13');
 	</script>
-</body>
+	</body>
 </html>
