@@ -7,9 +7,10 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::index');
 $routes->post('/', 'Home::index');
-$routes->get('/timein', 'AttendanceController::TimeIn');
+$routes->add('/timein', 'AttendanceController::TimeIn');
 $routes->get('/timeout', 'AttendanceController::TimeOut');
-$routes->get('/location', 'AttendanceController::Location');
+$routes->post('/location', 'AttendanceController::Location');
+$routes->post('/send_in', 'AttendanceController::Send_In');
 $routes->add('/loginvalidation', 'LoginValidation::Sign_in');
 
 

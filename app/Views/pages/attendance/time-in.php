@@ -45,7 +45,7 @@
 						var longitude = position.coords.longitude;
 						$.ajax({
 							type:'POST',
-							url:"src/location/getLocation.php",
+							url:"location",
 							data:{latitude: latitude, longitude: longitude},
 							success:function(msg){
 								if(msg){
@@ -56,14 +56,6 @@
 							}
 						});
 					}
-                    function timeIn() {
-					alert('ok');
-                    //    if (navigator.geolocation) {
-                     //       navigator.geolocation.getCurrentPosition(success, error);
-                     //   } else {
-                     //       document.getElementById('status').innerText = "Geolocation is not supported by this browser.";
-                     //   }
-                    }
 
                 </script>
 <body>
@@ -75,19 +67,16 @@
                     <h2>Time In</h2>
                     <p id="status">Click the button to time-in.</p>
                 </span>
-
-                <form class="login100-form validate-form" id="timeInForm" method="POST" action="save_timein.php">
-                    
+				<?php $attributes = ['class' => 'login100-form validate-form', 'id' => 'timeInForm']; ?>
+				<?= form_open('send_in') ?>
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Branch Location">
-						<input class="input100" id="location" type="text" name="branch_loc">
-						
+						<input class="input100" id="location" type="text" name="location">
 					</div>
-                    <input type="hidden" name="location" id="location">
-                    <input type="hidden" name="time_in" id="time_in">
-                    <button type="button" class="login100-form-btn" onclick="timeIn()">Time In</button>
-                </form>
-
-                </div>
+					<input type="hidden" id="time_in" name="time_in" value="time_in">
+					<input type="hidden" id="emp_info_id" name="emp_info_id" value="1">
+                    <input type="submit" class=" login100-form-btn" value="Time In">
+				<?= form_close() ?>
+               </div>
 		</div>
 	</div>
 
