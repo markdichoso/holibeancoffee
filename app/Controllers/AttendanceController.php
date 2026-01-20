@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\Attendance;
+use CodeIgniter\I18n\Time;
 
 class AttendanceController extends BaseController
 {
@@ -47,8 +48,10 @@ class AttendanceController extends BaseController
     {
     $userModel = new Attendance();
     $data = $this->request->getPost();
-    $data['date_in']=date("l, F j, Y H:i:s");
-    print_r($data); return false;
+    $myTime = Time::now('Asia/Manila', 'en_US');
+    //echo $myTime; return false;
+    $data['date_in']=$myTime->format("l, F j, Y h:i:s");
+    //print_r($data); return false;
         // Use the insert() method for new records
         if ($userModel->insert($data)){
         return redirect()->to('timein')->with('success', 'Successfully Time in!');
@@ -59,18 +62,12 @@ class AttendanceController extends BaseController
     {      
     $userModel = new Attendance();
     $data = $this->request->getPost();
-    $data['date_out']=date("l, F j, Y H:i:s");
+    $myTime = Time::now('Asia/Manila', 'en_US');
+    $data['date_out']=$myTime->format("l, F j, Y h:i:s");
     $userModel = new Attendance();
-    $update = $userModel->time_out($data);
-
-    if($update){
-        echo "success";
-    }
  
-        // Use the insert() method for new records
-        // if ($userModel->insert($data)){
-        // return redirect()->to('timein')->with('success', 'Successfully Time in!');
-        // }
-        //print_r($data);
+    if ($userModel->time_out($data)){
+        return redirect()->to('timeout')->with('success', 'Successfully Time out!');
+        }
     }
 }

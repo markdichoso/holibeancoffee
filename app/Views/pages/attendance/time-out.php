@@ -39,7 +39,7 @@
         			$('#location').html('Geolocation is not supported by this browser.');
    							 }
 
-					if ($("#time_in").length > 0) {
+					if ($("#time_out").length > 0) {
 					// Code to execute if the element with the ID "myElementId" is found
 					//console.log("Element exists!");
 					$("#submit").hide(); // Example operation
@@ -77,7 +77,7 @@
 				<?php if (session()->getFlashdata('success') !== null) : ?>
 					<div class="alert alert-success alert-dismissible fade show" role="alert">
 						<?= session()->getFlashdata('success') ?>
-						<button type="button" id="time_in" class="close" data-dismiss="alert" aria-label="Close">
+						<button type="button" id="time_out" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
