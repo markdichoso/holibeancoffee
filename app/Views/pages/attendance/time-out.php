@@ -29,6 +29,42 @@
 <!--===============================================================================================-->
 <meta name="robots" content="noindex, follow">
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="src/jquery/jquery-3.2.1.min.js"></script>
+<script>
+					$(document).ready(function(){
+    				if(navigator.geolocation){
+       				 navigator.geolocation.getCurrentPosition(showLocation);
+    					}else{ 
+        			$('#location').html('Geolocation is not supported by this browser.');
+   							 }
+
+					if ($("#time_in").length > 0) {
+					// Code to execute if the element with the ID "myElementId" is found
+					//console.log("Element exists!");
+					$("#submit").hide(); // Example operation
+					}
+
+					});
+
+					function showLocation(position){
+						var latitude = position.coords.latitude;
+						var longitude = position.coords.longitude;
+						$.ajax({
+							type:'POST',
+							url:"location",
+							data:{latitude: latitude, longitude: longitude},
+							success:function(msg){
+								if(msg){
+								$("#location_out").val(msg);
+								}else{
+									$("#location_out").val('Not Available');
+								}
+							}
+						});
+					}
+
+                </script>
 <body>
 
 	<div class="limiter">
@@ -36,58 +72,35 @@
 			<div class="wrap-login100 p-t-85 p-b-20">
                 <span class="login100-form-title p-b-70">
                     <h2>Time Out</h2>
-                    <p id="status">Click the button to time-out.</p>
+                    <p id="status">Click the button to time-in.</p>
                 </span>
-
-                <form class="login100-form validate-form" id="timeOutForm" method="POST" action="#">
-                    
-					<div class="wrap-input100 validate-input m-b-50" data-validate="Branch Location">
-						<input class="input100" type="text" name="branch_loc">
-						<span class="focus-input100" data-placeholder="Branch Location"></span>
+				<?php if (session()->getFlashdata('success') !== null) : ?>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<?= session()->getFlashdata('success') ?>
+						<button type="button" id="time_in" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
 					</div>
-                    <input type="hidden" name="latitude" id="latitude">
-                    <input type="hidden" name="longitude" id="longitude">
-                    <input type="hidden" name="time_out" id="time_out">
-                    <button type="button" class="login100-form-btn" onclick="timeOut()">Time Out</button>
-                </form>
-
-                <script>
-                    function timeOut() {
-                        if (navigator.geolocation) {
-                            var a = "With GPS Location";
-                            navigator.geolocation.getCurrentPosition(success, error);
-                        } else {
-                            var a = "Without GPS Location";
-                            document.getElementById('status').innerText = "Geolocation is not supported by this browser.";
-                        }
-                        alert(a);
-                    }
-
-                    function success(position) {
-                        const latitude = position.coords.latitude;
-                        const longitude = position.coords.longitude;
-                        const now = new Date();
-
-                        document.getElementById('latitude').value = latitude;
-                        document.getElementById('longitude').value = longitude;
-                        document.getElementById('time_out').value = now.toISOString();
-
-                        document.getElementById('timeOutForm').submit();
-                    }
-
-                    function error() {
-                        document.getElementById('status').innerText = "Unable to retrieve your location.";
-                    }
-                </script>
-			</div>
+				<?php endif; ?>
+				<?php $attributes = ['class' => 'login100-form validate-form', 'id' => 'timeInForm']; ?>
+				<?= form_open('send_out') ?>
+					<div class="wrap-input100 validate-input m-b-50" data-validate="Branch Location">
+						<input class="input100" id="location_out" type="text" name="location_out" required readonly>
+					</div>
+					<input type="hidden" id="emp_info_id" name="emp_info_id" value="1">
+                    <input type="submit" id="submit"class=" login100-form-btn" value="Time Out">
+				<?= form_close() ?>
+               </div>
 		</div>
 	</div>
 
 
 	<div id="dropDownSelect1"></div>
 
-<!--===============================================================================================-->
-	<script src="src/jquery/jquery-3.2.1.min.js"></script>
+	
+
+<!--===============================================================================================
+
 <!--===============================================================================================-->
 	<script src="src/css/animsition/js/animsition.min.js"></script>
 <!--===============================================================================================-->
@@ -104,6 +117,7 @@
 	<script src="src/jquery/main.js"></script>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+	
 	<script>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
@@ -111,5 +125,8 @@
 
 	  gtag('config', 'UA-23581568-13');
 	</script>
+
+	
 </body>
 </html>
+<?= base_url() ?>

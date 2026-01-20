@@ -45,17 +45,32 @@ class AttendanceController extends BaseController
 
   public function Send_In()
     {
-    
-      
-    //return view('pages/attendance/time-out');
-
     $userModel = new Attendance();
     $data = $this->request->getPost();
     $data['date_in']=date("l, F j, Y H:i:s");
- 
+    print_r($data); return false;
         // Use the insert() method for new records
         if ($userModel->insert($data)){
         return redirect()->to('timein')->with('success', 'Successfully Time in!');
         }
+    }
+
+    public function Send_Out()
+    {      
+    $userModel = new Attendance();
+    $data = $this->request->getPost();
+    $data['date_out']=date("l, F j, Y H:i:s");
+    $userModel = new Attendance();
+    $update = $userModel->time_out($data);
+
+    if($update){
+        echo "success";
+    }
+ 
+        // Use the insert() method for new records
+        // if ($userModel->insert($data)){
+        // return redirect()->to('timein')->with('success', 'Successfully Time in!');
+        // }
+        //print_r($data);
     }
 }
