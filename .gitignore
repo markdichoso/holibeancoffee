@@ -1,2 +1,2 @@
-.htaccess
 app/Config/Database.php
+app/Config/App.php
