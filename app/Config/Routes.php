@@ -13,5 +13,7 @@ $routes->post('/location', 'AttendanceController::Location');
 $routes->post('/send_in', 'AttendanceController::Send_In');
 $routes->post('/send_out', 'AttendanceController::Send_Out');
 $routes->add('/loginvalidation', 'LoginValidation::Sign_in');
+$routes->add('/destroy', 'Home::session_destroyer');
+$routes->get('/dashboard', 'Home::dashboard');
 
 
