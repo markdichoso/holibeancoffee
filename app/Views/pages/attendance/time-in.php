@@ -49,9 +49,9 @@
 							data:{latitude: latitude, longitude: longitude},
 							success:function(msg){
 								if(msg){
-								$("#location").val(msg);
+								$("#location_in").val(msg);
 								}else{
-									$("#location").val('Not Available');
+									$("#location_in").val('Not Available');
 								}
 							}
 						});
@@ -67,12 +67,20 @@
                     <h2>Time In</h2>
                     <p id="status">Click the button to time-in.</p>
                 </span>
+				<?php if (session()->getFlashdata('success') !== null) : ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?= session()->getFlashdata('success') ?>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
 				<?php $attributes = ['class' => 'login100-form validate-form', 'id' => 'timeInForm']; ?>
 				<?= form_open('send_in') ?>
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Branch Location">
-						<input class="input100" id="location" type="text" name="location">
+						<input class="input100" id="location_in" type="text" name="location_in" required>
 					</div>
-					<input type="hidden" id="time_in" name="time_in" value="time_in">
+					<!-- <input type="hidden" id="time_in" name="time_in" value="time_in"> -->
 					<input type="hidden" id="emp_info_id" name="emp_info_id" value="1">
                     <input type="submit" class=" login100-form-btn" value="Time In">
 				<?= form_close() ?>

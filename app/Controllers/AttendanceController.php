@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Controllers;
+use App\Models\Attendance;
 
 class AttendanceController extends BaseController
 {
-    public function TimeIn(): string
+    public function TimeIn()
     {
        // echo 'test';
         return view('pages/attendance/time-in');
     }
 
-        public function TimeOut(): string
+        public function TimeOut()
     {
         return view('pages/attendance/time-out');
     }
@@ -44,8 +45,28 @@ class AttendanceController extends BaseController
 
   public function Send_In()
     {
-    $data = $this->request->getPost();
-    print_r($data);  
+    
+      
     //return view('pages/attendance/time-out');
+
+    $userModel = new Attendance();
+    $data = $this->request->getPost();
+    $data['date_in']=date("l, F j, Y H:i:s");
+        
+        // Get POST data
+     //   $data = $this->request->getPost(); 
+
+        // Or prepare data manually as an associative array
+        // $data = [
+        //     'username' => $this->request->getPost('username'),
+        //     'email'    => $this->request->getPost('email'),
+        //     // ... other fields
+        // ];
+
+        // Use the insert() method for new records
+        $userModel->insert($data);
+        return redirect()->to('timein')->with('success', 'Your form was successfully submitted!');
+       session()->setFlashdata('success', 'The item was successfully updated.');
+        //print_r($data);
     }
 }
