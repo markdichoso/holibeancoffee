@@ -52,21 +52,10 @@ class AttendanceController extends BaseController
     $userModel = new Attendance();
     $data = $this->request->getPost();
     $data['date_in']=date("l, F j, Y H:i:s");
-        
-        // Get POST data
-     //   $data = $this->request->getPost(); 
-
-        // Or prepare data manually as an associative array
-        // $data = [
-        //     'username' => $this->request->getPost('username'),
-        //     'email'    => $this->request->getPost('email'),
-        //     // ... other fields
-        // ];
-
+ 
         // Use the insert() method for new records
-        $userModel->insert($data);
-        return redirect()->to('timein')->with('success', 'Your form was successfully submitted!');
-       session()->setFlashdata('success', 'The item was successfully updated.');
-        //print_r($data);
+        if ($userModel->insert($data)){
+        return redirect()->to('timein')->with('success', 'Successfully Time in!');
+        }
     }
 }
