@@ -35,7 +35,7 @@
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-85 p-b-20">
 				
-				<?= form_open('') ?>
+				<?= form_open('loginvalidation') ?>
 				<!-- < class="login100-form validate-form"> -->
 					<span class="login100-form-title p-b-70">
 						Welcome to HBIS
@@ -44,7 +44,14 @@
 					<!-- <span class="login100-form-avatar">
 						<img src="images/avatar-01.jpg" alt="AVATAR">
 					</span> -->
-
+					<?php if (session()->getFlashdata('success') !== null) : ?>
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<?= session()->getFlashdata('success') ?>
+						<button type="button" id="time_in" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				<?php endif; ?>
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" data-validate = "Enter username">
 						<input class="input100" type="text" name="username" required >
 						<span class="focus-input100" data-placeholder="Username"></span>

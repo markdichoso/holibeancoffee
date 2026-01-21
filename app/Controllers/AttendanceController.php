@@ -5,17 +5,28 @@ namespace App\Controllers;
 use App\Models\Attendance;
 use CodeIgniter\I18n\Time;
 
+
 class AttendanceController extends BaseController
 {
     
     public function TimeIn()
     {
+        
+        if (!isset($_SESSION['user_id'])) {
+            // If the user is not logged in, redirect them to the login page
+            return redirect()->to('');
+        }
        // echo 'test';
         return view('pages/attendance/time-in');
     }
 
         public function TimeOut()
     {
+        
+        if (!isset($_SESSION['user_id'])) {
+            // If the user is not logged in, redirect them to the login page
+            return redirect()->to('');
+        }
         return view('pages/attendance/time-out');
     }
 // for reconstruction direct location used instead //
