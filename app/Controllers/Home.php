@@ -74,7 +74,7 @@ return redirect()->to(base_url(''));
     public function dashboard(){
         
         //echo "This is Dashboard";
-        echo session()->get('firstname');
+        echo session()->get('firstname')." ";
         echo session()->get('lastname');
     }
 }
