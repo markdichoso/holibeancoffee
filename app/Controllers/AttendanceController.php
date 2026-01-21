@@ -1,11 +1,13 @@
 <?php
 
+namespace App\Filters;
 namespace App\Controllers;
 use App\Models\Attendance;
 use CodeIgniter\I18n\Time;
 
 class AttendanceController extends BaseController
 {
+    
     public function TimeIn()
     {
        // echo 'test';
