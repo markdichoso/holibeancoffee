@@ -77,6 +77,7 @@
 				<?php if (session()->getFlashdata('success') !== null) : ?>
 					<div class="alert alert-success alert-dismissible fade show" role="alert">
 						<?= session()->getFlashdata('success') ?>
+						<?= anchor('', 'Home', ['class' => 'btn btn-primary', 'title' => 'Home'])."<br />"?>
 						<button type="button" id="time_out" class="close" data-dismiss="alert" aria-label="Close">
 							<span aria-hidden="true">&times;</span>
 						</button>
