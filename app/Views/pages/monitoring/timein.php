@@ -270,9 +270,9 @@
                             <span class="text-sm font-medium text-gray-700">GPS Status</span>
                             <div class="flex items-center space-x-2">
                                 <div
-                                    class="w-3 h-3 bg-green-500 rounded-full"
+                                    class="w-3 h-3 bg-yellow-500 rounded-full pulse-animation"
                                     id="gpsStatus"></div>
-                                <span class="text-sm text-green-600" id="gpsStatusText">Active</span>
+                                <span class="text-sm text-yellow-600" id="gpsStatusText">Locating...</span>
                             </div>
                         </div>
                         <div
@@ -287,11 +287,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="text-sm text-gray-600">
-                            <p>Latitude: 40.7128° N</p>
-                            <p>Longitude: 74.0060° W</p>
-                            <p class="mt-2">123 Business Plaza, New York, NY 10001</p>
+                        <div class="text-sm text-gray-600" id="locationDetails">
+                            <p id="latitudeDisplay">Latitude: Getting location...</p>
+                            <p id="longitudeDisplay">Longitude: Getting location...</p>
+                            <div class="mt-3 space-y-1">
+                                <p class="font-medium text-gray-700">Full Address:</p>
+                                <p id="addressDisplay">Loading full address...</p>
+                                <p id="cityDisplay" class="text-gray-500">City: Loading...</p>
+                                <p id="regionDisplay" class="text-gray-500">
+                                    Region: Loading...
+                                </p>
+                                <p id="countryDisplay" class="text-gray-500">
+                                    Country: Loading...
+                                </p>
+                                <p id="postalCodeDisplay" class="text-gray-500">
+                                    Postal Code: Loading...
+                                </p>
+                            </div>
                         </div>
+                        <div
+                            class="mt-3 text-xs text-gray-500"
+                            id="locationAccuracy"></div>
                     </div>
                 </div>
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -301,23 +317,41 @@
                     <div class="space-y-3">
                         <div class="flex items-center justify-between">
                             <span class="text-sm text-gray-600">IP Address</span>
-                            <span class="text-sm font-medium text-gray-900" id="ipAddress">192.168.1.105</span>
+                            <span class="text-sm font-medium text-gray-900" id="ipAddress">Loading...</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-sm text-gray-600">Browser</span>
-                            <span class="text-sm font-medium text-gray-900">Chrome 91.0</span>
+                            <span class="text-sm font-medium text-gray-900" id="browserInfo">Detecting...</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-sm text-gray-600">Operating System</span>
-                            <span class="text-sm font-medium text-gray-900">Windows 11</span>
+                            <span class="text-sm font-medium text-gray-900" id="osInfo">Detecting...</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-sm text-gray-600">Device Type</span>
-                            <span class="text-sm font-medium text-gray-900">Desktop</span>
+                            <span class="text-sm font-medium text-gray-900" id="deviceType">Detecting...</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Screen Resolution</span>
+                            <span
+                                class="text-sm font-medium text-gray-900"
+                                id="screenResolution">Detecting...</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Language</span>
+                            <span
+                                class="text-sm font-medium text-gray-900"
+                                id="languageInfo">Detecting...</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-600">Timezone</span>
+                            <span
+                                class="text-sm font-medium text-gray-900"
+                                id="timezoneInfo">Detecting...</span>
                         </div>
                         <div class="flex items-center justify-between">
                             <span class="text-sm text-gray-600">Session ID</span>
-                            <span class="text-sm font-medium text-gray-900">SES-7891234</span>
+                            <span class="text-sm font-medium text-gray-900" id="sessionId">Generating...</span>
                         </div>
                     </div>
                 </div>
@@ -475,30 +509,219 @@
         document.getElementById("timeOutBtn").addEventListener("click", handleTimeOut);
     </script>
     <script id="locationTracking">
-        function updateLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    function(position) {
-                        document.getElementById("gpsStatus").className =
-                            "w-3 h-3 bg-green-500 rounded-full";
-                        document.getElementById("gpsStatusText").textContent = "Active";
-                        document.getElementById("gpsStatusText").className =
-                            "text-sm text-green-600";
-                    },
-                    function(error) {
-                        document.getElementById("gpsStatus").className =
-                            "w-3 h-3 bg-red-500 rounded-full";
-                        document.getElementById("gpsStatusText").textContent = "Unavailable";
-                        document.getElementById("gpsStatusText").className =
-                            "text-sm text-red-600";
-                    },
+        let currentPosition = null;
+
+        function setLocationStatus(status, color, text) {
+            const gpsStatus = document.getElementById("gpsStatus");
+            const gpsStatusText = document.getElementById("gpsStatusText");
+            gpsStatus.className = `w-3 h-3 rounded-full ${status === "loading" ? "pulse-animation" : ""} bg-${color}-500`;
+            gpsStatusText.textContent = text;
+            gpsStatusText.className = `text-sm text-${color}-600`;
+        }
+
+        function formatCoordinate(coord, isLatitude) {
+            const direction = isLatitude ?
+                coord >= 0 ?
+                "N" :
+                "S" :
+                coord >= 0 ?
+                "E" :
+                "W";
+            return `${Math.abs(coord).toFixed(4)}° ${direction}`;
+        }
+        async function reverseGeocode(lat, lng) {
+            try {
+                const response = await fetch(
+                    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`,
                 );
+                const data = await response.json();
+                return {
+                    fullAddress: data.display_name ||
+                        `${data.locality || ""}, ${data.city || ""}, ${data.principalSubdivision || ""}, ${data.countryName || ""}`
+                        .replace(/^,\s*|,\s*$/g, "")
+                        .replace(/,\s*,/g, ",") ||
+                        `${lat.toFixed(4)}, ${lng.toFixed(4)}`,
+                    city: data.city || data.locality || "Unknown",
+                    region: data.principalSubdivision || data.region || "Unknown",
+                    country: data.countryName || "Unknown",
+                    postalCode: data.postcode || "N/A",
+                };
+            } catch (error) {
+                console.error("Reverse geocoding failed:", error);
+                return {
+                    fullAddress: `${lat.toFixed(4)}, ${lng.toFixed(4)}`,
+                    city: "Unknown",
+                    region: "Unknown",
+                    country: "Unknown",
+                    postalCode: "N/A",
+                };
             }
         }
-        updateLocation();
-        setInterval(updateLocation, 30000);
+        async function updateLocation() {
+            if (!navigator.geolocation) {
+                setLocationStatus("error", "red", "Not Supported");
+                document.getElementById("latitudeDisplay").textContent =
+                    "Latitude: Geolocation not supported";
+                document.getElementById("longitudeDisplay").textContent =
+                    "Longitude: Geolocation not supported";
+                document.getElementById("addressDisplay").textContent =
+                    "Address: Geolocation not available";
+                return;
+            }
+            setLocationStatus("loading", "yellow", "Locating...");
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 300000,
+            };
+            navigator.geolocation.getCurrentPosition(
+                async function(position) {
+                        currentPosition = position;
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        const accuracy = position.coords.accuracy;
+                        setLocationStatus("success", "green", "Active");
+                        document.getElementById("latitudeDisplay").textContent =
+                            `Latitude: ${formatCoordinate(lat, true)}`;
+                        document.getElementById("longitudeDisplay").textContent =
+                            `Longitude: ${formatCoordinate(lng, false)}`;
+                        document.getElementById("locationAccuracy").textContent =
+                            `Accuracy: ±${Math.round(accuracy)} meters`;
+                        const addressData = await reverseGeocode(lat, lng);
+                        document.getElementById("addressDisplay").textContent =
+                            addressData.fullAddress;
+                        document.getElementById("cityDisplay").textContent =
+                            `City: ${addressData.city}`;
+                        document.getElementById("regionDisplay").textContent =
+                            `Region: ${addressData.region}`;
+                        document.getElementById("countryDisplay").textContent =
+                            `Country: ${addressData.country}`;
+                        document.getElementById("postalCodeDisplay").textContent =
+                            `Postal Code: ${addressData.postalCode}`;
+                    },
+                    function(error) {
+                        let errorMessage = "Error occurred";
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMessage = "Access Denied";
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMessage = "Unavailable";
+                                break;
+                            case error.TIMEOUT:
+                                errorMessage = "Timeout";
+                                break;
+                        }
+                        setLocationStatus("error", "red", errorMessage);
+                        document.getElementById("latitudeDisplay").textContent =
+                            "Latitude: Unable to retrieve";
+                        document.getElementById("longitudeDisplay").textContent =
+                            "Longitude: Unable to retrieve";
+                        document.getElementById("addressDisplay").textContent =
+                            "Location access required for address details";
+                        document.getElementById("cityDisplay").textContent = "City: Unknown";
+                        document.getElementById("regionDisplay").textContent = "Region: Unknown";
+                        document.getElementById("countryDisplay").textContent =
+                            "Country: Unknown";
+                        document.getElementById("postalCodeDisplay").textContent =
+                            "Postal Code: N/A";
+                        document.getElementById("locationAccuracy").textContent =
+                            "Please enable location permissions";
+                    },
+                    options,
+            );
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            updateLocation();
+        });
+        setInterval(updateLocation, 60000);
     </script>
     <script id="deviceInfo">
+        function detectBrowser() {
+            const userAgent = navigator.userAgent;
+            let browser = "Unknown";
+            let version = "";
+            if (userAgent.includes("Firefox")) {
+                browser = "Firefox";
+                const match = userAgent.match(/Firefox\/(\d+\.\d+)/);
+                version = match ? match[1] : "";
+            } else if (userAgent.includes("Chrome") && !userAgent.includes("Edg")) {
+                browser = "Chrome";
+                const match = userAgent.match(/Chrome\/(\d+\.\d+)/);
+                version = match ? match[1] : "";
+            } else if (userAgent.includes("Safari") && !userAgent.includes("Chrome")) {
+                browser = "Safari";
+                const match = userAgent.match(/Version\/(\d+\.\d+)/);
+                version = match ? match[1] : "";
+            } else if (userAgent.includes("Edg")) {
+                browser = "Edge";
+                const match = userAgent.match(/Edg\/(\d+\.\d+)/);
+                version = match ? match[1] : "";
+            } else if (userAgent.includes("Opera") || userAgent.includes("OPR")) {
+                browser = "Opera";
+                const match = userAgent.match(/(Opera|OPR)\/(\d+\.\d+)/);
+                version = match ? match[2] : "";
+            }
+            return `${browser}${version ? " " + version : ""}`;
+        }
+
+        function detectOS() {
+            const userAgent = navigator.userAgent;
+            let os = "Unknown";
+            if (userAgent.includes("Windows NT 10.0")) {
+                os = "Windows 10/11";
+            } else if (userAgent.includes("Windows NT 6.3")) {
+                os = "Windows 8.1";
+            } else if (userAgent.includes("Windows NT 6.2")) {
+                os = "Windows 8";
+            } else if (userAgent.includes("Windows NT 6.1")) {
+                os = "Windows 7";
+            } else if (userAgent.includes("Windows")) {
+                os = "Windows";
+            } else if (userAgent.includes("Mac OS X")) {
+                const match = userAgent.match(/Mac OS X (\d+[._]\d+[._]?\d*)/);
+                if (match) {
+                    const version = match[1].replace(/_/g, ".");
+                    os = `macOS ${version}`;
+                } else {
+                    os = "macOS";
+                }
+            } else if (userAgent.includes("Linux")) {
+                if (userAgent.includes("Android")) {
+                    const match = userAgent.match(/Android (\d+\.\d+)/);
+                    os = match ? `Android ${match[1]}` : "Android";
+                } else {
+                    os = "Linux";
+                }
+            } else if (userAgent.includes("iPhone") || userAgent.includes("iPad")) {
+                const match = userAgent.match(/OS (\d+_\d+)/);
+                if (match) {
+                    const version = match[1].replace("_", ".");
+                    os = `iOS ${version}`;
+                } else {
+                    os = "iOS";
+                }
+            }
+            return os;
+        }
+
+        function detectDeviceType() {
+            const userAgent = navigator.userAgent;
+            if (/Mobi|Android/i.test(userAgent)) {
+                return "Mobile";
+            } else if (/Tablet|iPad/i.test(userAgent)) {
+                return "Tablet";
+            } else {
+                return "Desktop";
+            }
+        }
+
+        function generateSessionId() {
+            const timestamp = Date.now().toString(36);
+            const random = Math.random().toString(36).substr(2, 5).toUpperCase();
+            return `SES-${timestamp}-${random}`;
+        }
+
         function updateDeviceInfo() {
             fetch("https://api.ipify.org?format=json")
                 .then((response) => response.json())
@@ -506,10 +729,22 @@
                     document.getElementById("ipAddress").textContent = data.ip;
                 })
                 .catch((error) => {
-                    document.getElementById("ipAddress").textContent = "192.168.1.105";
+                    document.getElementById("ipAddress").textContent = "Unable to detect";
                 });
+            document.getElementById("browserInfo").textContent = detectBrowser();
+            document.getElementById("osInfo").textContent = detectOS();
+            document.getElementById("deviceType").textContent = detectDeviceType();
+            document.getElementById("screenResolution").textContent =
+                `${screen.width} x ${screen.height}`;
+            document.getElementById("languageInfo").textContent =
+                navigator.language || "Unknown";
+            document.getElementById("timezoneInfo").textContent =
+                Intl.DateTimeFormat().resolvedOptions().timeZone;
+            document.getElementById("sessionId").textContent = generateSessionId();
         }
-        updateDeviceInfo();
+        document.addEventListener("DOMContentLoaded", () => {
+            updateDeviceInfo();
+        });
     </script>
 </body>
 
