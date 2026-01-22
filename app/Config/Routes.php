@@ -18,4 +18,4 @@ $routes->get('/loginvalidation', 'LoginValidation::Sign_in');
 $routes->add('/destroy', 'Home::session_destroyer');
 $routes->get('/dashboard', 'Home::dashboard');
 
-
+$routes->get('/attendance', 'Home::attendance');
