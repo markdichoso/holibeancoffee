@@ -30,10 +30,20 @@ class Attendance extends Model
     $builder->where('emp_info_id', 1);
     $builder->like('date_in', $currentDate);
     $builder->update();
-    return true;
-    
-    
+    return true;   
 
+    }
+
+    public function searchAttendance($data)
+    {
+        
+        $emp_info_id = $data;
+        $currentDate = date('l, F d, Y');
+        return $this->table($this->table)
+                    ->where('emp_info_id', $emp_info_id)
+                    ->like('date_in', $currentDate) // Produces WHERE `username` LIKE '%searchTerm%'
+                    ->findAll();                    // Retrieves all matching results
+        //return $password;
     }
 }
 

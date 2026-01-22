@@ -40,6 +40,7 @@ class LoginValidation extends BaseController
             $newdata = [
                             'firstname'  => $return_emp[0]['firstname'],
                             'lastname'     => $return_emp[0]['lastname'],
+                            'emp_info_id'     => $return_emp[0]['emp_info_id'],
                             'user_id' => $return_emp[0]['user_id']
                         ];
             $session->set($newdata);

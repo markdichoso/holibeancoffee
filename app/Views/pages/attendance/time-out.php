@@ -42,9 +42,14 @@
 					if ($("#time_out").length > 0) {
 					// Code to execute if the element with the ID "myElementId" is found
 					//console.log("Element exists!");
-					$("#submit").hide(); // Example operation
+					$("form").remove(); // Example operation
 					}
-
+					if ($("#address_in").length > 0) {
+					// Code to execute if the element with the ID "myElementId" is found
+					//console.log("Element exists!");
+					//$this.remove();
+					$("form").remove(); // Example operation
+					}
 					});
 
 					function showLocation(position){
@@ -74,6 +79,10 @@
                     <h2>Time Out</h2>
                     <p id="status">Click the button to time-in.</p>
                 </span>
+				<?php if(!empty($address)): ?>
+				<p id="address_in_tilte"><b>Address In</b></p>
+				<p id="address_in"><?= esc($address) ?></p>
+				<?php endif; ?>
 				<?php if (session()->getFlashdata('success') !== null) : ?>
 					<div class="alert alert-success alert-dismissible fade show" role="alert">
 						<?= session()->getFlashdata('success') ?>

@@ -17,8 +17,23 @@ class AttendanceController extends BaseController
             return redirect()->to('');
         }
        // echo 'test';
-        return view('pages/attendance/time-in');
+
+         $emp_info_id = $_SESSION['emp_info_id'];
+         //echo $emp_info_id;
+         $attendanceModel = new Attendance();
+        if($attendance = $attendanceModel->searchAttendance($emp_info_id)){
+           // echo $attendance->location_in;
+            $in = [
+                'address' => $attendance[0]["location_in"],
+            ];
+        return view('pages/attendance/time-in',$in);
+        }             
+        else
+            { 
+                return view('pages/attendance/time-in'); 
+            }
     }
+        
 
         public function TimeOut()
     {
@@ -27,7 +42,19 @@ class AttendanceController extends BaseController
             // If the user is not logged in, redirect them to the login page
             return redirect()->to('');
         }
+        $emp_info_id = $_SESSION['emp_info_id'];
+         //echo $emp_info_id;
+         $attendanceModel = new Attendance();
+        if(!$attendance = $attendanceModel->searchAttendance($emp_info_id)){
+           // echo $attendance->location_in;
+            $in = [
+                'address' => 'You are not yet time in',
+            ];
+        return view('pages/attendance/time-in',$in);
+        }             
+
         return view('pages/attendance/time-out');
+        
     }
 // for reconstruction direct location used instead //
     public function Location()
