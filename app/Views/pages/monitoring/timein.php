@@ -204,18 +204,69 @@
                                 id="actionHistory"
                                 class="space-y-2 mt-4 border-t border-gray-200 pt-4">
                                 <div class="text-sm text-gray-500">Previous Actions:</div>
-                                <div class="space-y-2">
-                                    <div class="flex items-center justify-between text-sm">
-                                        <span class="text-gray-600">Clocked Out</span>
-                                        <span class="text-gray-500">July 31, 2025 11:30 AM</span>
+                                <div class="space-y-3" id="actionHistoryList">
+                                    <div
+                                        class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                                        <div
+                                            class="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                                            <div
+                                                class="w-full h-full flex items-center justify-center">
+                                                <div class="w-4 h-4 flex items-center justify-center">
+                                                    <i class="ri-image-line text-gray-400"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-sm font-medium text-gray-700">Clocked Out</span>
+                                                <span class="text-xs text-gray-500">July 31, 2025 11:30 AM</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500 mt-1">
+                                                No photo captured
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="flex items-center justify-between text-sm">
-                                        <span class="text-gray-600">Clocked In</span>
-                                        <span class="text-gray-500">July 31, 2025 8:00 AM</span>
+                                    <div
+                                        class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                                        <div
+                                            class="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                                            <div
+                                                class="w-full h-full flex items-center justify-center">
+                                                <div class="w-4 h-4 flex items-center justify-center">
+                                                    <i class="ri-image-line text-gray-400"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-sm font-medium text-gray-700">Clocked In</span>
+                                                <span class="text-xs text-gray-500">July 31, 2025 8:00 AM</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500 mt-1">
+                                                No photo captured
+                                            </p>
+                                        </div>
                                     </div>
-                                    <div class="flex items-center justify-between text-sm">
-                                        <span class="text-gray-600">Clocked Out</span>
-                                        <span class="text-gray-500">July 30, 2025 6:00 PM</span>
+                                    <div
+                                        class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-gray-200">
+                                        <div
+                                            class="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+                                            <div
+                                                class="w-full h-full flex items-center justify-center">
+                                                <div class="w-4 h-4 flex items-center justify-center">
+                                                    <i class="ri-image-line text-gray-400"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-center justify-between">
+                                                <span class="text-sm font-medium text-gray-700">Clocked Out</span>
+                                                <span class="text-xs text-gray-500">July 30, 2025 6:00 PM</span>
+                                            </div>
+                                            <p class="text-xs text-gray-500 mt-1">
+                                                No photo captured
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -276,23 +327,28 @@
                             </div>
                         </div>
                         <div
-                            class="bg-gray-100 rounded-lg p-4 h-32 flex items-center justify-center"
-                            style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;">
-                            <div class="bg-white bg-opacity-90 rounded-lg p-3">
-                                <div class="flex items-center space-x-2">
-                                    <div class="w-4 h-4 flex items-center justify-center">
-                                        <i class="ri-map-pin-line text-red-600"></i>
-                                    </div>
-                                    <span class="text-sm font-medium text-gray-900">Current Location</span>
+                            class="bg-gray-100 rounded-lg p-4 flex items-center justify-center">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-map-pin-line text-red-600"></i>
                                 </div>
+                                <span class="text-sm font-medium text-gray-900">Current Location</span>
                             </div>
                         </div>
                         <div class="text-sm text-gray-600" id="locationDetails">
                             <p id="latitudeDisplay">Latitude: Getting location...</p>
                             <p id="longitudeDisplay">Longitude: Getting location...</p>
                             <div class="mt-3 space-y-1">
-                                <p class="font-medium text-gray-700">Full Address:</p>
-                                <p id="addressDisplay">Loading full address...</p>
+                                <p class="font-medium text-gray-700">Complete Address:</p>
+                                <p id="buildingDisplay" class="text-gray-900">
+                                    Building: Loading...
+                                </p>
+                                <p id="streetDisplay" class="text-gray-900">
+                                    Street: Loading...
+                                </p>
+                                <p id="addressDisplay" class="text-gray-700">
+                                    Full Address: Loading...
+                                </p>
                                 <p id="cityDisplay" class="text-gray-500">City: Loading...</p>
                                 <p id="regionDisplay" class="text-gray-500">
                                     Region: Loading...
@@ -436,9 +492,8 @@
             statusIndicator.className = `w-3 h-3 rounded-full pulse-animation bg-${color}-500`;
         }
 
-        function updateLastAction(action) {
+        function updateLastAction(action, photoData = null) {
             const lastActionElement = document.getElementById("lastAction");
-            const actionHistoryDiv = document.getElementById("actionHistory");
             const now = new Date();
             const timeString = now.toLocaleTimeString("en-US");
             const dateString = now.toLocaleDateString("en-US", {
@@ -447,13 +502,29 @@
                 year: "numeric",
             });
             lastActionElement.textContent = `${action} at ${timeString}`;
+            const historyContainer = document.getElementById("actionHistoryList");
             const newActionDiv = document.createElement("div");
-            newActionDiv.className = "flex items-center justify-between text-sm";
+            newActionDiv.className =
+                "flex items-center space-x-3 p-3 bg-white rounded-lg border border-gray-200";
+            const photoHtml = photoData ?
+                `<img src="${photoData}" class="w-full h-full object-cover rounded-lg" alt="Captured photo">` :
+                `<div class="w-full h-full flex items-center justify-center">
+      <div class="w-4 h-4 flex items-center justify-center">
+      <i class="ri-image-line text-gray-400"></i>
+      </div>
+      </div>`;
             newActionDiv.innerHTML = `
-      <span class="text-gray-600">${action}</span>
-      <span class="text-gray-500">${dateString} ${timeString}</span>
+      <div class="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+      ${photoHtml}
+      </div>
+      <div class="flex-1 min-w-0">
+      <div class="flex items-center justify-between">
+      <span class="text-sm font-medium text-gray-700">${action}</span>
+      <span class="text-xs text-gray-500">${dateString} ${timeString}</span>
+      </div>
+      <p class="text-xs text-gray-500 mt-1">${photoData ? "Photo captured successfully" : "No photo captured"}</p>
+      </div>
       `;
-            const historyContainer = actionHistoryDiv.querySelector(".space-y-2");
             historyContainer.insertBefore(newActionDiv, historyContainer.firstChild);
             const historyItems = historyContainer.children;
             if (historyItems.length > 5) {
@@ -464,16 +535,24 @@
         function handleTimeIn() {
             const video = document.getElementById("cameraPreview");
             const canvas = document.getElementById("photoCanvas");
+            if (video.videoWidth === 0 || video.videoHeight === 0) {
+                showConfirmation(
+                    "Camera not ready",
+                    "Please wait for camera to initialize and try again",
+                    "error",
+                );
+                return;
+            }
             const context = canvas.getContext("2d");
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            const photoData = canvas.toDataURL("image/jpeg");
+            const photoData = canvas.toDataURL("image/jpeg", 0.8);
             savePhotoToLocalStorage("time_in", photoData);
             isTimedIn = true;
             lastActionTime = new Date();
             updateStatus("Clocked In", "green");
-            updateLastAction("Clocked In");
+            updateLastAction("Clocked In", photoData);
             document.getElementById("timeInBtn").disabled = true;
             document.getElementById("timeOutBtn").disabled = false;
             showConfirmation(
@@ -485,16 +564,24 @@
         function handleTimeOut() {
             const video = document.getElementById("cameraPreview");
             const canvas = document.getElementById("photoCanvas");
+            if (video.videoWidth === 0 || video.videoHeight === 0) {
+                showConfirmation(
+                    "Camera not ready",
+                    "Please wait for camera to initialize and try again",
+                    "error",
+                );
+                return;
+            }
             const context = canvas.getContext("2d");
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            const photoData = canvas.toDataURL("image/jpeg");
+            const photoData = canvas.toDataURL("image/jpeg", 0.8);
             savePhotoToLocalStorage("time_out", photoData);
             isTimedIn = false;
             lastActionTime = new Date();
             updateStatus("Not Clocked In", "red");
-            updateLastAction("Clocked Out");
+            updateLastAction("Clocked Out", photoData);
             document.getElementById("timeInBtn").disabled = false;
             document.getElementById("timeOutBtn").disabled = true;
             showConfirmation(
@@ -535,12 +622,21 @@
                     `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`,
                 );
                 const data = await response.json();
+                const building =
+                    data.building || data.house || data.amenity || "Not available";
+                const streetNumber = data.streetNumber || "";
+                const streetName = data.streetName || data.road || "";
+                const street = `${streetNumber} ${streetName}`.trim() || "Not available";
+                const fullAddress =
+                    data.display_name ||
+                    `${building !== "Not available" ? building + ", " : ""}${street !== "Not available" ? street + ", " : ""}${data.locality || data.city || ""}, ${data.principalSubdivision || ""}, ${data.countryName || ""}`
+                    .replace(/^,\s*|,\s*$/g, "")
+                    .replace(/,\s*,/g, ",") ||
+                    `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
                 return {
-                    fullAddress: data.display_name ||
-                        `${data.locality || ""}, ${data.city || ""}, ${data.principalSubdivision || ""}, ${data.countryName || ""}`
-                        .replace(/^,\s*|,\s*$/g, "")
-                        .replace(/,\s*,/g, ",") ||
-                        `${lat.toFixed(4)}, ${lng.toFixed(4)}`,
+                    building: building,
+                    street: street,
+                    fullAddress: fullAddress,
                     city: data.city || data.locality || "Unknown",
                     region: data.principalSubdivision || data.region || "Unknown",
                     country: data.countryName || "Unknown",
@@ -549,7 +645,9 @@
             } catch (error) {
                 console.error("Reverse geocoding failed:", error);
                 return {
-                    fullAddress: `${lat.toFixed(4)}, ${lng.toFixed(4)}`,
+                    building: "Not available",
+                    street: "Not available",
+                    fullAddress: `${lat.toFixed(6)}, ${lng.toFixed(6)}`,
                     city: "Unknown",
                     region: "Unknown",
                     country: "Unknown",
@@ -588,6 +686,10 @@
                         document.getElementById("locationAccuracy").textContent =
                             `Accuracy: ±${Math.round(accuracy)} meters`;
                         const addressData = await reverseGeocode(lat, lng);
+                        document.getElementById("buildingDisplay").textContent =
+                            `Building: ${addressData.building}`;
+                        document.getElementById("streetDisplay").textContent =
+                            `Street: ${addressData.street}`;
                         document.getElementById("addressDisplay").textContent =
                             addressData.fullAddress;
                         document.getElementById("cityDisplay").textContent =
@@ -617,6 +719,10 @@
                             "Latitude: Unable to retrieve";
                         document.getElementById("longitudeDisplay").textContent =
                             "Longitude: Unable to retrieve";
+                        document.getElementById("buildingDisplay").textContent =
+                            "Building: Access required";
+                        document.getElementById("streetDisplay").textContent =
+                            "Street: Access required";
                         document.getElementById("addressDisplay").textContent =
                             "Location access required for address details";
                         document.getElementById("cityDisplay").textContent = "City: Unknown";
