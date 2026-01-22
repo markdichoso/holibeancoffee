@@ -92,6 +92,7 @@
 				<?php if(!empty($address)): ?>
 				<p id="address_in_tilte"><b>Address In</b></p>
 				<p id="address_in"><?= esc($address) ?></p>
+				
 				<?php endif; ?>
 				<?php if (session()->getFlashdata('success') !== null) : ?>
 					<div class="alert alert-success alert-dismissible fade show" role="alert">
