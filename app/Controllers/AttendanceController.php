@@ -1,5 +1,5 @@
 <?php
-
+namespace App\Controllers;
 namespace App\Filters;
 namespace App\Controllers;
 use App\Models\Attendance;
@@ -16,7 +16,6 @@ class AttendanceController extends BaseController
             // If the user is not logged in, redirect them to the login page
             return redirect()->to('');
         }
-       // echo 'test';
 
          $emp_info_id = $_SESSION['emp_info_id'];
          //echo $emp_info_id;
@@ -26,9 +25,9 @@ class AttendanceController extends BaseController
             $in = [
                 'address' => $attendance[0]["location_in"],
             ];
-        return view('pages/attendance/time-in',$in);
-        }             
-        else
+            return view('pages/attendance/time-in',$in);
+            }             
+                else
             { 
                 return view('pages/attendance/time-in'); 
             }

@@ -41,6 +41,7 @@ class Attendance extends Model
         $currentDate = date('l, F d, Y');
         return $this->table($this->table)
                     ->where('emp_info_id', $emp_info_id)
+                    ->where('location_in !=', '')
                     ->like('date_in', $currentDate) // Produces WHERE `username` LIKE '%searchTerm%'
                     ->findAll();                    // Retrieves all matching results
         //return $password;
