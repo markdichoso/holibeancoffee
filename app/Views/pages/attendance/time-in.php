@@ -39,7 +39,7 @@
         			$('#location').html('Geolocation is not supported by this browser.');
    							 }
 					$('form').on('submit', function(event) {
-    // Prevent the form from submitting in the traditional HTML way (page reload)
+   					 // Prevent the form from submitting in the traditional HTML way (page reload)
    					 //event.preventDefault();
 					location_val = $('#location_in').val();
 					if(location_val === ''){

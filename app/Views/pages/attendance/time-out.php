@@ -87,9 +87,11 @@
                     <h2>Time Out</h2>
                     <p id="status">Click the button to time-in.</p>
                 </span>
-				<?php if(!empty($address)): ?>
-				<p id="address_in_tilte"><b>Address In</b></p>
-				<p id="address_in"><?= esc($address) ?></p>
+				<?php if(!empty($address_in)): ?>
+				<p id="address_in_tite"><b>Address In</b></p>
+				<p id="address_in"><?= esc($address_in) ?></p>
+				<p id="address_out_tite"><b>Address Out</b></p>
+				<p id="address_out"><?= esc($address_out) ?></p>
 				<?php endif; ?>
 				<?php if (session()->getFlashdata('success') !== null) : ?>
 					<div class="alert alert-success alert-dismissible fade show" role="alert">

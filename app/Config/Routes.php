@@ -17,5 +17,11 @@ $routes->post('/loginvalidation', 'LoginValidation::Sign_in');
 $routes->get('/loginvalidation', 'LoginValidation::Sign_in');
 $routes->add('/destroy', 'Home::session_destroyer');
 $routes->get('/dashboard', 'Home::dashboard');
+// app/Config/Routes.php
+$routes->get('/capture', 'Image::capture');
+$routes->post('/image/upload', 'Image::upload');
+$routes->get('/image/upload', 'Image::upload');
+
+
 
 $routes->get('/attendance', 'Home::attendance');
