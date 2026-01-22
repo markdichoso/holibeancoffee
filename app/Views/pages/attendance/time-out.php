@@ -38,7 +38,15 @@
     					}else{ 
         			$('#location').html('Geolocation is not supported by this browser.');
    							 }
-
+					$('form').on('submit', function(event) {
+   					 // Prevent the form from submitting in the traditional HTML way (page reload)
+   					 //event.preventDefault();
+					location_val = $('#location_out').val();
+					if(location_val === ''){
+						alert('Please wait for the location to show!')
+						return false;
+					}
+					});
 					if ($("#time_out").length > 0) {
 					// Code to execute if the element with the ID "myElementId" is found
 					//console.log("Element exists!");
@@ -97,7 +105,7 @@
 					<div class="wrap-input100 validate-input m-b-50" data-validate="Branch Location">
 						<input class="input100" id="location_out" type="text" name="location_out" required readonly>
 					</div>
-					<input type="hidden" id="emp_info_id" name="emp_info_id" value="1">
+					<input type="hidden" id="emp_info_id" name="emp_info_id" value="<?=session()->get('emp_info_id')?>">
                     <input type="submit" id="submit"class=" login100-form-btn" value="Time Out">
 				<?= form_close() ?>
                </div>

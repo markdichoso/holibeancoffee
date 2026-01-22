@@ -18,6 +18,7 @@ class Attendance extends Model
 
     public function time_out($data)
     {
+    $emp_info_id = $_SESSION['emp_info_id'];
     //$db      = \Config\Database::connect();
     $builder = new Attendance();
     //$builder = $db->table('attendance');
@@ -27,7 +28,7 @@ class Attendance extends Model
     // $data['date_out']=date("l, F j, Y H:i:s");
     $builder->set('date_out', $date_out);
     $builder->set('location_out', $location_out);
-    $builder->where('emp_info_id', 1);
+    $builder->where('emp_info_id', $emp_info_id);
     $builder->like('date_in', $currentDate);
     $builder->update();
     return true;   
