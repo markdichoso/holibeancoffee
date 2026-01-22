@@ -9,11 +9,21 @@ class Image extends Controller
 {
     public function capture()
     {
+         if (!isset($_SESSION['user_id'])) {
+            // If the user is not logged in, redirect them to the login page
+            return redirect()->to('');
+        }
+
         return view('capture_image');
     }
 
     public function upload()
     {
+         if (!isset($_SESSION['user_id'])) {
+            // If the user is not logged in, redirect them to the login page
+            return redirect()->to('');
+        }
+
         $request = $this->request;
         $imageData = $request->getPost('imageData');
         
