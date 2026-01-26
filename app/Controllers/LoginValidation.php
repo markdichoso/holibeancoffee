@@ -45,7 +45,7 @@ class LoginValidation extends BaseController
                         ];
             $session->set($newdata);
             //echo $session->get('firstname');
-            return redirect()->to(base_url('dashboard'));
+            return redirect()->to(base_url('attendance'));
                     }
                 else {
                     return redirect()->to('')->with('success', 'Invalid Credentials!');

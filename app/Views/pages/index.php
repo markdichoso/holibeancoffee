@@ -38,7 +38,7 @@
 				<?= form_open('loginvalidation') ?>
 				<!-- < class="login100-form validate-form"> -->
 					<span class="login100-form-title p-b-70">
-						Welcome to eCMT
+						Welcome to HBIS
 					</span>
 					
 					<!-- <span class="login100-form-avatar">

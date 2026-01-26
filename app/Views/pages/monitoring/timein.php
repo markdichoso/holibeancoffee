@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Time Tracking System</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="src/jquery/jquery-3.2.1.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -91,9 +93,28 @@
                     <div class="w-5 h-5 sm:w-6 sm:h-6 flex items-center justify-center mr-2 sm:mr-3">
                         <i class="ri-check-circle-line text-green-600"></i>
                     </div>
+<<<<<<< Updated upstream
                     <div>
                         <p class="text-green-800 font-medium text-sm sm:text-base" id="confirmationText">Successfully clocked in at 2:30:45 PM</p>
                         <p class="text-green-600 text-xs sm:text-sm" id="confirmationDetails">Location verified • Device authenticated</p>
+=======
+                    <div class="text-sm text-gray-600" id="currentTime">2:30:45 PM</div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-2">
+                        <div
+                            class="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full">
+                            <i class="ri-shield-check-line text-green-600"></i>
+                        </div>
+                        <span class="text-sm text-gray-700"><?php  echo anchor('destroy', 'Out na Tayo', ['class' => 'btn btn-primary', 'title' => 'Session Destroy']);?></span>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <div
+                            class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full">
+                            <i class="ri-user-line text-blue-600"></i>
+                        </div>
+                        <span class="text-sm text-gray-700"><?=session()->get('firstname')." ".session()->get('lastname') ?></span>
+>>>>>>> Stashed changes
                     </div>
                 </div>
             </div>
@@ -156,6 +177,10 @@
                                         </div>
                                     </div>
                                 </div>
+<<<<<<< Updated upstream
+=======
+                                <span class="text-gray-900"><?=session()->get('emp_info_id')?></span>
+>>>>>>> Stashed changes
                             </div>
                             <div id="timeContent" class="tab-content">
                                 <div class="text-center mb-6 sm:mb-8 lg:mb-10 xl:mb-12 bg-gradient-to-br from-gray-50 to-blue-50/30 rounded-xl sm:rounded-2xl lg:rounded-3xl py-6 sm:py-8 lg:py-10 xl:py-12 px-4 sm:px-6 lg:px-8 xl:px-10 border border-gray-100/50">
@@ -169,6 +194,7 @@
                                     <div class="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-mono font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-purple-900 bg-clip-text text-transparent mb-2 sm:mb-3 lg:mb-4 tracking-tight" id="digitalClock">2:30:45</div>
                                     <div class="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-600 font-semibold">Live Time</div>
                                 </div>
+<<<<<<< Updated upstream
                                 <div class="mb-6 sm:mb-8 lg:mb-10">
                                     <div class="bg-gradient-to-br from-gray-900/5 to-indigo-900/10 rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-4 lg:p-6 xl:p-8 shadow-2xl border border-gray-100/50">
                                         <div class="relative group aspect-[3/4] max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-auto">
@@ -315,8 +341,45 @@
                                             </div>
                                         </div>
                                     </div>
+=======
+                                <span class="text-gray-900"><?=session()->get('firstname')." ".session()->get('lastname') ?></span>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Department</label>
+                            <div
+                                class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+                                <div class="w-5 h-5 flex items-center justify-center">
+                                    <i class="ri-building-line text-gray-600"></i>
+                                </div>
+                                <span class="text-gray-900">Human Resources</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">
+                        Location Information
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-gray-700">GPS Status</span>
+                            <div class="flex items-center space-x-2">
+                                <div
+                                    class="w-3 h-3 bg-green-600 rounded-full pulse-animation"
+                                    id="gpsStatus"></div>
+                                <span class="text-sm text-yellow-600" id="gpsStatusText">Locating...</span>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-gray-100 rounded-lg p-4 flex items-center justify-center">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-4 h-4 flex items-center justify-center">
+                                    <i class="ri-map-pin-line text-red-600"></i>
+>>>>>>> Stashed changes
                                 </div>
                             </div>
+<<<<<<< Updated upstream
                             <div id="logsContent" class="tab-content hidden">
                                 <div class="bg-gradient-to-br from-gray-50 to-orange-50/30 rounded-3xl p-8 border border-gray-100/50 shadow-2xl">
                                     <div class="flex items-center justify-between mb-8">
@@ -721,6 +784,17 @@
                                         </div>
                                     </div>
                                 </div>
+=======
+                        </div>
+                        <div class="text-sm text-gray-600" id="locationDetails">
+                            <p id="latitudeDisplay"></p>
+                            <p id="longitudeDisplay"></p>
+                            <div class="mt-3 space-y-1">
+                                <p class="font-medium text-gray-700">Complete Address:</p>
+                                <p id="location_in" class="text-gray-900">
+                                </p>
+                                
+>>>>>>> Stashed changes
                             </div>
                         </div>
                     </div>
@@ -849,7 +923,17 @@ ${photoHtml}
                 );
                 return;
             }
+<<<<<<< Updated upstream
             const context = canvas.getContext('2d');
+=======
+            location_in = $("#location_in").html();
+            if(location_in = ""){
+            alert("No location appeared! Please wait!");
+            return false;    
+            }
+           // alert(location_in);
+            const context = canvas.getContext("2d");
+>>>>>>> Stashed changes
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -901,9 +985,8 @@ ${photoHtml}
         document.getElementById('timeInBtn').addEventListener('click', handleTimeIn);
         document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
     </script>
-    <script id="locationTracking">
-        let currentPosition = null;
 
+<<<<<<< Updated upstream
         function setLocationStatus(status, color, text) {
             const gpsStatus = document.getElementById('gpsStatus');
             const gpsStatusText = document.getElementById('gpsStatusText');
@@ -1056,6 +1139,8 @@ ${photoHtml}
             document.getElementById('activityTab').addEventListener('click', () => showTab('activity'));
         });
     </script>
+=======
+>>>>>>> Stashed changes
     <script id="deviceInfo">
         function detectBrowser() {
             const userAgent = navigator.userAgent;
@@ -1166,6 +1251,58 @@ ${photoHtml}
         document.addEventListener('DOMContentLoaded', () => {
             updateDeviceInfo();
         });
+    </script>
+    <script id="getLocation">
+        				$(document).ready(function(){
+    				if(navigator.geolocation){
+       				 navigator.geolocation.getCurrentPosition(showLocation);
+    					}else{ 
+        			$('#location_in').html('Geolocation is not supported by this browser.');
+   							 }
+					$('form').on('submit', function(event) {
+   					 // Prevent the form from submitting in the traditional HTML way (page reload)
+   					 //event.preventDefault();
+					location_val = $('#location_in').val();
+					if(location_val === ''){
+						alert('Please wait for the location to show!')
+						return false;
+					}
+					});
+					if ($("#time_in").length > 0) {
+					// Code to execute if the element with the ID "myElementId" is found
+					//console.log("Element exists!");
+					$("form").remove(); // Example operation
+					}
+					if ($("#address_in").length > 0) {
+					// Code to execute if the element with the ID "myElementId" is found
+					//console.log("Element exists!");
+					//$this.remove();
+					$("form").remove(); // Example operation
+					}
+					});
+
+					function showLocation(position){
+						var latitude = position.coords.latitude;
+						var longitude = position.coords.longitude;
+                        $("#latitudeDisplay").html("Latitude: "+latitude);
+                        $("#longitudeDisplay").html("Longitude: "+longitude);
+						$.ajax({
+							type:'POST',
+							url:"location",
+							data:{latitude: latitude, longitude: longitude},
+							success:function(msg){
+								if(msg){
+								$("#location_in").html(msg);
+                                $("#gpsStatusText").html("Active");
+                                //$("#gpsStatus").switchClass("w-3 h-3 bg-yellow-500 rounded-full pulse-animation", "w-3 h-3 bg-green-500 rounded-full pulse-animation");
+                                $("#gpsStatusText").css("color", "green");
+								}else{
+									$("#location_in").html('Not Available');
+								}
+							}
+						});
+					}
+    
     </script>
 </body>
 

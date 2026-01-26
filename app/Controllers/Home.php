@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controllers;
-
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use App\Models\Users;
@@ -16,7 +15,6 @@ class Home extends BaseController
             // If the user is not logged in, redirect them to the login page
             return redirect()->to('dashboard');
         }
-
 
         return view('pages/index');
     }
@@ -52,6 +50,10 @@ class Home extends BaseController
 
     public function attendance()
     {
+        if (!isset($_SESSION['user_id'])) {
+            // If the user is not logged in, redirect them to the login page
+            return redirect()->to('');
+        }
         return view('pages/monitoring/timein');
     }
 }
