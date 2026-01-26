@@ -126,7 +126,7 @@
                             <div class="bg-gradient-to-br from-white/80 to-gray-50/50 rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 border border-gray-100/50 shadow-xl backdrop-blur-sm mb-4 sm:mb-6 lg:mb-8">
                                 <div class="flex items-center justify-center mb-4 sm:mb-6 lg:mb-8">
                                     <div class="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl p-1 sm:p-2 shadow-lg border border-gray-100/50 w-full max-w-none overflow-x-auto">
-                                        <div class="flex space-x-1 min-w-max lg:min-w-0 lg:grid lg:grid-cols-5 lg:gap-1 xl:gap-2" role="tablist">
+                                        <div class="flex space-x-1 min-w-max lg:min-w-0 lg:grid lg:grid-cols-3 lg:gap-1 xl:gap-2" role="tablist">
                                             <button id="timeTab" class="tab-button px-3 sm:px-4 lg:px-6 xl:px-8 py-2 sm:py-3 text-xs sm:text-sm lg:text-base font-bold rounded-full transition-all duration-300 !rounded-full bg-primary text-white shadow-md whitespace-nowrap" role="tab" aria-selected="true">
                                                 <div class="flex items-center space-x-1 sm:space-x-2">
                                                     <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
@@ -151,22 +151,6 @@
                                                         <i class="ri-history-line"></i>
                                                     </div>
                                                     <span>Activity</span>
-                                                </div>
-                                            </button>
-                                            <button id="deviceTab" class="tab-button px-3 sm:px-4 lg:px-6 xl:px-8 py-2 sm:py-3 text-xs sm:text-sm lg:text-base font-bold rounded-full transition-all duration-300 !rounded-full text-gray-600 hover:text-gray-800 hover:bg-gray-50 whitespace-nowrap" role="tab" aria-selected="false">
-                                                <div class="flex items-center space-x-1 sm:space-x-2">
-                                                    <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
-                                                        <i class="ri-smartphone-line"></i>
-                                                    </div>
-                                                    <span>Device</span>
-                                                </div>
-                                            </button>
-                                            <button id="locationTab" class="tab-button px-3 sm:px-4 lg:px-6 xl:px-8 py-2 sm:py-3 text-xs sm:text-sm lg:text-base font-bold rounded-full transition-all duration-300 !rounded-full text-gray-600 hover:text-gray-800 hover:bg-gray-50 whitespace-nowrap" role="tab" aria-selected="false">
-                                                <div class="flex items-center space-x-1 sm:space-x-2">
-                                                    <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
-                                                        <i class="ri-map-pin-line"></i>
-                                                    </div>
-                                                    <span>Location</span>
                                                 </div>
                                             </button>
                                         </div>
@@ -221,6 +205,116 @@
                                             <span class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold">Clock Out</span>
                                         </div>
                                     </button>
+                                </div>
+                                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 xl:gap-12 mb-6 sm:mb-8 lg:mb-10 xl:mb-12">
+                                    <div class="bg-gradient-to-br from-purple-50/80 to-pink-50/30 rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-10 border border-purple-100/50 shadow-xl backdrop-blur-sm">
+                                        <div class="flex items-center justify-between mb-4 sm:mb-6 lg:mb-8">
+                                            <h3 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
+                                                <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg sm:rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl">
+                                                    <div class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 xl:w-7 xl:h-7 flex items-center justify-center">
+                                                        <i class="ri-smartphone-line text-white text-sm sm:text-base lg:text-lg xl:text-xl"></i>
+                                                    </div>
+                                                </div>
+                                                <span>Device Info</span>
+                                            </h3>
+                                            <div class="flex items-center space-x-2">
+                                                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-lg"></div>
+                                                <span class="text-xs sm:text-sm font-medium text-green-600">Connected</span>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-3 sm:space-y-4">
+                                            <div class="flex justify-between items-center py-2 sm:py-3 border-b border-purple-100/50">
+                                                <span class="text-xs sm:text-sm lg:text-base font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                        <i class="ri-window-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Browser</span>
+                                                </span>
+                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="browserInfoMain">Chrome 122.0</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 sm:py-3 border-b border-purple-100/50">
+                                                <span class="text-xs sm:text-sm lg:text-base font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                        <i class="ri-computer-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>OS</span>
+                                                </span>
+                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="osInfoMain">Windows 10</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 sm:py-3 border-b border-purple-100/50">
+                                                <span class="text-xs sm:text-sm lg:text-base font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                        <i class="ri-global-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>IP</span>
+                                                </span>
+                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600 font-mono" id="ipAddressMain">192.168.1.100</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 sm:py-3">
+                                                <span class="text-xs sm:text-sm lg:text-base font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                        <i class="ri-aspect-ratio-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Screen</span>
+                                                </span>
+                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="screenResolutionMain">1920 x 1080</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-green-50/80 to-emerald-50/30 rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-10 border border-green-100/50 shadow-xl backdrop-blur-sm">
+                                        <div class="flex items-center justify-between mb-4 sm:mb-6 lg:mb-8">
+                                            <h3 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 flex items-center space-x-2 sm:space-x-3 lg:space-x-4">
+                                                <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 xl:w-14 xl:h-14 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg sm:rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl">
+                                                    <div class="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 xl:w-7 xl:h-7 flex items-center justify-center">
+                                                        <i class="ri-map-pin-line text-white text-sm sm:text-base lg:text-lg xl:text-xl"></i>
+                                                    </div>
+                                                </div>
+                                                <span>Location</span>
+                                            </h3>
+                                            <div class="flex items-center space-x-2 sm:space-x-3">
+                                                <div class="w-2 h-2 sm:w-3 sm:h-3 rounded-full shadow-lg pulse-animation bg-green-500" id="gpsStatusMain"></div>
+                                                <span class="text-xs sm:text-sm font-medium text-green-600" id="gpsStatusTextMain">Active</span>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-3 sm:space-y-4">
+                                            <div class="flex justify-between items-center py-2 sm:py-3 border-b border-green-100/50">
+                                                <span class="text-xs sm:text-sm lg:text-base font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                        <i class="ri-gps-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>GPS</span>
+                                                </span>
+                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="coordinatesMain">40.7128° N, 74.0060° W</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 sm:py-3 border-b border-green-100/50">
+                                                <span class="text-xs sm:text-sm lg:text-base font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                        <i class="ri-building-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Address</span>
+                                                </span>
+                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="addressMain">123 Business Plaza</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 sm:py-3 border-b border-green-100/50">
+                                                <span class="text-xs sm:text-sm lg:text-base font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                        <i class="ri-map-2-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>City</span>
+                                                </span>
+                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="cityMain">New York</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 sm:py-3">
+                                                <span class="text-xs sm:text-sm lg:text-base font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                        <i class="ri-pin-distance-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Accuracy</span>
+                                                </span>
+                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="accuracyMain">±5 meters</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div id="logsContent" class="tab-content hidden">
@@ -887,6 +981,10 @@ ${photoHtml}
                         document.getElementById('regionDisplay').textContent = `Region: ${addressData.region}`;
                         document.getElementById('countryDisplay').textContent = `Country: ${addressData.country}`;
                         document.getElementById('postalCodeDisplay').textContent = `Postal Code: ${addressData.postalCode}`;
+                        document.getElementById('coordinatesMain').textContent = `${formatCoordinate(lat, true)}, ${formatCoordinate(lng, false)}`;
+                        document.getElementById('addressMain').textContent = addressData.building;
+                        document.getElementById('cityMain').textContent = addressData.city;
+                        document.getElementById('accuracyMain').textContent = `±${Math.round(accuracy)} meters`;
                     },
                     function(error) {
                         let errorMessage = 'Error occurred';
@@ -956,8 +1054,6 @@ ${photoHtml}
             document.getElementById('timeTab').addEventListener('click', () => showTab('time'));
             document.getElementById('logsTab').addEventListener('click', () => showTab('logs'));
             document.getElementById('activityTab').addEventListener('click', () => showTab('activity'));
-            document.getElementById('deviceTab').addEventListener('click', () => showTab('device'));
-            document.getElementById('locationTab').addEventListener('click', () => showTab('location'));
         });
     </script>
     <script id="deviceInfo">
@@ -1051,6 +1147,7 @@ ${photoHtml}
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('ipAddress').textContent = data.ip;
+                    document.getElementById('ipAddressMain').textContent = data.ip;
                 })
                 .catch(error => {
                     document.getElementById('ipAddress').textContent = 'Unable to detect';
@@ -1062,6 +1159,9 @@ ${photoHtml}
             document.getElementById('languageInfo').textContent = navigator.language || 'Unknown';
             document.getElementById('timezoneInfo').textContent = Intl.DateTimeFormat().resolvedOptions().timeZone;
             document.getElementById('sessionId').textContent = generateSessionId();
+            document.getElementById('browserInfoMain').textContent = detectBrowser();
+            document.getElementById('osInfoMain').textContent = detectOS();
+            document.getElementById('screenResolutionMain').textContent = `${screen.width} x ${screen.height}`;
         }
         document.addEventListener('DOMContentLoaded', () => {
             updateDeviceInfo();
