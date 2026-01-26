@@ -530,10 +530,10 @@
                 return;
             }
             location_in = $("#location_in").html();
-            // if(location_in === ""){
-            // alert("No location appeared! Please wait!");
-            // return false;    
-            // }
+            if(location_in === ""){
+            alert("No location appeared! Please wait!");
+            return false;    
+            }
            // alert(location_in);
             const context = canvas.getContext("2d");
             canvas.width = video.videoWidth;
