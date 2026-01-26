@@ -427,6 +427,8 @@
         let isTimedIn = false;
         let lastActionTime = null;
         let stream = null;
+        $("#timeInBtn").hide();
+        $("#timeOutBtn").hide();
 
         function savePhotoToLocalStorage(type, photoData) {
             const timestamp = new Date().toISOString();
@@ -530,10 +532,10 @@
                 return;
             }
             location_in = $("#location_in").html();
-            if(location_in === ""){
-            alert("No location appeared! Please wait!");
-            return false;    
-            }
+            // if(location_in === ""){
+            // alert("No location appeared! Please wait!");
+            // return false;    
+            // }
            // alert(location_in);
             const context = canvas.getContext("2d");
             canvas.width = video.videoWidth;
@@ -742,7 +744,10 @@
                                 $("#gpsStatusText").html("Active");
                                 //$("#gpsStatus").switchClass("w-3 h-3 bg-yellow-500 rounded-full pulse-animation", "w-3 h-3 bg-green-500 rounded-full pulse-animation");
                                 $("#gpsStatusText").css("color", "green");
-								}else{
+                                $("#timeInBtn").show();
+                                $("#timeOutBtn").show();
+								}
+                                else{
 									$("#location_in").html('Not Available');
 								}
 							}
