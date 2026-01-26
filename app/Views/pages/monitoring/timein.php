@@ -2,10 +2,11 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Time Tracking System</title>
-    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.16">
+    </script>
     <script>
         tailwind.config = {
             theme: {
@@ -30,14 +31,10 @@
             },
         };
     </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
-        rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
     <style>
         :where([class^="ri-"])::before {
             content: "\f3c2";
@@ -88,184 +85,544 @@
 </head>
 
 <body class="bg-gray-50 min-h-screen">
-    <header class="bg-white shadow-sm border-b border-gray-200">
-        <div class="px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <div class="text-2xl font-['Pacifico'] text-primary">logo</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-lg font-semibold text-gray-900" id="currentDate">
-                        Thursday, July 31, 2025
-                    </div>
-                    <div class="text-sm text-gray-600" id="currentTime">2:30:45 PM</div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <div class="flex items-center space-x-2">
-                        <div
-                            class="w-8 h-8 flex items-center justify-center bg-green-100 rounded-full">
-                            <i class="ri-shield-check-line text-green-600"></i>
-                        </div>
-                        <span class="text-sm text-gray-700">Secure Connection</span>
-                    </div>
-                    <div class="flex items-center space-x-2">
-                        <div
-                            class="w-8 h-8 flex items-center justify-center bg-blue-100 rounded-full">
-                            <i class="ri-user-line text-blue-600"></i>
-                        </div>
-                        <span class="text-sm text-gray-700">Sarah Johnson</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <main class="max-w-7xl mx-auto px-6 py-8">
-        <div
-            id="confirmationMessage"
-            class="hidden mb-6 p-4 bg-green-50 border border-green-200 rounded-lg success-fade">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+        <div id="confirmationMessage" class="hidden mb-6 p-4 bg-green-50 border border-green-200 rounded-lg success-fade">
             <div class="flex items-center">
                 <div class="w-6 h-6 flex items-center justify-center mr-3">
                     <i class="ri-check-circle-line text-green-600"></i>
                 </div>
                 <div>
-                    <p class="text-green-800 font-medium" id="confirmationText">
-                        Successfully clocked in at 2:30:45 PM
-                    </p>
-                    <p class="text-green-600 text-sm" id="confirmationDetails">
-                        Location verified • Device authenticated
-                    </p>
+                    <p class="text-green-800 font-medium" id="confirmationText">Successfully clocked in at 2:30:45 PM</p>
+                    <p class="text-green-600 text-sm" id="confirmationDetails">Location verified • Device authenticated</p>
                 </div>
             </div>
         </div>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div class="lg:col-span-2">
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-                    <div class="text-center mb-8">
-                        <div
-                            class="text-6xl font-mono font-bold text-gray-900 mb-2"
-                            id="digitalClock">
-                            2:30:45
-                        </div>
-                        <div class="text-lg text-gray-600">Current Time</div>
-                    </div>
-                    <div class="flex items-center justify-center mb-8">
-                        <div
-                            class="flex items-center space-x-3 px-4 py-2 bg-gray-100 rounded-full">
-                            <div
-                                class="w-3 h-3 bg-red-500 rounded-full pulse-animation"
-                                id="statusIndicator"></div>
-                            <span class="text-sm font-medium text-gray-700" id="statusText">Not Clocked In</span>
-                        </div>
-                    </div>
-                    <div class="mb-6">
-                        <div class="bg-gray-100 rounded-lg p-4">
-                            <div class="relative">
-                                <video
-                                    id="cameraPreview"
-                                    class="w-full h-128 object-cover rounded-lg"
-                                    autoplay
-                                    playsinline></video>
-                                <canvas
-                                    id="photoCanvas"
-                                    class="w-full h-64 object-cover rounded-lg hidden absolute top-0 left-0"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex space-x-4 mb-8">
-                        <button
-                            id="timeInBtn"
-                            class="flex-1 bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 !rounded-button transition-colors whitespace-nowrap">
-                            <div class="flex items-center justify-center space-x-2">
-                                <div class="w-5 h-5 flex items-center justify-center">
-                                    <i class="ri-login-circle-line"></i>
+        <div class="max-w-4xl mx-auto">
+            <div>
+                <div class="bg-gradient-to-br from-white to-blue-50/20 rounded-3xl shadow-2xl border-0 overflow-hidden backdrop-blur-sm">
+                    <div class="bg-gradient-to-r from-indigo-500/10 via-purple-500/5 to-pink-500/10 px-4 sm:px-6 lg:px-8 py-6 sm:py-7 lg:py-8 border-b border-gray-100/30">
+                        <div class="flex flex-col sm:flex-row items-center sm:justify-between space-y-4 sm:space-y-0">
+                            <div class="flex flex-col sm:flex-row items-center sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 lg:space-x-5 text-center sm:text-left">
+                                <div class="w-16 h-16 sm:w-18 sm:h-18 lg:w-20 lg:h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl sm:rounded-3xl flex items-center justify-center shadow-2xl">
+                                    <div class="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 flex items-center justify-center">
+                                        <i class="ri-user-line text-white text-2xl sm:text-2xl lg:text-3xl"></i>
+                                    </div>
                                 </div>
-                                <span>Time In</span>
-                            </div>
-                        </button>
-                        <button
-                            id="timeOutBtn"
-                            class="flex-1 bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-6 !rounded-button transition-colors whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
-                            disabled>
-                            <div class="flex items-center justify-center space-x-2">
-                                <div class="w-5 h-5 flex items-center justify-center">
-                                    <i class="ri-logout-circle-line"></i>
+                                <div>
+                                    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Sarah Johnson</h2>
+                                    <p class="text-sm sm:text-base text-gray-600 font-medium">EMP-2024-001 • Human Resources</p>
+                                    <p class="text-xs sm:text-sm text-gray-500 mt-1 sm:mt-2 font-medium" id="currentDate">Monday, January 26, 2026</p>
                                 </div>
-                                <span>Time Out</span>
                             </div>
-                        </button>
+                            <div class="flex justify-center sm:justify-end">
+                                <div class="flex items-center space-x-3 sm:space-x-4 px-4 sm:px-5 lg:px-6 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-xl sm:rounded-2xl shadow-lg border border-white/20">
+                                    <div class="w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full pulse-animation shadow-lg" id="statusIndicator"></div>
+                                    <span class="text-sm sm:text-base font-bold text-gray-800" id="statusText">Not Clocked In</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="border-t border-gray-200 pt-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-4">
-                            Last Action
-                        </h3>
-                        <div class="bg-gray-50 rounded-lg p-4 space-y-3">
-                            <p class="text-gray-600" id="lastAction">No recent activity</p>
-                            <div
-                                id="actionHistory"
-                                class="space-y-2 mt-4 border-t border-gray-200 pt-4">
-                                <div class="text-sm text-gray-500">Previous Actions:</div>
-                                <div class="space-y-3" id="actionHistoryList">
-                                    <div
-                                        class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-gray-200">
-                                        <div
-                                            class="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-                                            <div
-                                                class="w-full h-full flex items-center justify-center">
-                                                <div class="w-4 h-4 flex items-center justify-center">
-                                                    <i class="ri-image-line text-gray-400"></i>
+                    <div class="p-8">
+                        <div class="bg-gradient-to-br from-white/80 to-gray-50/50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-gray-100/50 shadow-xl backdrop-blur-sm mb-6 sm:mb-8">
+                            <div class="flex items-center justify-center mb-6 sm:mb-8">
+                                <div class="bg-white rounded-xl sm:rounded-2xl p-1 sm:p-2 shadow-lg border border-gray-100/50 w-full max-w-4xl overflow-x-auto">
+                                    <div class="flex space-x-1 min-w-max sm:min-w-0 sm:grid sm:grid-cols-5 sm:gap-1" role="tablist">
+                                        <button id="timeTab" class="tab-button px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold rounded-full transition-all duration-300 !rounded-full bg-primary text-white shadow-md whitespace-nowrap" role="tab" aria-selected="true">
+                                            <div class="flex items-center space-x-1 sm:space-x-2">
+                                                <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                    <i class="ri-time-line"></i>
                                                 </div>
+                                                <span class="hidden sm:inline">Time Tracking</span>
+                                                <span class="sm:hidden">Time</span>
                                             </div>
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <div class="flex items-center justify-between">
-                                                <span class="text-sm font-medium text-gray-700">Clocked Out</span>
-                                                <span class="text-xs text-gray-500">July 31, 2025 11:30 AM</span>
+                                        </button>
+                                        <button id="logsTab" class="tab-button px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold rounded-full transition-all duration-300 !rounded-full text-gray-600 hover:text-gray-800 hover:bg-gray-50 whitespace-nowrap" role="tab" aria-selected="false">
+                                            <div class="flex items-center space-x-1 sm:space-x-2">
+                                                <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                    <i class="ri-timer-line"></i>
+                                                </div>
+                                                <span class="hidden sm:inline">Duration Logs</span>
+                                                <span class="sm:hidden">Logs</span>
                                             </div>
-                                            <p class="text-xs text-gray-500 mt-1">
-                                                No photo captured
-                                            </p>
+                                        </button>
+                                        <button id="activityTab" class="tab-button px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold rounded-full transition-all duration-300 !rounded-full text-gray-600 hover:text-gray-800 hover:bg-gray-50 whitespace-nowrap" role="tab" aria-selected="false">
+                                            <div class="flex items-center space-x-1 sm:space-x-2">
+                                                <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                    <i class="ri-history-line"></i>
+                                                </div>
+                                                <span>Activity</span>
+                                            </div>
+                                        </button>
+                                        <button id="deviceTab" class="tab-button px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold rounded-full transition-all duration-300 !rounded-full text-gray-600 hover:text-gray-800 hover:bg-gray-50 whitespace-nowrap" role="tab" aria-selected="false">
+                                            <div class="flex items-center space-x-1 sm:space-x-2">
+                                                <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                    <i class="ri-smartphone-line"></i>
+                                                </div>
+                                                <span>Device</span>
+                                            </div>
+                                        </button>
+                                        <button id="locationTab" class="tab-button px-3 sm:px-4 lg:px-6 py-2 sm:py-3 text-xs sm:text-sm font-bold rounded-full transition-all duration-300 !rounded-full text-gray-600 hover:text-gray-800 hover:bg-gray-50 whitespace-nowrap" role="tab" aria-selected="false">
+                                            <div class="flex items-center space-x-1 sm:space-x-2">
+                                                <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
+                                                    <i class="ri-map-pin-line"></i>
+                                                </div>
+                                                <span>Location</span>
+                                            </div>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="timeContent" class="tab-content">
+                            <div class="text-center mb-8 sm:mb-10 lg:mb-12 bg-gradient-to-br from-gray-50 to-blue-50/30 rounded-2xl sm:rounded-3xl py-8 sm:py-10 lg:py-12 px-4 sm:px-6 lg:px-8 border border-gray-100/50">
+                                <div class="mb-4 sm:mb-6">
+                                    <div class="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl sm:rounded-2xl shadow-xl mb-3 sm:mb-4">
+                                        <div class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 flex items-center justify-center">
+                                            <i class="ri-time-line text-white text-lg sm:text-xl lg:text-2xl"></i>
                                         </div>
                                     </div>
-                                    <div
-                                        class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-gray-200">
-                                        <div
-                                            class="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-                                            <div
-                                                class="w-full h-full flex items-center justify-center">
-                                                <div class="w-4 h-4 flex items-center justify-center">
-                                                    <i class="ri-image-line text-gray-400"></i>
+                                </div>
+                                <div class="text-4xl sm:text-6xl lg:text-8xl font-mono font-bold bg-gradient-to-r from-gray-900 via-indigo-900 to-purple-900 bg-clip-text text-transparent mb-3 sm:mb-4 tracking-tight" id="digitalClock">2:30:45</div>
+                                <div class="text-base sm:text-lg lg:text-xl text-gray-600 font-semibold">Live Time</div>
+                            </div>
+                            <div class="mb-8 sm:mb-10">
+                                <div class="bg-gradient-to-br from-gray-900/5 to-indigo-900/10 rounded-2xl sm:rounded-3xl p-3 sm:p-4 lg:p-6 shadow-2xl border border-gray-100/50">
+                                    <div class="relative group aspect-[3/4] max-w-md mx-auto">
+                                        <video id="cameraPreview" class="w-full h-full object-cover rounded-xl sm:rounded-2xl shadow-2xl border-2 sm:border-4 border-white/50" autoplay playsinline></video>
+                                        <canvas id="photoCanvas" class="w-full h-full object-cover rounded-xl sm:rounded-2xl hidden absolute top-0 left-0 shadow-2xl border-2 sm:border-4 border-white/50"></canvas>
+                                        <div class="absolute inset-0 rounded-xl sm:rounded-2xl ring-1 ring-black/5 pointer-events-none"></div>
+                                        <div class="absolute bottom-2 sm:bottom-3 lg:bottom-4 left-2 sm:left-3 lg:left-4 right-2 sm:right-3 lg:right-4">
+                                            <div class="bg-black/40 backdrop-blur-md rounded-xl sm:rounded-2xl px-3 sm:px-4 py-2 sm:py-3">
+                                                <div class="flex items-center justify-center space-x-2 sm:space-x-3">
+                                                    <div class="w-2 h-2 sm:w-3 sm:h-3 bg-green-400 rounded-full animate-pulse shadow-lg"></div>
+                                                    <span class="text-white text-xs sm:text-sm font-bold">Camera Active</span>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="flex-1 min-w-0">
-                                            <div class="flex items-center justify-between">
-                                                <span class="text-sm font-medium text-gray-700">Clocked In</span>
-                                                <span class="text-xs text-gray-500">July 31, 2025 8:00 AM</span>
-                                            </div>
-                                            <p class="text-xs text-gray-500 mt-1">
-                                                No photo captured
-                                            </p>
                                         </div>
                                     </div>
-                                    <div
-                                        class="flex items-center space-x-3 p-3 bg-white rounded-lg border border-gray-200">
-                                        <div
-                                            class="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-                                            <div
-                                                class="w-full h-full flex items-center justify-center">
-                                                <div class="w-4 h-4 flex items-center justify-center">
-                                                    <i class="ri-image-line text-gray-400"></i>
+                                </div>
+                            </div>
+                            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 lg:space-x-8 mb-8 sm:mb-10 lg:mb-12">
+                                <button id="timeInBtn" class="group flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-10 !rounded-button transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 shadow-2xl hover:shadow-3xl whitespace-nowrap relative overflow-hidden">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    <div class="flex items-center justify-center space-x-3 sm:space-x-4 relative z-10">
+                                        <div class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 flex items-center justify-center bg-white/20 rounded-lg sm:rounded-xl shadow-lg">
+                                            <i class="ri-login-circle-line text-base sm:text-lg lg:text-xl"></i>
+                                        </div>
+                                        <span class="text-base sm:text-lg lg:text-xl font-bold">Clock In</span>
+                                    </div>
+                                </button>
+                                <button id="timeOutBtn" class="group flex-1 bg-gradient-to-r from-red-500 to-rose-600 hover:from-red-600 hover:to-rose-700 text-white font-bold py-4 sm:py-5 lg:py-6 px-6 sm:px-8 lg:px-10 !rounded-button transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 shadow-2xl hover:shadow-3xl whitespace-nowrap disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-lg relative overflow-hidden" disabled>
+                                    <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    <div class="flex items-center justify-center space-x-3 sm:space-x-4 relative z-10">
+                                        <div class="w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 flex items-center justify-center bg-white/20 rounded-lg sm:rounded-xl shadow-lg">
+                                            <i class="ri-logout-circle-line text-base sm:text-lg lg:text-xl"></i>
+                                        </div>
+                                        <span class="text-base sm:text-lg lg:text-xl font-bold">Clock Out</span>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="logsContent" class="tab-content hidden">
+                            <div class="bg-gradient-to-br from-gray-50 to-orange-50/30 rounded-3xl p-8 border border-gray-100/50 shadow-2xl">
+                                <div class="flex items-center justify-between mb-8">
+                                    <h3 class="text-3xl font-bold text-gray-900 flex items-center space-x-4">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-amber-600 rounded-2xl flex items-center justify-center shadow-xl">
+                                            <div class="w-5 h-5 flex items-center justify-center">
+                                                <i class="ri-timer-line text-white text-lg"></i>
+                                            </div>
+                                        </div>
+                                        <span>Time Duration Logs</span>
+                                    </h3>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-3 h-3 bg-orange-500 rounded-full animate-pulse shadow-lg"></div>
+                                        <span class="text-base font-bold text-orange-700">Real-time Tracking</span>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100/50 shadow-lg hover:shadow-xl transition-shadow">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-8 h-8 bg-blue-100 rounded-xl flex items-center justify-center">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-calendar-line text-blue-600"></i>
+                                                    </div>
+                                                </div>
+                                                <span class="text-lg font-bold text-blue-900">Daily Time</span>
+                                            </div>
+                                            <div class="w-2 h-2 bg-blue-500 rounded-full shadow-lg"></div>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div class="text-center">
+                                                <div class="text-4xl font-bold text-blue-900 mb-2" id="dailyHours">0h 0m</div>
+                                                <div class="text-sm text-blue-700 font-medium">Today's Total</div>
+                                            </div>
+                                            <div class="bg-white/70 rounded-xl p-3 border border-blue-100/50">
+                                                <div class="flex justify-between items-center text-sm">
+                                                    <span class="text-gray-700 font-medium">Target</span>
+                                                    <span class="text-gray-600">8h 0m</span>
+                                                </div>
+                                                <div class="w-full bg-blue-100 rounded-full h-2 mt-2">
+                                                    <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-2 rounded-full transition-all duration-500" id="dailyProgress" style="width: 0%"></div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="flex-1 min-w-0">
-                                            <div class="flex items-center justify-between">
-                                                <span class="text-sm font-medium text-gray-700">Clocked Out</span>
-                                                <span class="text-xs text-gray-500">July 30, 2025 6:00 PM</span>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100/50 shadow-lg hover:shadow-xl transition-shadow">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-8 h-8 bg-green-100 rounded-xl flex items-center justify-center">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-calendar-week-line text-green-600"></i>
+                                                    </div>
+                                                </div>
+                                                <span class="text-lg font-bold text-green-900">Weekly Time</span>
                                             </div>
-                                            <p class="text-xs text-gray-500 mt-1">
-                                                No photo captured
-                                            </p>
+                                            <div class="w-2 h-2 bg-green-500 rounded-full shadow-lg"></div>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div class="text-center">
+                                                <div class="text-4xl font-bold text-green-900 mb-2" id="weeklyHours">32h 45m</div>
+                                                <div class="text-sm text-green-700 font-medium">This Week's Total</div>
+                                            </div>
+                                            <div class="bg-white/70 rounded-xl p-3 border border-green-100/50">
+                                                <div class="flex justify-between items-center text-sm">
+                                                    <span class="text-gray-700 font-medium">Target</span>
+                                                    <span class="text-gray-600">40h 0m</span>
+                                                </div>
+                                                <div class="w-full bg-green-100 rounded-full h-2 mt-2">
+                                                    <div class="bg-gradient-to-r from-green-500 to-emerald-500 h-2 rounded-full transition-all duration-500" style="width: 82%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100/50 shadow-lg hover:shadow-xl transition-shadow">
+                                        <div class="flex items-center justify-between mb-4">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-8 h-8 bg-purple-100 rounded-xl flex items-center justify-center">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-calendar-2-line text-purple-600"></i>
+                                                    </div>
+                                                </div>
+                                                <span class="text-lg font-bold text-purple-900">Monthly Time</span>
+                                            </div>
+                                            <div class="w-2 h-2 bg-purple-500 rounded-full shadow-lg"></div>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div class="text-center">
+                                                <div class="text-4xl font-bold text-purple-900 mb-2" id="monthlyHours">138h 20m</div>
+                                                <div class="text-sm text-purple-700 font-medium">January 2026 Total</div>
+                                            </div>
+                                            <div class="bg-white/70 rounded-xl p-3 border border-purple-100/50">
+                                                <div class="flex justify-between items-center text-sm">
+                                                    <span class="text-gray-700 font-medium">Target</span>
+                                                    <span class="text-gray-600">160h 0m</span>
+                                                </div>
+                                                <div class="w-full bg-purple-100 rounded-full h-2 mt-2">
+                                                    <div class="bg-gradient-to-r from-purple-500 to-pink-500 h-2 rounded-full transition-all duration-500" style="width: 86%"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-6 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-2xl p-6 border border-orange-100/50 shadow-lg">
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center space-x-4">
+                                            <div class="w-8 h-8 bg-orange-100 rounded-xl flex items-center justify-center">
+                                                <div class="w-4 h-4 flex items-center justify-center">
+                                                    <i class="ri-information-line text-orange-600"></i>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h4 class="text-lg font-bold text-orange-900">Current Status</h4>
+                                                <p class="text-sm text-orange-700" id="currentStatusText">Not clocked in • Ready to start tracking</p>
+                                            </div>
+                                        </div>
+                                        <div class="text-right">
+                                            <div class="text-2xl font-bold text-orange-900" id="sessionDuration">0h 0m</div>
+                                            <div class="text-sm text-orange-700">Current Session</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="activityContent" class="tab-content hidden">
+                            <div class="bg-gradient-to-br from-gray-50 to-blue-50/30 rounded-3xl p-8 border border-gray-100/50 shadow-2xl">
+                                <div class="flex items-center justify-between mb-8">
+                                    <h3 class="text-3xl font-bold text-gray-900 flex items-center space-x-4">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-xl">
+                                            <div class="w-5 h-5 flex items-center justify-center">
+                                                <i class="ri-history-line text-white text-lg"></i>
+                                            </div>
+                                        </div>
+                                        <span>Activity Timeline</span>
+                                    </h3>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-3 h-3 bg-blue-500 rounded-full animate-bounce shadow-lg"></div>
+                                        <span class="text-base font-bold text-gray-700">Live Updates</span>
+                                    </div>
+                                </div>
+                                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-6 mb-8 border border-blue-100/50 shadow-lg">
+                                    <div class="flex items-center space-x-4 mb-4">
+                                        <div class="w-4 h-4 bg-blue-500 rounded-full shadow-lg"></div>
+                                        <span class="text-base font-bold text-blue-900">Latest Activity</span>
+                                    </div>
+                                    <p class="text-gray-800 font-bold text-xl" id="lastAction">No recent activity</p>
+                                </div>
+                                <div id="actionHistory" class="space-y-4">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="text-sm font-medium text-gray-700">Recent Actions</span>
+                                        <span class="text-xs text-gray-400">Last 5 entries</span>
+                                    </div>
+                                    <div class="space-y-4" id="actionHistoryList">
+                                        <div class="flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                                            <div class="w-14 h-14 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden flex-shrink-0">
+                                                <div class="w-full h-full flex items-center justify-center">
+                                                    <div class="w-5 h-5 flex items-center justify-center">
+                                                        <i class="ri-image-line text-gray-400"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="text-sm font-semibold text-gray-900">Clocked Out</span>
+                                                    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md">July 31, 2025 11:30 AM</span>
+                                                </div>
+                                                <p class="text-xs text-gray-500">No photo captured • Session ended</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                                            <div class="w-14 h-14 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden flex-shrink-0">
+                                                <div class="w-full h-full flex items-center justify-center">
+                                                    <div class="w-5 h-5 flex items-center justify-center">
+                                                        <i class="ri-image-line text-gray-400"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="text-sm font-semibold text-gray-900">Clocked In</span>
+                                                    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md">July 31, 2025 8:00 AM</span>
+                                                </div>
+                                                <p class="text-xs text-gray-500">No photo captured • Location verified</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+                                            <div class="w-14 h-14 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden flex-shrink-0">
+                                                <div class="w-full h-full flex items-center justify-center">
+                                                    <div class="w-5 h-5 flex items-center justify-center">
+                                                        <i class="ri-image-line text-gray-400"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="flex-1 min-w-0">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="text-sm font-semibold text-gray-900">Clocked Out</span>
+                                                    <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md">July 30, 2025 6:00 PM</span>
+                                                </div>
+                                                <p class="text-xs text-gray-500">No photo captured • Day completed</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="deviceContent" class="tab-content hidden">
+                            <div class="bg-gradient-to-br from-gray-50 to-purple-50/30 rounded-3xl p-8 border border-gray-100/50 shadow-2xl">
+                                <div class="flex items-center justify-between mb-8">
+                                    <h3 class="text-3xl font-bold text-gray-900 flex items-center space-x-4">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl flex items-center justify-center shadow-xl">
+                                            <div class="w-5 h-5 flex items-center justify-center">
+                                                <i class="ri-smartphone-line text-white text-lg"></i>
+                                            </div>
+                                        </div>
+                                        <span>Device Information</span>
+                                    </h3>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse shadow-lg"></div>
+                                        <span class="text-sm font-medium text-green-600">Connected</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-6">
+                                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100/50 shadow-lg">
+                                        <div class="flex items-center space-x-3 mb-4">
+                                            <div class="w-8 h-8 bg-purple-100 rounded-xl flex items-center justify-center">
+                                                <div class="w-4 h-4 flex items-center justify-center">
+                                                    <i class="ri-global-line text-purple-600"></i>
+                                                </div>
+                                            </div>
+                                            <span class="text-lg font-bold text-purple-900">Network</span>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm font-medium text-gray-700">IP Address</span>
+                                                <span class="text-sm text-gray-600 font-mono bg-white px-3 py-1 rounded-lg" id="ipAddress">Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm font-medium text-gray-700">Session ID</span>
+                                                <span class="text-sm text-gray-600 font-mono bg-white px-3 py-1 rounded-lg" id="sessionId">Generating...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100/50">
+                                        <div class="space-y-4">
+                                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                                <span class="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-window-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Browser</span>
+                                                </span>
+                                                <span class="text-sm text-gray-600" id="browserInfo">Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                                <span class="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-computer-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Operating System</span>
+                                                </span>
+                                                <span class="text-sm text-gray-600" id="osInfo">Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                                <span class="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-device-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Device Type</span>
+                                                </span>
+                                                <span class="text-sm text-gray-600" id="deviceType">Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                                <span class="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-aspect-ratio-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Screen Resolution</span>
+                                                </span>
+                                                <span class="text-sm text-gray-600" id="screenResolution">Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                                <span class="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-translate-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Language</span>
+                                                </span>
+                                                <span class="text-sm text-gray-600" id="languageInfo">Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2">
+                                                <span class="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-time-zone-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Timezone</span>
+                                                </span>
+                                                <span class="text-sm text-gray-600" id="timezoneInfo">Detecting...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="locationContent" class="tab-content hidden">
+                            <div class="bg-gradient-to-br from-gray-50 to-green-50/30 rounded-3xl p-8 border border-gray-100/50 shadow-2xl">
+                                <div class="flex items-center justify-between mb-8">
+                                    <h3 class="text-3xl font-bold text-gray-900 flex items-center space-x-4">
+                                        <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center shadow-xl">
+                                            <div class="w-5 h-5 flex items-center justify-center">
+                                                <i class="ri-map-pin-line text-white text-lg"></i>
+                                            </div>
+                                        </div>
+                                        <span>Location Information</span>
+                                    </h3>
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-3 h-3 rounded-full shadow-lg pulse-animation" id="gpsStatus"></div>
+                                        <span class="text-sm font-medium" id="gpsStatusText">Initializing...</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-6">
+                                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100/50 shadow-lg">
+                                        <div class="flex items-center space-x-3 mb-4">
+                                            <div class="w-8 h-8 bg-green-100 rounded-xl flex items-center justify-center">
+                                                <div class="w-4 h-4 flex items-center justify-center">
+                                                    <i class="ri-gps-line text-green-600"></i>
+                                                </div>
+                                            </div>
+                                            <span class="text-lg font-bold text-green-900">GPS Coordinates</span>
+                                        </div>
+                                        <div class="space-y-3">
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm font-medium text-gray-700" id="latitudeDisplay">Latitude: Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm font-medium text-gray-700" id="longitudeDisplay">Longitude: Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center">
+                                                <span class="text-sm text-gray-600" id="locationAccuracy">Accuracy: Calculating...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100/50">
+                                        <div class="space-y-4">
+                                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                                <span class="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-building-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Building</span>
+                                                </span>
+                                                <span class="text-sm text-gray-600" id="buildingDisplay">Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                                <span class="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-road-map-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Street</span>
+                                                </span>
+                                                <span class="text-sm text-gray-600" id="streetDisplay">Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                                <span class="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-map-2-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>City</span>
+                                                </span>
+                                                <span class="text-sm text-gray-600" id="cityDisplay">Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                                <span class="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-pin-distance-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Region</span>
+                                                </span>
+                                                <span class="text-sm text-gray-600" id="regionDisplay">Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2 border-b border-gray-100">
+                                                <span class="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-earth-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Country</span>
+                                                </span>
+                                                <span class="text-sm text-gray-600" id="countryDisplay">Detecting...</span>
+                                            </div>
+                                            <div class="flex justify-between items-center py-2">
+                                                <span class="text-sm font-medium text-gray-700 flex items-center space-x-2">
+                                                    <div class="w-4 h-4 flex items-center justify-center">
+                                                        <i class="ri-mail-line text-gray-500"></i>
+                                                    </div>
+                                                    <span>Postal Code</span>
+                                                </span>
+                                                <span class="text-sm text-gray-600" id="postalCodeDisplay">Detecting...</span>
+                                            </div>
+                                        </div>
+                                        <div class="mt-6 p-4 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl border border-gray-100">
+                                            <h4 class="text-sm font-bold text-gray-800 mb-2">Full Address</h4>
+                                            <p class="text-sm text-gray-600 leading-relaxed" id="addressDisplay">Retrieving location information...</p>
                                         </div>
                                     </div>
                                 </div>
@@ -274,144 +631,7 @@
                     </div>
                 </div>
             </div>
-            <div class="space-y-6">
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">
-                        Employee Information
-                    </h3>
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Employee ID</label>
-                            <div
-                                class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-5 h-5 flex items-center justify-center">
-                                    <i class="ri-badge-line text-gray-600"></i>
-                                </div>
-                                <span class="text-gray-900">EMP-2024-001</span>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                            <div
-                                class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-5 h-5 flex items-center justify-center">
-                                    <i class="ri-user-line text-gray-600"></i>
-                                </div>
-                                <span class="text-gray-900">Sarah Johnson</span>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Department</label>
-                            <div
-                                class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                                <div class="w-5 h-5 flex items-center justify-center">
-                                    <i class="ri-building-line text-gray-600"></i>
-                                </div>
-                                <span class="text-gray-900">Human Resources</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">
-                        Location Information
-                    </h3>
-                    <div class="space-y-4">
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm font-medium text-gray-700">GPS Status</span>
-                            <div class="flex items-center space-x-2">
-                                <div
-                                    class="w-3 h-3 bg-yellow-500 rounded-full pulse-animation"
-                                    id="gpsStatus"></div>
-                                <span class="text-sm text-yellow-600" id="gpsStatusText">Locating...</span>
-                            </div>
-                        </div>
-                        <div
-                            class="bg-gray-100 rounded-lg p-4 flex items-center justify-center">
-                            <div class="flex items-center space-x-2">
-                                <div class="w-4 h-4 flex items-center justify-center">
-                                    <i class="ri-map-pin-line text-red-600"></i>
-                                </div>
-                                <span class="text-sm font-medium text-gray-900">Current Location</span>
-                            </div>
-                        </div>
-                        <div class="text-sm text-gray-600" id="locationDetails">
-                            <p id="latitudeDisplay">Latitude: Getting location...</p>
-                            <p id="longitudeDisplay">Longitude: Getting location...</p>
-                            <div class="mt-3 space-y-1">
-                                <p class="font-medium text-gray-700">Complete Address:</p>
-                                <p id="buildingDisplay" class="text-gray-900">
-                                    Building: Loading...
-                                </p>
-                                <p id="streetDisplay" class="text-gray-900">
-                                    Street: Loading...
-                                </p>
-                                <p id="addressDisplay" class="text-gray-700">
-                                    Full Address: Loading...
-                                </p>
-                                <p id="cityDisplay" class="text-gray-500">City: Loading...</p>
-                                <p id="regionDisplay" class="text-gray-500">
-                                    Region: Loading...
-                                </p>
-                                <p id="countryDisplay" class="text-gray-500">
-                                    Country: Loading...
-                                </p>
-                                <p id="postalCodeDisplay" class="text-gray-500">
-                                    Postal Code: Loading...
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            class="mt-3 text-xs text-gray-500"
-                            id="locationAccuracy"></div>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">
-                        Device Information
-                    </h3>
-                    <div class="space-y-3">
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600">IP Address</span>
-                            <span class="text-sm font-medium text-gray-900" id="ipAddress">Loading...</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600">Browser</span>
-                            <span class="text-sm font-medium text-gray-900" id="browserInfo">Detecting...</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600">Operating System</span>
-                            <span class="text-sm font-medium text-gray-900" id="osInfo">Detecting...</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600">Device Type</span>
-                            <span class="text-sm font-medium text-gray-900" id="deviceType">Detecting...</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600">Screen Resolution</span>
-                            <span
-                                class="text-sm font-medium text-gray-900"
-                                id="screenResolution">Detecting...</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600">Language</span>
-                            <span
-                                class="text-sm font-medium text-gray-900"
-                                id="languageInfo">Detecting...</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600">Timezone</span>
-                            <span
-                                class="text-sm font-medium text-gray-900"
-                                id="timezoneInfo">Detecting...</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-600">Session ID</span>
-                            <span class="text-sm font-medium text-gray-900" id="sessionId">Generating...</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        </div>
         </div>
     </main>
     <script id="timeUpdater">
@@ -430,9 +650,6 @@
                 day: "numeric",
             });
             document.getElementById("digitalClock").textContent = timeString;
-            document.getElementById("currentTime").textContent =
-                now.toLocaleTimeString("en-US");
-            document.getElementById("currentDate").textContent = dateString;
         }
         setInterval(updateTime, 1000);
         updateTime();
@@ -509,22 +726,22 @@
             const photoHtml = photoData ?
                 `<img src="${photoData}" class="w-full h-full object-cover rounded-lg" alt="Captured photo">` :
                 `<div class="w-full h-full flex items-center justify-center">
-      <div class="w-4 h-4 flex items-center justify-center">
-      <i class="ri-image-line text-gray-400"></i>
-      </div>
-      </div>`;
+<div class="w-4 h-4 flex items-center justify-center">
+<i class="ri-image-line text-gray-400"></i>
+</div>
+</div>`;
             newActionDiv.innerHTML = `
-      <div class="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
-      ${photoHtml}
-      </div>
-      <div class="flex-1 min-w-0">
-      <div class="flex items-center justify-between">
-      <span class="text-sm font-medium text-gray-700">${action}</span>
-      <span class="text-xs text-gray-500">${dateString} ${timeString}</span>
-      </div>
-      <p class="text-xs text-gray-500 mt-1">${photoData ? "Photo captured successfully" : "No photo captured"}</p>
-      </div>
-      `;
+<div class="w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0">
+${photoHtml}
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium text-gray-700">${action}</span>
+<span class="text-xs text-gray-500">${dateString} ${timeString}</span>
+</div>
+<p class="text-xs text-gray-500 mt-1">${photoData ? "Photo captured successfully" : "No photo captured"}</p>
+</div>
+`;
             historyContainer.insertBefore(newActionDiv, historyContainer.firstChild);
             const historyItems = historyContainer.children;
             if (historyItems.length > 5) {
@@ -741,6 +958,69 @@
             updateLocation();
         });
         setInterval(updateLocation, 60000);
+    </script>
+    <script id="dateUpdater">
+        function updateCurrentDate() {
+            const now = new Date();
+            const dateString = now.toLocaleDateString("en-US", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+            });
+            document.getElementById("currentDate").textContent = dateString;
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            updateCurrentDate();
+        });
+        setInterval(updateCurrentDate, 3600000);
+    </script>
+    <script id="tabNavigation">
+        function showTab(tabName) {
+            document.querySelectorAll(".tab-content").forEach((content) => {
+                content.classList.add("hidden");
+            });
+            document.querySelectorAll(".tab-button").forEach((button) => {
+                button.classList.remove("bg-primary", "text-white", "shadow-md");
+                button.classList.add(
+                    "text-gray-600",
+                    "hover:text-gray-800",
+                    "hover:bg-gray-50",
+                );
+                button.setAttribute("aria-selected", "false");
+            });
+            document.getElementById(tabName + "Content").classList.remove("hidden");
+            document
+                .getElementById(tabName + "Tab")
+                .classList.remove(
+                    "text-gray-600",
+                    "hover:text-gray-800",
+                    "hover:bg-gray-50",
+                );
+            document
+                .getElementById(tabName + "Tab")
+                .classList.add("bg-primary", "text-white", "shadow-md");
+            document
+                .getElementById(tabName + "Tab")
+                .setAttribute("aria-selected", "true");
+        }
+        document.addEventListener("DOMContentLoaded", () => {
+            document
+                .getElementById("timeTab")
+                .addEventListener("click", () => showTab("time"));
+            document
+                .getElementById("logsTab")
+                .addEventListener("click", () => showTab("logs"));
+            document
+                .getElementById("activityTab")
+                .addEventListener("click", () => showTab("activity"));
+            document
+                .getElementById("deviceTab")
+                .addEventListener("click", () => showTab("device"));
+            document
+                .getElementById("locationTab")
+                .addEventListener("click", () => showTab("location"));
+        });
     </script>
     <script id="deviceInfo">
         function detectBrowser() {
