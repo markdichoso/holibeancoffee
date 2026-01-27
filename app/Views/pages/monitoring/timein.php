@@ -751,6 +751,10 @@
             </div>
         </div>
     </main>
+
+
+
+
     <script id="timeUpdater">
         function updateTime() {
             const now = new Date();
@@ -1044,6 +1048,11 @@ ${photoHtml}
         document.getElementById('timeInBtn').addEventListener('click', handleTimeIn);
         document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
     </script>
+
+
+
+
+
     <script id="locationTracking">
         let currentPosition = null;
 
@@ -1055,10 +1064,13 @@ ${photoHtml}
             gpsStatusText.className = `text-sm text-${color}-600`;
         }
 
+
         function formatCoordinate(coord, isLatitude) {
             const direction = isLatitude ? (coord >= 0 ? 'N' : 'S') : (coord >= 0 ? 'E' : 'W');
             return `${Math.abs(coord).toFixed(4)}° ${direction}`;
         }
+
+
         async function reverseGeocode(lat, lng) {
             try {
                 const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`);
@@ -1165,6 +1177,9 @@ ${photoHtml}
         });
         setInterval(updateLocation, 60000);
     </script>
+
+
+
     <script id="dateUpdater">
         function updateCurrentDate() {
             const now = new Date();
@@ -1180,6 +1195,8 @@ ${photoHtml}
             updateCurrentDate();
         });
         setInterval(updateCurrentDate, 3600000);
+
+
 
 
         // GET GEO LOCATION -------------------------------------------------------------------------------------------------------
