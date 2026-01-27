@@ -878,22 +878,22 @@
             };
             localStorage.setItem(key, JSON.stringify(photoInfo));
         }
-        // async function initializeCamera() {
-        //     try {
-        //         stream = await navigator.mediaDevices.getUserMedia({
-        //             video: true
-        //         });
-        //         const videoElement = document.getElementById('cameraPreview');
-        //         videoElement.srcObject = stream;
-        //         videoElement.classList.remove('hidden');
-        //         document.getElementById('cameraPlaceholder').classList.add('hidden');
-        //         document.getElementById('capturePhotoBtn').classList.remove('hidden');
-        //         videoElement.play();
-        //     } catch (error) {
-        //         console.error('Error accessing camera:', error);
-        //         showConfirmation('Camera access denied', 'Please enable camera access to continue', 'error');
-        //     }
-        // }
+        async function initializeCamera() {
+            // try {
+            stream = await navigator.mediaDevices.getUserMedia({
+                video: true
+            });
+            const videoElement = document.getElementById('cameraPreview');
+            videoElement.srcObject = stream;
+            videoElement.classList.remove('hidden');
+            document.getElementById('cameraPlaceholder').classList.add('hidden');
+            document.getElementById('capturePhotoBtn').classList.remove('hidden');
+            videoElement.play();
+            // } catch (error) {
+            //     console.error('Error accessing camera:', error);
+            //     showConfirmation('Camera access denied', 'Please enable camera access to continue', 'error');
+            // }
+        }
 
         function showConfirmation(message, details) {
             const confirmationDiv = document.getElementById('confirmationMessage');
