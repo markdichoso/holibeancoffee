@@ -129,7 +129,7 @@
                                 <div class="flex items-center justify-center mb-4 sm:mb-6 lg:mb-8">
                                     <div class="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl p-1 sm:p-2 shadow-lg border border-gray-100/50 w-full max-w-none overflow-x-auto">
 
-                                        <div class="flex items-center justify-center space-x-1 min-w-max lg:min-w-0 lg:grid lg:grid-cols-3 lg:gap-1 xl:gap-2" role="tablist">
+                                        <div class="flex justify-center space-x-1 min-w-max lg:min-w-0 lg:grid lg:grid-cols-3 lg:gap-1 xl:gap-2" role="tablist">
 
 
                                             <button id="timeTab" class="tab-button px-3 sm:px-4 lg:px-6 xl:px-8 py-2 sm:py-3 text-xs sm:text-sm lg:text-base font-bold rounded-full transition-all duration-300 !rounded-full bg-primary text-white shadow-md whitespace-nowrap" role="tab" aria-selected="true">
