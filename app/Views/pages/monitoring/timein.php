@@ -110,7 +110,7 @@
                                     </div>
                                     <div class="min-w-0">
                                         <h2 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 mb-1">
-                                            <span class="text-sm text-gray-700"><?= session()->get('firstname') . " " . session()->get('lastname') ?></span>
+                                            <?= session()->get('firstname') . " " . session()->get('lastname') ?>
                                         </h2>
                                         <p class="text-xs sm:text-sm lg:text-base xl:text-lg text-gray-600 font-medium">Employee Number : <?php echo $_SESSION['user_id']; ?> • Human Resources</p>
                                         <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 sm:mt-2 font-medium" id="currentDate">Monday, January 26, 2026</p>
