@@ -334,6 +334,11 @@
                                     </div>
                                 </div>
                             </div>
+
+
+                            <!-- NAVIGATION TAB - TIME DURATION LOGS -->
+
+
                             <div id="logsContent" class="tab-content hidden">
                                 <div class="bg-gradient-to-br from-gray-50 to-orange-50/30 rounded-3xl p-8 border border-gray-100/50 shadow-2xl">
                                     <div class="flex items-center justify-between mb-8">
@@ -733,7 +738,8 @@
                                             </div>
                                             <div class="mt-6 p-4 bg-gradient-to-r from-gray-50 to-blue-50 rounded-xl border border-gray-100">
                                                 <h4 class="text-sm font-bold text-gray-800 mb-2">Full Address</h4>
-                                                <p class="text-sm text-gray-600 leading-relaxed" id="addressDisplay">Retrieving location information...</p>
+                                                <!-- <p class="text-sm text-gray-600 leading-relaxed" id="addressDisplay">Retrieving location information...</p> -->
+                                                <p class="text-sm text-gray-600 leading-relaxed" id="location_in">Retrieving location information...</p>
                                             </div>
                                         </div>
                                     </div>
@@ -1086,6 +1092,9 @@ ${photoHtml}
                 };
             }
         }
+
+
+
         async function updateLocation() {
             if (!navigator.geolocation) {
                 setLocationStatus('error', 'red', 'Not Supported');
@@ -1171,7 +1180,69 @@ ${photoHtml}
             updateCurrentDate();
         });
         setInterval(updateCurrentDate, 3600000);
+
+
+        // GET GEO LOCATION -------------------------------------------------------------------------------------------------------
+
+        $(document).ready(function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showLocation);
+            } else {
+                $('#location_in').html('Geolocation is not supported by this browser.');
+            }
+            $('form').on('submit', function(event) {
+                // Prevent the form from submitting in the traditional HTML way (page reload)
+                //event.preventDefault();
+                location_val = $('#location_in').val();
+                if (location_val === '') {
+                    alert('Please wait for the location to show!')
+                    return false;
+                }
+            });
+            if ($("#time_in").length > 0) {
+                // Code to execute if the element with the ID "myElementId" is found
+                //console.log("Element exists!");
+                $("form").remove(); // Example operation
+            }
+            if ($("#address_in").length > 0) {
+                // Code to execute if the element with the ID "myElementId" is found
+                //console.log("Element exists!");
+                //$this.remove();
+                $("form").remove(); // Example operation
+            }
+        });
+
+        function showLocation(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            $("#latitudeDisplay").html("Latitude: " + latitude);
+            $("#longitudeDisplay").html("Longitude: " + longitude);
+            $.ajax({
+                type: 'POST',
+                url: "location",
+                data: {
+                    latitude: latitude,
+                    longitude: longitude
+                },
+                success: function(msg) {
+                    if (msg) {
+                        $("#location_in").html(msg);
+                        $("#gpsStatusText").html("Active");
+                        //$("#gpsStatus").switchClass("w-3 h-3 bg-yellow-500 rounded-full pulse-animation", "w-3 h-3 bg-green-500 rounded-full pulse-animation");
+                        $("#gpsStatusText").css("color", "green");
+                    } else {
+                        $("#location_in").html('Not Available');
+                    }
+                }
+            });
+        }
+
+        // GET GEO LOCATION - END --------------------------------------------------------------------------------------------------
     </script>
+
+
+
+
     <script id="tabNavigation">
         function showTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(content => {
