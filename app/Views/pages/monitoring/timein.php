@@ -128,8 +128,12 @@
                             <div class="bg-gradient-to-br from-white/80 to-gray-50/50 rounded-xl sm:rounded-2xl lg:rounded-3xl p-3 sm:p-4 md:p-6 lg:p-8 xl:p-10 border border-gray-100/50 shadow-xl backdrop-blur-sm mb-4 sm:mb-6 lg:mb-8">
                                 <div class="flex items-center justify-center mb-4 sm:mb-6 lg:mb-8">
                                     <div class="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl p-1 sm:p-2 shadow-lg border border-gray-100/50 w-full max-w-none overflow-x-auto">
-                                        <div class="flex space-x-1 min-w-max lg:min-w-0 lg:grid lg:grid-cols-3 lg:gap-1 xl:gap-2" role="tablist">
+
+                                        <div class="flex items-center space-x-1 min-w-max lg:min-w-0 lg:grid lg:grid-cols-3 lg:gap-1 xl:gap-2" role="tablist">
+
+
                                             <button id="timeTab" class="tab-button px-3 sm:px-4 lg:px-6 xl:px-8 py-2 sm:py-3 text-xs sm:text-sm lg:text-base font-bold rounded-full transition-all duration-300 !rounded-full bg-primary text-white shadow-md whitespace-nowrap" role="tab" aria-selected="true">
+
                                                 <div class="flex items-center justify-center space-x-1 sm:space-x-2">
                                                     <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
                                                         <i class="ri-time-line"></i>
@@ -137,7 +141,11 @@
                                                     <span class="hidden md:inline">Time Tracking</span>
                                                     <span class="md:hidden">Time</span>
                                                 </div>
+
+
                                             </button>
+
+
                                             <button id="logsTab" class="tab-button px-3 sm:px-4 lg:px-6 xl:px-8 py-2 sm:py-3 text-xs sm:text-sm lg:text-base font-bold rounded-full transition-all duration-300 !rounded-full text-gray-600 hover:text-gray-800 hover:bg-gray-50 whitespace-nowrap" role="tab" aria-selected="false">
                                                 <div class="flex items-center justify-center space-x-1 sm:space-x-2">
                                                     <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
@@ -147,6 +155,8 @@
                                                     <span class="md:hidden">Logs</span>
                                                 </div>
                                             </button>
+
+
                                             <button id="activityTab" class="tab-button px-3 sm:px-4 lg:px-6 xl:px-8 py-2 sm:py-3 text-xs sm:text-sm lg:text-base font-bold rounded-full transition-all duration-300 !rounded-full text-gray-600 hover:text-gray-800 hover:bg-gray-50 whitespace-nowrap" role="tab" aria-selected="false">
                                                 <div class="flex items-center justify-center space-x-1 sm:space-x-2">
                                                     <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
@@ -155,7 +165,12 @@
                                                     <span>Activity</span>
                                                 </div>
                                             </button>
+
+
                                         </div>
+
+
+
                                     </div>
                                 </div>
                             </div>
