@@ -110,7 +110,7 @@
                                     </div>
                                     <div class="min-w-0">
                                         <h2 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 mb-1">Sarah Johnson</h2>
-                                        <p class="text-xs sm:text-sm lg:text-base xl:text-lg text-gray-600 font-medium">EMP-2024-001 • Human Resources</p>
+                                        <p class="text-xs sm:text-sm lg:text-base xl:text-lg text-gray-600 font-medium"><?php echo $_SESSION['user_id']; ?> • Human Resources</p>
                                         <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 sm:mt-2 font-medium" id="currentDate">Monday, January 26, 2026</p>
                                     </div>
                                 </div>
