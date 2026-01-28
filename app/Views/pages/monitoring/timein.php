@@ -1107,75 +1107,75 @@ ${photoHtml}
 
 
 
-        // async function updateLocation() {
-        //     if (!navigator.geolocation) {
-        //         setLocationStatus('error', 'red', 'Not Supported');
-        //         document.getElementById('latitudeDisplay').textContent = 'Latitude: Geolocation not supported';
-        //         document.getElementById('longitudeDisplay').textContent = 'Longitude: Geolocation not supported';
-        //         document.getElementById('addressDisplay').textContent = 'Address: Geolocation not available';
-        //         return;
-        //     }
-        //     setLocationStatus('loading', 'yellow', 'Locating...');
-        //     const options = {
-        //         enableHighAccuracy: true,
-        //         timeout: 10000,
-        //         maximumAge: 300000
-        //     };
-        //     navigator.geolocation.getCurrentPosition(
-        //         async function(position) {
-        //                 currentPosition = position;
-        //                 const lat = position.coords.latitude;
-        //                 const lng = position.coords.longitude;
-        //                 const accuracy = position.coords.accuracy;
-        //                 setLocationStatus('success', 'green', 'Active');
-        //                 document.getElementById('latitudeDisplay').textContent = `Latitude: ${formatCoordinate(lat, true)}`;
-        //                 document.getElementById('longitudeDisplay').textContent = `Longitude: ${formatCoordinate(lng, false)}`;
-        //                 document.getElementById('locationAccuracy').textContent = `Accuracy: ±${Math.round(accuracy)} meters`;
-        //                 const addressData = await reverseGeocode(lat, lng);
-        //                 document.getElementById('buildingDisplay').textContent = `Building: ${addressData.building}`;
-        //                 document.getElementById('streetDisplay').textContent = `Street: ${addressData.street}`;
-        //                 document.getElementById('addressDisplay').textContent = addressData.fullAddress;
-        //                 document.getElementById('cityDisplay').textContent = `City: ${addressData.city}`;
-        //                 document.getElementById('regionDisplay').textContent = `Region: ${addressData.region}`;
-        //                 document.getElementById('countryDisplay').textContent = `Country: ${addressData.country}`;
-        //                 document.getElementById('postalCodeDisplay').textContent = `Postal Code: ${addressData.postalCode}`;
-        //                 document.getElementById('coordinatesMain').textContent = `${formatCoordinate(lat, true)}, ${formatCoordinate(lng, false)}`;
-        //                 document.getElementById('addressMain').textContent = addressData.building;
-        //                 document.getElementById('cityMain').textContent = addressData.city;
-        //                 document.getElementById('accuracyMain').textContent = `±${Math.round(accuracy)} meters`;
-        //             },
-        //             function(error) {
-        //                 let errorMessage = 'Error occurred';
-        //                 switch (error.code) {
-        //                     case error.PERMISSION_DENIED:
-        //                         errorMessage = 'Access Denied';
-        //                         break;
-        //                     case error.POSITION_UNAVAILABLE:
-        //                         errorMessage = 'Unavailable';
-        //                         break;
-        //                     case error.TIMEOUT:
-        //                         errorMessage = 'Timeout';
-        //                         break;
-        //                 }
-        //                 setLocationStatus('error', 'red', errorMessage);
-        //                 document.getElementById('latitudeDisplay').textContent = 'Latitude: Unable to retrieve';
-        //                 document.getElementById('longitudeDisplay').textContent = 'Longitude: Unable to retrieve';
-        //                 document.getElementById('buildingDisplay').textContent = 'Building: Access required';
-        //                 document.getElementById('streetDisplay').textContent = 'Street: Access required';
-        //                 document.getElementById('addressDisplay').textContent = 'Location access required for address details';
-        //                 document.getElementById('cityDisplay').textContent = 'City: Unknown';
-        //                 document.getElementById('regionDisplay').textContent = 'Region: Unknown';
-        //                 document.getElementById('countryDisplay').textContent = 'Country: Unknown';
-        //                 document.getElementById('postalCodeDisplay').textContent = 'Postal Code: N/A';
-        //                 document.getElementById('locationAccuracy').textContent = 'Please enable location permissions';
-        //             },
-        //             options
-        //     );
-        // }
-        // document.addEventListener('DOMContentLoaded', () => {
-        //     updateLocation();
-        // });
-        // setInterval(updateLocation, 60000);
+        async function updateLocation() {
+            if (!navigator.geolocation) {
+                setLocationStatus('error', 'red', 'Not Supported');
+                document.getElementById('latitudeDisplay').textContent = 'Latitude: Geolocation not supported';
+                document.getElementById('longitudeDisplay').textContent = 'Longitude: Geolocation not supported';
+                document.getElementById('addressDisplay').textContent = 'Address: Geolocation not available';
+                return;
+            }
+            setLocationStatus('loading', 'yellow', 'Locating...');
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 300000
+            };
+            navigator.geolocation.getCurrentPosition(
+                async function(position) {
+                        currentPosition = position;
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        const accuracy = position.coords.accuracy;
+                        setLocationStatus('success', 'green', 'Active');
+                        document.getElementById('latitudeDisplay').textContent = `Latitude: ${formatCoordinate(lat, true)}`;
+                        document.getElementById('longitudeDisplay').textContent = `Longitude: ${formatCoordinate(lng, false)}`;
+                        document.getElementById('locationAccuracy').textContent = `Accuracy: ±${Math.round(accuracy)} meters`;
+                        const addressData = await reverseGeocode(lat, lng);
+                        document.getElementById('buildingDisplay').textContent = `Building: ${addressData.building}`;
+                        document.getElementById('streetDisplay').textContent = `Street: ${addressData.street}`;
+                        document.getElementById('addressDisplay').textContent = addressData.fullAddress;
+                        document.getElementById('cityDisplay').textContent = `City: ${addressData.city}`;
+                        document.getElementById('regionDisplay').textContent = `Region: ${addressData.region}`;
+                        document.getElementById('countryDisplay').textContent = `Country: ${addressData.country}`;
+                        document.getElementById('postalCodeDisplay').textContent = `Postal Code: ${addressData.postalCode}`;
+                        document.getElementById('coordinatesMain').textContent = `${formatCoordinate(lat, true)}, ${formatCoordinate(lng, false)}`;
+                        document.getElementById('addressMain').textContent = addressData.building;
+                        document.getElementById('cityMain').textContent = addressData.city;
+                        document.getElementById('accuracyMain').textContent = `±${Math.round(accuracy)} meters`;
+                    },
+                    function(error) {
+                        let errorMessage = 'Error occurred';
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMessage = 'Access Denied';
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMessage = 'Unavailable';
+                                break;
+                            case error.TIMEOUT:
+                                errorMessage = 'Timeout';
+                                break;
+                        }
+                        setLocationStatus('error', 'red', errorMessage);
+                        document.getElementById('latitudeDisplay').textContent = 'Latitude: Unable to retrieve';
+                        document.getElementById('longitudeDisplay').textContent = 'Longitude: Unable to retrieve';
+                        document.getElementById('buildingDisplay').textContent = 'Building: Access required';
+                        document.getElementById('streetDisplay').textContent = 'Street: Access required';
+                        document.getElementById('addressDisplay').textContent = 'Location access required for address details';
+                        document.getElementById('cityDisplay').textContent = 'City: Unknown';
+                        document.getElementById('regionDisplay').textContent = 'Region: Unknown';
+                        document.getElementById('countryDisplay').textContent = 'Country: Unknown';
+                        document.getElementById('postalCodeDisplay').textContent = 'Postal Code: N/A';
+                        document.getElementById('locationAccuracy').textContent = 'Please enable location permissions';
+                    },
+                    options
+            );
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLocation();
+        });
+        setInterval(updateLocation, 60000);
 
 
 
