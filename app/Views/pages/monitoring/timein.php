@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Time Tracking System</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="src/jquery/jquery-3.2.1.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -312,9 +310,9 @@
                                                     </div>
                                                     <span>Address</span>
                                                 </span>
-                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="location_in"></span>
+                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="addressMain">123 Business Plaza</span>
                                             </div>
-                                            <!-- <div class="flex justify-between items-center py-2 sm:py-3 border-b border-green-100/50">
+                                            <div class="flex justify-between items-center py-2 sm:py-3 border-b border-green-100/50">
                                                 <span class="text-xs sm:text-sm lg:text-base font-medium text-gray-700 flex items-center space-x-2">
                                                     <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
                                                         <i class="ri-map-2-line text-gray-500"></i>
@@ -331,7 +329,7 @@
                                                     <span>Accuracy</span>
                                                 </span>
                                                 <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="accuracyMain">±5 meters</span>
-                                            </div> -->
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -753,6 +751,10 @@
             </div>
         </div>
     </main>
+
+
+
+
     <script id="timeUpdater">
         function updateTime() {
             const now = new Date();
@@ -1047,7 +1049,138 @@ ${photoHtml}
         document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
     </script>
 
+
+
+
+
     <script id="locationTracking">
+        let currentPosition = null;
+
+        function setLocationStatus(status, color, text) {
+            const gpsStatus = document.getElementById('gpsStatus');
+            const gpsStatusText = document.getElementById('gpsStatusText');
+            gpsStatus.className = `w-3 h-3 rounded-full ${status === 'loading' ? 'pulse-animation' : ''} bg-${color}-500`;
+            gpsStatusText.textContent = text;
+            gpsStatusText.className = `text-sm text-${color}-600`;
+        }
+
+
+        function formatCoordinate(coord, isLatitude) {
+            const direction = isLatitude ? (coord >= 0 ? 'N' : 'S') : (coord >= 0 ? 'E' : 'W');
+            return `${Math.abs(coord).toFixed(4)}° ${direction}`;
+        }
+
+
+        async function reverseGeocode(lat, lng) {
+            try {
+                const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`);
+                const data = await response.json();
+                const building = data.building || data.house || data.amenity || 'Not available';
+                const streetNumber = data.streetNumber || '';
+                const streetName = data.streetName || data.road || '';
+                const street = `${streetNumber} ${streetName}`.trim() || 'Not available';
+                const fullAddress = data.display_name ||
+                    `${building !== 'Not available' ? building + ', ' : ''}${street !== 'Not available' ? street + ', ' : ''}${data.locality || data.city || ''}, ${data.principalSubdivision || ''}, ${data.countryName || ''}`.replace(/^,\s*|,\s*$/g, '').replace(/,\s*,/g, ',') ||
+                    `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+                return {
+                    building: building,
+                    street: street,
+                    fullAddress: fullAddress,
+                    city: data.city || data.locality || 'Unknown',
+                    region: data.principalSubdivision || data.region || 'Unknown',
+                    country: data.countryName || 'Unknown',
+                    postalCode: data.postcode || 'N/A'
+                };
+            } catch (error) {
+                console.error('Reverse geocoding failed:', error);
+                return {
+                    building: 'Not available',
+                    street: 'Not available',
+                    fullAddress: `${lat.toFixed(6)}, ${lng.toFixed(6)}`,
+                    city: 'Unknown',
+                    region: 'Unknown',
+                    country: 'Unknown',
+                    postalCode: 'N/A'
+                };
+            }
+        }
+
+
+
+        async function updateLocation() {
+            if (!navigator.geolocation) {
+                setLocationStatus('error', 'red', 'Not Supported');
+                document.getElementById('latitudeDisplay').textContent = 'Latitude: Geolocation not supported';
+                document.getElementById('longitudeDisplay').textContent = 'Longitude: Geolocation not supported';
+                document.getElementById('addressDisplay').textContent = 'Address: Geolocation not available';
+                return;
+            }
+            setLocationStatus('loading', 'yellow', 'Locating...');
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 300000
+            };
+            navigator.geolocation.getCurrentPosition(
+                async function(position) {
+                        currentPosition = position;
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        const accuracy = position.coords.accuracy;
+                        setLocationStatus('success', 'green', 'Active');
+                        document.getElementById('latitudeDisplay').textContent = `Latitude: ${formatCoordinate(lat, true)}`;
+                        document.getElementById('longitudeDisplay').textContent = `Longitude: ${formatCoordinate(lng, false)}`;
+                        document.getElementById('locationAccuracy').textContent = `Accuracy: ±${Math.round(accuracy)} meters`;
+                        const addressData = await reverseGeocode(lat, lng);
+                        document.getElementById('buildingDisplay').textContent = `Building: ${addressData.building}`;
+                        document.getElementById('streetDisplay').textContent = `Street: ${addressData.street}`;
+                        document.getElementById('addressDisplay').textContent = addressData.fullAddress;
+                        document.getElementById('cityDisplay').textContent = `City: ${addressData.city}`;
+                        document.getElementById('regionDisplay').textContent = `Region: ${addressData.region}`;
+                        document.getElementById('countryDisplay').textContent = `Country: ${addressData.country}`;
+                        document.getElementById('postalCodeDisplay').textContent = `Postal Code: ${addressData.postalCode}`;
+                        document.getElementById('coordinatesMain').textContent = `${formatCoordinate(lat, true)}, ${formatCoordinate(lng, false)}`;
+                        document.getElementById('addressMain').textContent = addressData.building;
+                        document.getElementById('cityMain').textContent = addressData.city;
+                        document.getElementById('accuracyMain').textContent = `±${Math.round(accuracy)} meters`;
+                    },
+                    function(error) {
+                        let errorMessage = 'Error occurred';
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                                errorMessage = 'Access Denied';
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                errorMessage = 'Unavailable';
+                                break;
+                            case error.TIMEOUT:
+                                errorMessage = 'Timeout';
+                                break;
+                        }
+                        setLocationStatus('error', 'red', errorMessage);
+                        document.getElementById('latitudeDisplay').textContent = 'Latitude: Unable to retrieve';
+                        document.getElementById('longitudeDisplay').textContent = 'Longitude: Unable to retrieve';
+                        document.getElementById('buildingDisplay').textContent = 'Building: Access required';
+                        document.getElementById('streetDisplay').textContent = 'Street: Access required';
+                        document.getElementById('addressDisplay').textContent = 'Location access required for address details';
+                        document.getElementById('cityDisplay').textContent = 'City: Unknown';
+                        document.getElementById('regionDisplay').textContent = 'Region: Unknown';
+                        document.getElementById('countryDisplay').textContent = 'Country: Unknown';
+                        document.getElementById('postalCodeDisplay').textContent = 'Postal Code: N/A';
+                        document.getElementById('locationAccuracy').textContent = 'Please enable location permissions';
+                    },
+                    options
+            );
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            updateLocation();
+        });
+        setInterval(updateLocation, 60000);
+
+
+
+
+
         // GET GEO LOCATION -------------------------------------------------------------------------------------------------------
 
         $(document).ready(function() {
@@ -1056,10 +1189,9 @@ ${photoHtml}
             } else {
                 $('#location_in').html('Geolocation is not supported by this browser.');
             }
-            $('#timeInBtn').on('click', function(event) {
+            $('form').on('submit', function(event) {
                 // Prevent the form from submitting in the traditional HTML way (page reload)
                 //event.preventDefault();
-                //alert('Let us wait'); return false;
                 location_val = $('#location_in').val();
                 if (location_val === '') {
                     alert('Please wait for the location to show!')
@@ -1094,7 +1226,7 @@ ${photoHtml}
                 success: function(msg) {
                     if (msg) {
                         $("#location_in").html(msg);
-                    //    $("#gpsStatusText").html("Active");
+                        $("#gpsStatusText").html("Active");
                         //$("#gpsStatus").switchClass("w-3 h-3 bg-yellow-500 rounded-full pulse-animation", "w-3 h-3 bg-green-500 rounded-full pulse-animation");
                         $("#gpsStatusText").css("color", "green");
                     } else {
