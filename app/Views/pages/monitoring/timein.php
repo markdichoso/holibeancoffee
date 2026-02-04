@@ -974,13 +974,6 @@ ${photoHtml}
                     return false;
                 }
             
-            loc = $("#lastAction").html();
-            if(loc!=''){
-                alert("Your still clocked in!");
-                document.getElementById('timeInBtn').disabled = true;
-                return false;
-            }
-            
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
