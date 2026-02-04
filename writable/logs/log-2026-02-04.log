@@ -161,3 +161,157 @@ in APPPATH\Controllers\Home.php on line 58.
  4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 05:56:35 --> ErrorException: Undefined array key 0
+[Method: GET, Route: attendance]
+in APPPATH\Controllers\Home.php on line 64.
+ 1 APPPATH\Controllers\Home.php(64): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\Home.php', 64)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 05:56:39 --> ErrorException: Undefined array key 0
+[Method: GET, Route: attendance]
+in APPPATH\Controllers\Home.php on line 64.
+ 1 APPPATH\Controllers\Home.php(64): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\Home.php', 64)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 05:56:54 --> ErrorException: Undefined array key 0
+[Method: GET, Route: attendance]
+in APPPATH\Controllers\Home.php on line 64.
+ 1 APPPATH\Controllers\Home.php(64): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\Home.php', 64)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 05:57:00 --> ErrorException: Undefined array key 0
+[Method: GET, Route: attendance]
+in APPPATH\Controllers\Home.php on line 64.
+ 1 APPPATH\Controllers\Home.php(64): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\Home.php', 64)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 05:57:02 --> ErrorException: Undefined array key 0
+[Method: GET, Route: attendance]
+in APPPATH\Controllers\Home.php on line 64.
+ 1 APPPATH\Controllers\Home.php(64): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key 0', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\Home.php', 64)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 05:58:09 --> ErrorException: Undefined variable $in
+[Method: GET, Route: attendance]
+in APPPATH\Controllers\Home.php on line 70.
+ 1 APPPATH\Controllers\Home.php(70): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $in', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\Home.php', 70)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 05:58:34 --> ErrorException: Undefined variable $in
+[Method: GET, Route: attendance]
+in APPPATH\Controllers\Home.php on line 70.
+ 1 APPPATH\Controllers\Home.php(70): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $in', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\Home.php', 70)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 05:59:24 --> ErrorException: Undefined variable $address
+[Method: GET, Route: attendance]
+in APPPATH\Views\pages\monitoring\timein.php on line 482.
+ 1 APPPATH\Views\pages\monitoring\timein.php(482): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $address', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Views\\pages\\monitoring\\timein.php', 482)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\holibeancoffee\\app\\Views\\pages\\monitoring\\timein.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('pages/monitoring/timein', [], true)
+ 5 APPPATH\Controllers\Home.php(71): view('pages/monitoring/timein')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 05:59:28 --> ErrorException: Undefined variable $address
+[Method: GET, Route: attendance]
+in APPPATH\Views\pages\monitoring\timein.php on line 482.
+ 1 APPPATH\Views\pages\monitoring\timein.php(482): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $address', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Views\\pages\\monitoring\\timein.php', 482)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\holibeancoffee\\app\\Views\\pages\\monitoring\\timein.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('pages/monitoring/timein', [], true)
+ 5 APPPATH\Controllers\Home.php(71): view('pages/monitoring/timein')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 05:59:55 --> ErrorException: Undefined variable $address
+[Method: GET, Route: attendance]
+in APPPATH\Views\pages\monitoring\timein.php on line 482.
+ 1 APPPATH\Views\pages\monitoring\timein.php(482): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $address', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Views\\pages\\monitoring\\timein.php', 482)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\holibeancoffee\\app\\Views\\pages\\monitoring\\timein.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('pages/monitoring/timein', [], true)
+ 5 APPPATH\Controllers\Home.php(71): view('pages/monitoring/timein')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 06:02:42 --> ErrorException: Undefined variable $address
+[Method: GET, Route: attendance]
+in APPPATH\Views\pages\monitoring\timein.php on line 482.
+ 1 APPPATH\Views\pages\monitoring\timein.php(482): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $address', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Views\\pages\\monitoring\\timein.php', 482)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\holibeancoffee\\app\\Views\\pages\\monitoring\\timein.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('pages/monitoring/timein', [], true)
+ 5 APPPATH\Controllers\Home.php(72): view('pages/monitoring/timein')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 07:20:46 --> ErrorException: Undefined variable $address
+[Method: GET, Route: attendance]
+in APPPATH\Views\pages\monitoring\timein.php on line 482.
+ 1 APPPATH\Views\pages\monitoring\timein.php(482): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $address', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Views\\pages\\monitoring\\timein.php', 482)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\holibeancoffee\\app\\Views\\pages\\monitoring\\timein.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('pages/monitoring/timein', [], true)
+ 5 APPPATH\Controllers\Home.php(72): view('pages/monitoring/timein')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 07:20:49 --> ErrorException: Undefined variable $address
+[Method: GET, Route: attendance]
+in APPPATH\Views\pages\monitoring\timein.php on line 482.
+ 1 APPPATH\Views\pages\monitoring\timein.php(482): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $address', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Views\\pages\\monitoring\\timein.php', 482)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\holibeancoffee\\app\\Views\\pages\\monitoring\\timein.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('pages/monitoring/timein', [], true)
+ 5 APPPATH\Controllers\Home.php(72): view('pages/monitoring/timein')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))

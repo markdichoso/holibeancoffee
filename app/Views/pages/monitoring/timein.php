@@ -479,7 +479,7 @@
                                             <div class="w-4 h-4 bg-blue-500 rounded-full shadow-lg"></div>
                                             <span class="text-base font-bold text-blue-900">Latest Activity</span>
                                         </div>
-                                        <p class="text-gray-800 font-bold text-xl" id="lastAction"><?= esc($address) ?> - <?= esc($activity) ?></p>
+                                        <p class="text-gray-800 font-bold text-xl" id="lastAction"></p>
                                     </div>
                                     <div id="actionHistory" class="space-y-4">
                                         <div class="flex items-center justify-between mb-4">
@@ -973,6 +973,14 @@ ${photoHtml}
                     document.getElementById('timeInBtn').disabled = true;
                     return false;
                 }
+            
+            loc = $("#lastAction").html();
+            if(loc!=''){
+                alert("Your still clocked in!");
+                document.getElementById('timeInBtn').disabled = true;
+                return false;
+            }
+            
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
@@ -1185,6 +1193,7 @@ ${photoHtml}
         $(document).ready(function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showLocation);
+
             } else {
                 $('#location_in').html('Geolocation is not supported by this browser.');
             }
@@ -1193,12 +1202,18 @@ ${photoHtml}
                 //console.log("Element exists!");
                 $("form").remove(); // Example operation
             }
-            if ($("#address_in").length > 0) {
-                // Code to execute if the element with the ID "myElementId" is found
-                //console.log("Element exists!");
-                //$this.remove();
-                $("form").remove(); // Example operation
+            // if ($("#lastAction").length > 0) {
+            //     // Code to execute if the element with the ID "myElementId" is found
+            //     //console.log("Element exists!");
+            //     //$this.remove();
+            //     document.getElementById('timeInBtn').disabled = true;
+            // }
+
+            loc = $("#lastAction").html();
+            if(loc!=''){
+              updateStatus('Clocked In', 'green');
             }
+
         });
 
         function showLocation(position) {
@@ -1216,9 +1231,9 @@ ${photoHtml}
                 success: function(msg) {
                     if (msg) {
                         $("#addressMain").html(msg);
-                        document.getElementById('timeInBtn').disabled = false;
+                       document.getElementById('timeInBtn').disabled = false;
                     } else {
-                        $("#location_in").html('Not Available');
+                        $("#addressMain").html('Not Available');
                     }
                 }
             });

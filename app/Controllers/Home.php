@@ -59,11 +59,17 @@ class Home extends BaseController
         
         $attendanceModel = new Attendance();
         $emp_info_id = $_SESSION['emp_info_id'];
-        $attendance = $attendanceModel->searchAttendance($emp_info_id);   
+        if($attendance = $attendanceModel->searchAttendance($emp_info_id))
+            {  
         $in = [
                 'address' => $attendance[0]["location_in"],
                 'activity' => "Time-In",
             ];
-        return view('pages/monitoring/timein', $in);
+            return view('pages/monitoring/timein', $in);
+            }
+        else 
+            {
+        return view('pages/monitoring/timein');
+            }
     }
 }
