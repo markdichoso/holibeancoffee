@@ -39,7 +39,7 @@ class Attendance extends Model
     {
         
         $emp_info_id = $data;
-        $currentDate = date('l, F d, Y');
+        $currentDate = date('l, F j, Y');
         return $this->table($this->table)
                     ->where('emp_info_id', $emp_info_id)
                     ->where('location_in !=', '')

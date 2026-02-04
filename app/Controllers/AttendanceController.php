@@ -32,6 +32,27 @@ class AttendanceController extends BaseController
                 return view('pages/attendance/time-in'); 
             }
     }
+
+    public function CheckTimeIn()
+    {
+       // alert('ok');
+        if (!isset($_SESSION['user_id'])) {
+            // If the user is not logged in, redirect them to the login page
+            return redirect()->to('');
+        }
+        $activity = $this->request->getPost('activity');
+        if($activity === 'checkTimeIn')
+            {
+         $emp_info_id = $_SESSION['emp_info_id'];
+         //echo $emp_info_id;
+         $attendanceModel = new Attendance();
+        if($attendance = $attendanceModel->searchAttendance($emp_info_id))
+            {
+           // echo $attendance->location_in;
+           echo json_encode($attendance);
+                }
+            }       
+    }
         
 
         public function TimeOut()
@@ -93,7 +114,7 @@ class AttendanceController extends BaseController
         // Use the insert() method for new records
         if ($userModel->insert($data)){
         //return redirect()->to('timein')->with('success', 'Successfully Time in!');
-        return true;
+        echo "Successfully Clocked In";
         }
     }
 

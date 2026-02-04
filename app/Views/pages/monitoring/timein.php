@@ -227,6 +227,12 @@
                                         </div>
                                     </button>
                                 </div>
+                                <div class="flex items-center justify-center space-x-2 sm:space-x-3 lg:space-x-4 relative z-10">
+                                            <div class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 flex items-center justify-center bg-white/20 rounded-lg sm:rounded-xl shadow-lg">
+                                                <i class="ri-login-circle-line text-sm sm:text-base lg:text-lg xl:text-xl"></i>
+                                            </div>
+                                            <span class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold" id="checking"></span>
+                                </div>
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 xl:gap-12 mb-6 sm:mb-8 lg:mb-10 xl:mb-12">
                                     <div class="bg-gradient-to-br from-purple-50/80 to-pink-50/30 rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-10 border border-purple-100/50 shadow-xl backdrop-blur-sm">
                                         <div class="flex items-center justify-between mb-4 sm:mb-6 lg:mb-8">
@@ -1112,6 +1118,8 @@ ${photoHtml}
                 $('#location_in').html('Geolocation is not supported by this browser.');
             }
 
+            checkTimeIn();
+
         });
 
         function showLocation(position) {
@@ -1147,8 +1155,37 @@ ${photoHtml}
                       location_in: location_in
                 },
                 success: function(msg) {
-                
+                if(msg)
+                    {
+                        $("#checking").html(msg);
+                       $("#timeInBtn").remove(); 
+                    }
                 }
+            });
+
+        }
+
+        function checkTimeIn() {
+           // $("#checking").html('dsfsfsfsadfsfs');
+            activity = "checkTimeIn";
+            $.ajax({
+                type: 'POST',
+                url: "checkTimeIn",
+              //  dataType: "json",
+                data: {
+                       activity: activity
+                },
+                success: function(msg) {
+               //$("#checking").html(msg);
+               if(msg)
+                    {
+                       $("#timeInBtn").remove();
+                       updateStatus('Clocked In', 'green');
+                       document.getElementById('timeOutBtn').disabled = false; 
+                    }
+                //return false;
+                }
+                //$("#checking").html(msg);
             });
 
         }
