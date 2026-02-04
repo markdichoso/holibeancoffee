@@ -24,11 +24,12 @@ class Attendance extends Model
     //$builder = $db->table('attendance');
     $date_out=$data['date_out'];
     $location_out=$data['location_out'];
-    $currentDate = date('l, F d, Y');
+    $currentDate = date('l, F j, Y');
     // $data['date_out']=date("l, F j, Y H:i:s");
     $builder->set('date_out', $date_out);
     $builder->set('location_out', $location_out);
     $builder->where('emp_info_id', $emp_info_id);
+    $builder->where('location_out IS NULL');
     $builder->like('date_in', $currentDate);
     $builder->update();
     return true;   
@@ -42,6 +43,7 @@ class Attendance extends Model
         $currentDate = date('l, F j, Y');
         return $this->table($this->table)
                     ->where('emp_info_id', $emp_info_id)
+                    ->where('location_out IS NULL')
                     ->where('location_in !=', '')
                     ->like('date_in', $currentDate) // Produces WHERE `username` LIKE '%searchTerm%'
                     ->findAll();                    // Retrieves all matching results

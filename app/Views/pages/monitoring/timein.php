@@ -980,6 +980,7 @@ ${photoHtml}
                     return false;
                 }
             timeIn(location_val);
+            checkTimeIn();
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
@@ -1012,6 +1013,8 @@ ${photoHtml}
                 );
                 return;
             }
+            location_val = $('#addressMain').html();
+            timeOut(location_val);
             if (!currentSessionStart) return;
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
@@ -1165,6 +1168,26 @@ ${photoHtml}
 
         }
 
+        function timeOut(address) {
+            location_out = address;
+            $.ajax({
+                type: 'POST',
+                url: "send_out",
+                data: {
+                      location_out: location_out
+                },
+                success: function(msg) {
+                if(msg)
+                    {
+                        $("#checking").html(msg);
+                        updateStatus('Not Clocked In', 'red');
+                       $("#timeOutBtn").remove(); 
+                    }
+                }
+            });
+
+        }
+
         function checkTimeIn() {
            // $("#checking").html('dsfsfsfsadfsfs');
             activity = "checkTimeIn";
@@ -1183,7 +1206,7 @@ ${photoHtml}
                        updateStatus('Clocked In', 'green');
                        document.getElementById('timeOutBtn').disabled = false; 
                     }
-                //return false;
+                return false;
                 }
                 //$("#checking").html(msg);
             });

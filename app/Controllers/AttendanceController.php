@@ -120,14 +120,14 @@ class AttendanceController extends BaseController
 
     public function Send_Out()
     {      
-    $userModel = new Attendance();
+    //$userModel = new Attendance();
     $data = $this->request->getPost();
     $myTime = Time::now('Asia/Manila', 'en_US');
     $data['date_out']=$myTime->format("l, F j, Y h:i:s");
     $userModel = new Attendance();
  
     if ($userModel->time_out($data)){
-        return redirect()->to('timeout')->with('success', 'Successfully Time out!');
+        echo "Successfully Clocked Out!";
         }
     }
 }
