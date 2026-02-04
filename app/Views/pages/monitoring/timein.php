@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Time Tracking System</title>
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="src/jquery/jquery-3.2.1.min.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -114,12 +116,14 @@
                                         </h2>
                                         <p class="text-xs sm:text-sm lg:text-base xl:text-lg text-gray-600 font-medium">Employee Number : <?php echo $_SESSION['user_id']; ?> • Human Resources</p>
                                         <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 sm:mt-2 font-medium" id="currentDate">Monday, January 26, 2026</p>
+                                        <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 sm:mt-2 font-medium" id="currentDate"><?php echo anchor('destroy', 'LET&#39;S GO!', ['class' => 'btn btn-primary', 'title' => 'Log Out']); ?></p>
                                     </div>
                                 </div>
                                 <div class="flex justify-center lg:justify-end">
                                     <div class="flex items-center space-x-2 sm:space-x-3 lg:space-x-4 px-3 sm:px-4 lg:px-5 xl:px-6 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-lg sm:rounded-xl lg:rounded-2xl shadow-lg border border-white/20">
                                         <div class="w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full pulse-animation shadow-lg flex-shrink-0" id="statusIndicator"></div>
-                                        <span class="text-xs sm:text-sm lg:text-base xl:text-lg font-bold text-gray-800 whitespace-nowrap" id="statusText">Not Clocked In</span>
+                                        <span class="text-xs sm:text-sm lg:text-base xl:text-lg font-bold text-gray-800 whitespace-nowrap" id="statusText">Not Clocked In</span></br>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -310,17 +314,9 @@
                                                     </div>
                                                     <span>Address</span>
                                                 </span>
-                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="addressMain">123 Business Plaza</span>
+                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="addressMain"></span>
                                             </div>
-                                            <div class="flex justify-between items-center py-2 sm:py-3 border-b border-green-100/50">
-                                                <span class="text-xs sm:text-sm lg:text-base font-medium text-gray-700 flex items-center space-x-2">
-                                                    <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
-                                                        <i class="ri-map-2-line text-gray-500"></i>
-                                                    </div>
-                                                    <span>City</span>
-                                                </span>
-                                                <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="cityMain">New York</span>
-                                            </div>
+                                      
                                             <div class="flex justify-between items-center py-2 sm:py-3">
                                                 <span class="text-xs sm:text-sm lg:text-base font-medium text-gray-700 flex items-center space-x-2">
                                                     <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
@@ -483,7 +479,7 @@
                                             <div class="w-4 h-4 bg-blue-500 rounded-full shadow-lg"></div>
                                             <span class="text-base font-bold text-blue-900">Latest Activity</span>
                                         </div>
-                                        <p class="text-gray-800 font-bold text-xl" id="lastAction">No recent activity</p>
+                                        <p class="text-gray-800 font-bold text-xl" id="lastAction"><?= esc($address) ?> - <?= esc($activity) ?></p>
                                     </div>
                                     <div id="actionHistory" class="space-y-4">
                                         <div class="flex items-center justify-between mb-4">
@@ -752,9 +748,6 @@
         </div>
     </main>
 
-
-
-
     <script id="timeUpdater">
         function updateTime() {
             const now = new Date();
@@ -974,6 +967,12 @@ ${photoHtml}
                 );
                 return;
             }
+            location_val = $('#addressMain').html();
+                if (location_val === '') {
+                    alert('Please wait for the location to show!')
+                    document.getElementById('timeInBtn').disabled = true;
+                    return false;
+                }
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
@@ -1189,15 +1188,6 @@ ${photoHtml}
             } else {
                 $('#location_in').html('Geolocation is not supported by this browser.');
             }
-            $('form').on('submit', function(event) {
-                // Prevent the form from submitting in the traditional HTML way (page reload)
-                //event.preventDefault();
-                location_val = $('#location_in').val();
-                if (location_val === '') {
-                    alert('Please wait for the location to show!')
-                    return false;
-                }
-            });
             if ($("#time_in").length > 0) {
                 // Code to execute if the element with the ID "myElementId" is found
                 //console.log("Element exists!");
@@ -1225,10 +1215,8 @@ ${photoHtml}
                 },
                 success: function(msg) {
                     if (msg) {
-                        $("#location_in").html(msg);
-                        $("#gpsStatusText").html("Active");
-                        //$("#gpsStatus").switchClass("w-3 h-3 bg-yellow-500 rounded-full pulse-animation", "w-3 h-3 bg-green-500 rounded-full pulse-animation");
-                        $("#gpsStatusText").css("color", "green");
+                        $("#addressMain").html(msg);
+                        document.getElementById('timeInBtn').disabled = false;
                     } else {
                         $("#location_in").html('Not Available');
                     }
@@ -1239,7 +1227,13 @@ ${photoHtml}
         // GET GEO LOCATION - END --------------------------------------------------------------------------------------------------
     </script>
 
+    <script>
+        $(document).ready(function() {
+            
+        });
 
+        
+    </script>
 
     <script id="dateUpdater">
         function updateCurrentDate() {

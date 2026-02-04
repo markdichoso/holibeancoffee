@@ -5,6 +5,8 @@ use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use App\Models\Users;
 use App\Models\Employee_Info;
+use App\Models\Attendance;
+use CodeIgniter\I18n\Time;
 
 class Home extends BaseController
 {
@@ -54,6 +56,14 @@ class Home extends BaseController
             // If the user is not logged in, redirect them to the login page
             return redirect()->to('');
         }
-        return view('pages/monitoring/timein');
+        
+        $attendanceModel = new Attendance();
+        $emp_info_id = $_SESSION['emp_info_id'];
+        $attendance = $attendanceModel->searchAttendance($emp_info_id);   
+        $in = [
+                'address' => $attendance[0]["location_in"],
+                'activity' => "Time-In",
+            ];
+        return view('pages/monitoring/timein', $in);
     }
 }

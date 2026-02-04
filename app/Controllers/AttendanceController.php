@@ -22,6 +22,7 @@ class AttendanceController extends BaseController
          $attendanceModel = new Attendance();
         if($attendance = $attendanceModel->searchAttendance($emp_info_id)){
            // echo $attendance->location_in;
+           echo date('l, F d, Y');
             $in = [
                 'address' => $attendance[0]["location_in"],
             ];
@@ -89,7 +90,7 @@ class AttendanceController extends BaseController
     $data = $this->request->getPost();
     $myTime = Time::now('Asia/Manila', 'en_US');
     //echo $myTime; return false;
-    $data['date_in']=$myTime->format("l, F j, Y h:i:s");
+    $data['date_in']=$myTime->format("l, F d, Y h:i:s");
     //print_r($data); return false;
         // Use the insert() method for new records
         if ($userModel->insert($data)){

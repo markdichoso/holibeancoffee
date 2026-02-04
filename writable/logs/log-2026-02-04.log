@@ -1,0 +1,163 @@
+CRITICAL - 2026-02-04 02:22:49 --> ParseError: syntax error, unexpected identifier "fafsfdsfsafdsfa", expecting "," or ";"
+[Method: GET, Route: timein]
+in APPPATH\Controllers\AttendanceController.php on line 25.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\AttendanceController.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\AttendanceController')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\AttendanceController')
+ 4 SYSTEMPATH\CodeIgniter.php(885): class_exists('\\App\\Controllers\\AttendanceController', true)
+ 5 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 02:32:11 --> Error: Undefined constant "App\Models\currentDate"
+[Method: GET, Route: timein]
+in APPPATH\Models\Attendance.php on line 43.
+ 1 APPPATH\Controllers\AttendanceController.php(23): App\Models\Attendance->searchAttendance('1')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AttendanceController->TimeIn()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 02:33:21 --> ErrorException: Undefined variable $attendance
+[Method: GET, Route: timein]
+in APPPATH\Controllers\AttendanceController.php on line 23.
+ 1 APPPATH\Controllers\AttendanceController.php(23): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $attendance', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\AttendanceController.php', 23)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AttendanceController->TimeIn()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 02:33:29 --> ErrorException: Undefined variable $attendance
+[Method: GET, Route: timein]
+in APPPATH\Controllers\AttendanceController.php on line 23.
+ 1 APPPATH\Controllers\AttendanceController.php(23): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $attendance', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\AttendanceController.php', 23)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AttendanceController->TimeIn()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 02:40:15 --> ParseError: syntax error, unexpected token "->"
+[Method: GET, Route: timein]
+in APPPATH\Models\Attendance.php on line 45.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs\\holibeancoffee\\app\\Models\\Attendance.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Attendance')
+ 3 APPPATH\Controllers\AttendanceController.php(22): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Attendance')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AttendanceController->TimeIn()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 02:40:17 --> ParseError: syntax error, unexpected token "->"
+[Method: GET, Route: timein]
+in APPPATH\Models\Attendance.php on line 45.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs\\holibeancoffee\\app\\Models\\Attendance.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Models\\Attendance')
+ 3 APPPATH\Controllers\AttendanceController.php(22): CodeIgniter\Autoloader\Autoloader->loadClass('App\\Models\\Attendance')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AttendanceController->TimeIn()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 02:59:17 --> ParseError: syntax error, unexpected identifier "print_r"
+[Method: GET, Route: timein]
+in APPPATH\Controllers\AttendanceController.php on line 25.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\AttendanceController.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\AttendanceController')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\AttendanceController')
+ 4 SYSTEMPATH\CodeIgniter.php(885): class_exists('\\App\\Controllers\\AttendanceController', true)
+ 5 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 02:59:18 --> ParseError: syntax error, unexpected identifier "print_r"
+[Method: GET, Route: timein]
+in APPPATH\Controllers\AttendanceController.php on line 25.
+ 1 SYSTEMPATH\Autoloader\Autoloader.php(295): CodeIgniter\Autoloader\Autoloader->includeFile('C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\AttendanceController.php')
+ 2 SYSTEMPATH\Autoloader\Autoloader.php(271): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Controllers\\AttendanceController')
+ 3 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Controllers\\AttendanceController')
+ 4 SYSTEMPATH\CodeIgniter.php(885): class_exists('\\App\\Controllers\\AttendanceController', true)
+ 5 SYSTEMPATH\CodeIgniter.php(494): CodeIgniter\CodeIgniter->startController()
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 03:08:15 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: timein]
+in APPPATH\Models\Attendance.php on line 53.
+ 1 APPPATH\Controllers\AttendanceController.php(24): App\Models\Attendance->searchAttendance('1')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AttendanceController->TimeIn()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 03:32:35 --> ErrorException: Undefined variable $data
+[Method: GET, Route: timein]
+in APPPATH\Controllers\AttendanceController.php on line 38.
+ 1 APPPATH\Controllers\AttendanceController.php(38): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $data', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\AttendanceController.php', 38)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AttendanceController->TimeIn()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 03:34:06 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: timein]
+in APPPATH\Models\Users.php on line 20.
+ 1 APPPATH\Controllers\AttendanceController.php(38): App\Models\Users->searchUsers('norlan')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AttendanceController->TimeIn()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 03:34:07 --> TypeError: Cannot access offset of type string on string
+[Method: GET, Route: timein]
+in APPPATH\Models\Users.php on line 20.
+ 1 APPPATH\Controllers\AttendanceController.php(38): App\Models\Users->searchUsers('norlan')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AttendanceController->TimeIn()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 04:44:07 --> ParseError: syntax error, unexpected identifier "s", expecting ")"
+[Method: GET, Route: attendance]
+in APPPATH\Views\pages\monitoring\timein.php on line 119.
+ 1 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('pages/monitoring/timein', [], true)
+ 3 APPPATH\Controllers\Home.php(57): view('pages/monitoring/timein')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 04:44:19 --> ParseError: syntax error, unexpected identifier "Go", expecting ")"
+[Method: GET, Route: attendance]
+in APPPATH\Views\pages\monitoring\timein.php on line 119.
+ 1 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 2 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('pages/monitoring/timein', [], true)
+ 3 APPPATH\Controllers\Home.php(57): view('pages/monitoring/timein')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-04 04:50:08 --> Error: Class "App\Controllers\Attendance" not found
+[Method: GET, Route: attendance]
+in APPPATH\Controllers\Home.php on line 58.
+ 1 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->attendance()
+ 2 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 3 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 5 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 6 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
