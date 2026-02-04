@@ -22,7 +22,6 @@ class AttendanceController extends BaseController
          $attendanceModel = new Attendance();
         if($attendance = $attendanceModel->searchAttendance($emp_info_id)){
            // echo $attendance->location_in;
-           echo date('l, F d, Y');
             $in = [
                 'address' => $attendance[0]["location_in"],
             ];
@@ -63,9 +62,7 @@ class AttendanceController extends BaseController
         $latitude = $this->request->getPost('latitude');
         $longitude = $this->request->getPost('longitude');
         if(!empty($latitude) && !empty($longitude)){
-    //send request and receive json data by latitude and longitude
-    //$url = 'http://maps.googleapis.com/maps/api/geocode/json?latlng='.trim($_POST['latitude']).','.trim($_POST['longitude']).'&sensor=false&key=AIzaSyCJyDp4TLGUigRfo4YN46dXcWOPRqLD0gQ';
-    $url = 'https://us1.locationiq.com/v1/reverse?key=pk.35a6dfbc6fb83f3e2bf972bcfdd6ac50&lat='.trim($_POST['latitude']).'&lon='.trim($_POST['longitude']).'&format=json&';
+     $url = 'https://us1.locationiq.com/v1/reverse?key=pk.35a6dfbc6fb83f3e2bf972bcfdd6ac50&lat='.trim($_POST['latitude']).'&lon='.trim($_POST['longitude']).'&format=json&';
     $json = @file_get_contents($url);
     $data = json_decode($json);
       
@@ -90,11 +87,13 @@ class AttendanceController extends BaseController
     $data = $this->request->getPost();
     $myTime = Time::now('Asia/Manila', 'en_US');
     //echo $myTime; return false;
-    $data['date_in']=$myTime->format("l, F d, Y h:i:s");
+    $data['date_in']=$myTime->format("l, F j, Y h:i:s");
+    $data['emp_info_id'] = $_SESSION['emp_info_id'];
     //print_r($data); return false;
         // Use the insert() method for new records
         if ($userModel->insert($data)){
-        return redirect()->to('timein')->with('success', 'Successfully Time in!');
+        //return redirect()->to('timein')->with('success', 'Successfully Time in!');
+        return true;
         }
     }
 

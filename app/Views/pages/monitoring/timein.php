@@ -209,7 +209,7 @@
                                 </div>
                                 <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 lg:space-x-6 xl:space-x-8 mb-6 sm:mb-8 lg:mb-10 xl:mb-12">
                                     <button id="timeInBtn" class="group flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold py-3 sm:py-4 lg:py-5 xl:py-6 px-4 sm:px-6 lg:px-8 xl:px-10 !rounded-button transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 shadow-2xl hover:shadow-3xl whitespace-nowrap relative overflow-hidden">
-                                        <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" id="divBtnIn"></div>
                                         <div class="flex items-center justify-center space-x-2 sm:space-x-3 lg:space-x-4 relative z-10">
                                             <div class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 flex items-center justify-center bg-white/20 rounded-lg sm:rounded-xl shadow-lg">
                                                 <i class="ri-login-circle-line text-sm sm:text-base lg:text-lg xl:text-xl"></i>
@@ -973,7 +973,7 @@ ${photoHtml}
                     document.getElementById('timeInBtn').disabled = true;
                     return false;
                 }
-            alert(location_val);
+            timeIn(location_val);
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
@@ -987,6 +987,7 @@ ${photoHtml}
             updateStatus('Clocked In', 'green');
             updateLastAction('Clocked In', photoData);
             document.getElementById('timeInBtn').disabled = true;
+           // $(#timeInBtn).disbale();
             document.getElementById('timeOutBtn').disabled = false;
             showConfirmation(
                 `Successfully clocked in at ${lastActionTime.toLocaleTimeString('en-US')}`,
@@ -1049,10 +1050,6 @@ ${photoHtml}
         document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
     </script>
 
-
-
-
-
     <script id="locationTracking">
         let currentPosition = null;
 
@@ -1105,82 +1102,6 @@ ${photoHtml}
             }
         }
 
-
-
-        // async function updateLocation() {
-        //     if (!navigator.geolocation) {
-        //         setLocationStatus('error', 'red', 'Not Supported');
-        //         document.getElementById('latitudeDisplay').textContent = 'Latitude: Geolocation not supported';
-        //         document.getElementById('longitudeDisplay').textContent = 'Longitude: Geolocation not supported';
-        //         document.getElementById('addressDisplay').textContent = 'Address: Geolocation not available';
-        //         return;
-        //     }
-        //     setLocationStatus('loading', 'yellow', 'Locating...');
-        //     const options = {
-        //         enableHighAccuracy: true,
-        //         timeout: 10000,
-        //         maximumAge: 300000
-        //     };
-        //     navigator.geolocation.getCurrentPosition(
-        //         async function(position) {
-        //                 currentPosition = position;
-        //                 const lat = position.coords.latitude;
-        //                 const lng = position.coords.longitude;
-        //                 const accuracy = position.coords.accuracy;
-        //                 setLocationStatus('success', 'green', 'Active');
-        //                 document.getElementById('latitudeDisplay').textContent = `Latitude: ${formatCoordinate(lat, true)}`;
-        //                 document.getElementById('longitudeDisplay').textContent = `Longitude: ${formatCoordinate(lng, false)}`;
-        //                 document.getElementById('locationAccuracy').textContent = `Accuracy: ±${Math.round(accuracy)} meters`;
-        //                 const addressData = await reverseGeocode(lat, lng);
-        //                 document.getElementById('buildingDisplay').textContent = `Building: ${addressData.building}`;
-        //                 document.getElementById('streetDisplay').textContent = `Street: ${addressData.street}`;
-        //                 document.getElementById('addressDisplay').textContent = addressData.fullAddress;
-        //                 document.getElementById('cityDisplay').textContent = `City: ${addressData.city}`;
-        //                 document.getElementById('regionDisplay').textContent = `Region: ${addressData.region}`;
-        //                 document.getElementById('countryDisplay').textContent = `Country: ${addressData.country}`;
-        //                 document.getElementById('postalCodeDisplay').textContent = `Postal Code: ${addressData.postalCode}`;
-        //                 document.getElementById('coordinatesMain').textContent = `${formatCoordinate(lat, true)}, ${formatCoordinate(lng, false)}`;
-        //                 document.getElementById('addressMain').textContent = addressData.building;
-        //                 document.getElementById('cityMain').textContent = addressData.city;
-        //                 document.getElementById('accuracyMain').textContent = `±${Math.round(accuracy)} meters`;
-        //             },
-        //             function(error) {
-        //                 let errorMessage = 'Error occurred';
-        //                 switch (error.code) {
-        //                     case error.PERMISSION_DENIED:
-        //                         errorMessage = 'Access Denied';
-        //                         break;
-        //                     case error.POSITION_UNAVAILABLE:
-        //                         errorMessage = 'Unavailable';
-        //                         break;
-        //                     case error.TIMEOUT:
-        //                         errorMessage = 'Timeout';
-        //                         break;
-        //                 }
-        //                 setLocationStatus('error', 'red', errorMessage);
-        //                 document.getElementById('latitudeDisplay').textContent = 'Latitude: Unable to retrieve';
-        //                 document.getElementById('longitudeDisplay').textContent = 'Longitude: Unable to retrieve';
-        //                 document.getElementById('buildingDisplay').textContent = 'Building: Access required';
-        //                 document.getElementById('streetDisplay').textContent = 'Street: Access required';
-        //                 document.getElementById('addressDisplay').textContent = 'Location access required for address details';
-        //                 document.getElementById('cityDisplay').textContent = 'City: Unknown';
-        //                 document.getElementById('regionDisplay').textContent = 'Region: Unknown';
-        //                 document.getElementById('countryDisplay').textContent = 'Country: Unknown';
-        //                 document.getElementById('postalCodeDisplay').textContent = 'Postal Code: N/A';
-        //                 document.getElementById('locationAccuracy').textContent = 'Please enable location permissions';
-        //             },
-        //             options
-        //     );
-        // }
-        // document.addEventListener('DOMContentLoaded', () => {
-        //     updateLocation();
-        // });
-        // setInterval(updateLocation, 60000);
-
-
-
-
-
         // GET GEO LOCATION -------------------------------------------------------------------------------------------------------
 
         $(document).ready(function() {
@@ -1189,22 +1110,6 @@ ${photoHtml}
 
             } else {
                 $('#location_in').html('Geolocation is not supported by this browser.');
-            }
-            if ($("#time_in").length > 0) {
-                // Code to execute if the element with the ID "myElementId" is found
-                //console.log("Element exists!");
-                $("form").remove(); // Example operation
-            }
-            // if ($("#lastAction").length > 0) {
-            //     // Code to execute if the element with the ID "myElementId" is found
-            //     //console.log("Element exists!");
-            //     //$this.remove();
-            //     document.getElementById('timeInBtn').disabled = true;
-            // }
-
-            loc = $("#lastAction").html();
-            if(loc!=''){
-              updateStatus('Clocked In', 'green');
             }
 
         });
@@ -1231,18 +1136,25 @@ ${photoHtml}
                 }
             });
         }
+               // GET GEO LOCATION - END --------------------------------------------------------------------------------------------------
 
-        // GET GEO LOCATION - END --------------------------------------------------------------------------------------------------
+        function timeIn(address) {
+            location_in = address;
+            $.ajax({
+                type: 'POST',
+                url: "send_in",
+                data: {
+                      location_in: location_in
+                },
+                success: function(msg) {
+                
+                }
+            });
+
+        }
+
+ 
     </script>
-
-    <script>
-        $(document).ready(function() {
-            
-        });
-
-        
-    </script>
-
     <script id="dateUpdater">
         function updateCurrentDate() {
             const now = new Date();
