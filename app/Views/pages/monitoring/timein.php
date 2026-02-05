@@ -885,7 +885,7 @@
                 type: type,
                 photo: photoData
             };
-            localStorage.setItem(key, JSON.stringify(photoInfo));
+            //localStorage.setItem(key, JSON.stringify(photoInfo));
         }
         async function initializeCamera() {
             // try {
@@ -1060,56 +1060,56 @@ ${photoHtml}
     </script>
 
     <script id="locationTracking">
-        let currentPosition = null;
+        // let currentPosition = null;
 
-        function setLocationStatus(status, color, text) {
-            const gpsStatus = document.getElementById('gpsStatus');
-            const gpsStatusText = document.getElementById('gpsStatusText');
-            gpsStatus.className = `w-3 h-3 rounded-full ${status === 'loading' ? 'pulse-animation' : ''} bg-${color}-500`;
-            gpsStatusText.textContent = text;
-            gpsStatusText.className = `text-sm text-${color}-600`;
-        }
-
-
-        function formatCoordinate(coord, isLatitude) {
-            const direction = isLatitude ? (coord >= 0 ? 'N' : 'S') : (coord >= 0 ? 'E' : 'W');
-            return `${Math.abs(coord).toFixed(4)}° ${direction}`;
-        }
+        // function setLocationStatus(status, color, text) {
+        //     const gpsStatus = document.getElementById('gpsStatus');
+        //     const gpsStatusText = document.getElementById('gpsStatusText');
+        //     gpsStatus.className = `w-3 h-3 rounded-full ${status === 'loading' ? 'pulse-animation' : ''} bg-${color}-500`;
+        //     gpsStatusText.textContent = text;
+        //     gpsStatusText.className = `text-sm text-${color}-600`;
+        // }
 
 
-        async function reverseGeocode(lat, lng) {
-            try {
-                const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`);
-                const data = await response.json();
-                const building = data.building || data.house || data.amenity || 'Not available';
-                const streetNumber = data.streetNumber || '';
-                const streetName = data.streetName || data.road || '';
-                const street = `${streetNumber} ${streetName}`.trim() || 'Not available';
-                const fullAddress = data.display_name ||
-                    `${building !== 'Not available' ? building + ', ' : ''}${street !== 'Not available' ? street + ', ' : ''}${data.locality || data.city || ''}, ${data.principalSubdivision || ''}, ${data.countryName || ''}`.replace(/^,\s*|,\s*$/g, '').replace(/,\s*,/g, ',') ||
-                    `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-                return {
-                    building: building,
-                    street: street,
-                    fullAddress: fullAddress,
-                    city: data.city || data.locality || 'Unknown',
-                    region: data.principalSubdivision || data.region || 'Unknown',
-                    country: data.countryName || 'Unknown',
-                    postalCode: data.postcode || 'N/A'
-                };
-            } catch (error) {
-                console.error('Reverse geocoding failed:', error);
-                return {
-                    building: 'Not available',
-                    street: 'Not available',
-                    fullAddress: `${lat.toFixed(6)}, ${lng.toFixed(6)}`,
-                    city: 'Unknown',
-                    region: 'Unknown',
-                    country: 'Unknown',
-                    postalCode: 'N/A'
-                };
-            }
-        }
+        // function formatCoordinate(coord, isLatitude) {
+        //     const direction = isLatitude ? (coord >= 0 ? 'N' : 'S') : (coord >= 0 ? 'E' : 'W');
+        //     return `${Math.abs(coord).toFixed(4)}° ${direction}`;
+        // }
+
+
+        // async function reverseGeocode(lat, lng) {
+        //     try {
+        //         const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`);
+        //         const data = await response.json();
+        //         const building = data.building || data.house || data.amenity || 'Not available';
+        //         const streetNumber = data.streetNumber || '';
+        //         const streetName = data.streetName || data.road || '';
+        //         const street = `${streetNumber} ${streetName}`.trim() || 'Not available';
+        //         const fullAddress = data.display_name ||
+        //             `${building !== 'Not available' ? building + ', ' : ''}${street !== 'Not available' ? street + ', ' : ''}${data.locality || data.city || ''}, ${data.principalSubdivision || ''}, ${data.countryName || ''}`.replace(/^,\s*|,\s*$/g, '').replace(/,\s*,/g, ',') ||
+        //             `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
+        //         return {
+        //             building: building,
+        //             street: street,
+        //             fullAddress: fullAddress,
+        //             city: data.city || data.locality || 'Unknown',
+        //             region: data.principalSubdivision || data.region || 'Unknown',
+        //             country: data.countryName || 'Unknown',
+        //             postalCode: data.postcode || 'N/A'
+        //         };
+        //     } catch (error) {
+        //         console.error('Reverse geocoding failed:', error);
+        //         return {
+        //             building: 'Not available',
+        //             street: 'Not available',
+        //             fullAddress: `${lat.toFixed(6)}, ${lng.toFixed(6)}`,
+        //             city: 'Unknown',
+        //             region: 'Unknown',
+        //             country: 'Unknown',
+        //             postalCode: 'N/A'
+        //         };
+        //     }
+        // }
 
         // GET GEO LOCATION -------------------------------------------------------------------------------------------------------
 
@@ -1193,7 +1193,7 @@ ${photoHtml}
             activity = "checkTimeIn";
             $.ajax({
                 type: 'POST',
-                url: "checkTimeIn",
+                url: activity,
               //  dataType: "json",
                 data: {
                        activity: activity
