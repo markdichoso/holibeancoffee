@@ -138,12 +138,11 @@ class AttendanceController extends BaseController
     $filteredData = substr($file, strpos($file, ",") + 1);
     $unencodedData = base64_decode($filteredData);
     $filename = 'uploads/' . uniqid() . '.jpeg';
-    if (!is_dir(WRITEPATH . 'uploads')) {
+        if (!is_dir(WRITEPATH . 'uploads')) {
             mkdir(WRITEPATH . 'uploads', 0755, true);
         }
-
         // Save the image file
-        if (file_put_contents(WRITEPATH . $filename, $unencodedData) !== false) {
+        if (file_put_contents(WRITEPATH . $filename, $unencodedData)) {
             // Return the image path for display
           echo base_url(WRITEPATH . $filename); 
         }

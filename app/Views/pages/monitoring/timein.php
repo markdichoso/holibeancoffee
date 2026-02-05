@@ -879,15 +879,6 @@
         }
 
         function savePhotoToLocalStorage(type, photoData) {
-            // const timestamp = new Date().toISOString();
-            // const key = `timecard_photo_${type}_${timestamp}`;
-            // // const photoInfo = {
-            // //     timestamp: timestamp,
-            // //     type: type,
-            // //     photo: photoData
-            // // };
-            // uploadPhoto(photoData);
-            // //localStorage.setItem(key, JSON.stringify(photoInfo));
             activity = "uploadPhoto";
             photo = photoData;
             //$("#checking").append("<p>"+photo+"</p>");
@@ -899,7 +890,7 @@
                        activity: activity,
                        photo:   photo
                 },
-                success: function() {
+                success: function(msg) {
                 if(msg)
                     {
                      $("#photochecking").html(msg);
