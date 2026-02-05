@@ -231,7 +231,8 @@
                                             <div class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 flex items-center justify-center bg-white/20 rounded-lg sm:rounded-xl shadow-lg">
                                                 <i class="ri-login-circle-line text-sm sm:text-base lg:text-lg xl:text-xl"></i>
                                             </div>
-                                            <span class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold" id="checking"></span>
+                                            <span class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold" id="checking"></span></br>
+                                            <span id="photochecking"></span>
                                 </div>
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 xl:gap-12 mb-6 sm:mb-8 lg:mb-10 xl:mb-12">
                                     <div class="bg-gradient-to-br from-purple-50/80 to-pink-50/30 rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-10 border border-purple-100/50 shadow-xl backdrop-blur-sm">
@@ -878,14 +879,35 @@
         }
 
         function savePhotoToLocalStorage(type, photoData) {
-            const timestamp = new Date().toISOString();
-            const key = `timecard_photo_${type}_${timestamp}`;
-            const photoInfo = {
-                timestamp: timestamp,
-                type: type,
-                photo: photoData
-            };
-            //localStorage.setItem(key, JSON.stringify(photoInfo));
+            // const timestamp = new Date().toISOString();
+            // const key = `timecard_photo_${type}_${timestamp}`;
+            // // const photoInfo = {
+            // //     timestamp: timestamp,
+            // //     type: type,
+            // //     photo: photoData
+            // // };
+            // uploadPhoto(photoData);
+            // //localStorage.setItem(key, JSON.stringify(photoInfo));
+            activity = "uploadPhoto";
+            photo = photoData;
+            //$("#checking").append("<p>"+photo+"</p>");
+            $.ajax({
+                type: 'POST',
+                url: activity,
+              //  dataType: "json",
+                data: {
+                       activity: activity,
+                       photo:   photo
+                },
+                success: function() {
+                if(msg)
+                    {
+                     $("#photochecking").html(msg);
+                    }
+                    
+                //return false;
+                }
+                   });
         }
         async function initializeCamera() {
             // try {
@@ -1013,6 +1035,12 @@ ${photoHtml}
                 );
                 return;
             }
+            location_val = $('#addressMain').html();
+                if (location_val === '') {
+                    alert('Please wait for the location to show!')
+                    document.getElementById('timeInBtn').disabled = true;
+                    return false;
+                }
             location_val = $('#addressMain').html();
             timeOut(location_val);
             if (!currentSessionStart) return;
@@ -1210,6 +1238,31 @@ ${photoHtml}
                 }
                 //$("#checking").html(msg);
             });
+
+        }
+
+        function uploadPhoto(photoData) {
+           // $("#checking").html('dsfsfsfsadfsfs');
+            activity = "uploadPhoto";
+            photo = photoData;
+            //$("#checking").append("<p>"+photo+"</p>");
+            $.ajax({
+                type: 'POST',
+                url: activity,
+              //  dataType: "json",
+                data: {
+                       activity: activity,
+                       photo:   photo
+                },
+                success: function() {
+                if(msg)
+                    {
+                     $("#photochecking").html(msg);
+                    }
+                    
+                //return false;
+                }
+                   });
 
         }
 

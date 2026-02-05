@@ -130,4 +130,23 @@ class AttendanceController extends BaseController
         echo "Successfully Clocked Out!";
         }
     }
+
+    public function uploadPhoto()
+    { 
+    //    alert("ok");     
+    $file = $this->request->getPost('photo');
+    $filteredData = substr($file, strpos($file, ",") + 1);
+    $unencodedData = base64_decode($filteredData);
+    $filename = 'uploads/' . uniqid() . '.jpeg';
+    if (!is_dir(WRITEPATH . 'uploads')) {
+            mkdir(WRITEPATH . 'uploads', 0755, true);
+        }
+
+        // Save the image file
+        if (file_put_contents(WRITEPATH . $filename, $unencodedData) !== false) {
+            // Return the image path for display
+          echo base_url(WRITEPATH . $filename); 
+        }
+       // $file->move(WRITEPATH . 'uploads', $newName); 
+    }
 }
