@@ -507,7 +507,7 @@
                                                         <span class="text-sm font-semibold text-gray-900">Clocked Out</span>
                                                         <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md">July 31, 2025 11:30 AM</span>
                                                     </div>
-                                                    <p class="text-xs text-gray-500">No photo captured • Session ended</p>
+                                                    <p class="text-xs text-gray-500"><img src = "<?=base_url('/uploads/69844084e41fb.jpeg')?>"></p>
                                                 </div>
                                             </div>
                                             <div class="flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
@@ -893,7 +893,8 @@
                 success: function(msg) {
                 if(msg)
                     {
-                     $("#photochecking").html(msg);
+                     //$("#photochecking").html(msg);
+                     $("#recent_photo").attr("src",msg);
                     }
                     
                 //return false;
@@ -950,7 +951,7 @@
             const newActionDiv = document.createElement('div');
             newActionDiv.className = 'flex items-center space-x-3 p-3 bg-white rounded-lg border border-gray-200';
             const photoHtml = photoData ?
-                `<img src="${photoData}" class="w-full h-full object-cover rounded-lg" alt="Captured photo">` :
+                `<img class="w-full h-full object-cover rounded-lg" alt="Captured photo" id="recent_photo">` :
                 `<div class="w-full h-full flex items-center justify-center">
 <div class="w-4 h-4 flex items-center justify-center">
 <i class="ri-image-line text-gray-400"></i>
@@ -1248,7 +1249,7 @@ ${photoHtml}
                 success: function() {
                 if(msg)
                     {
-                     $("#photochecking").html(msg);
+                     $("#recent_photo").attr("src", "msg");
                     }
                     
                 //return false;
