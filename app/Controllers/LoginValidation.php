@@ -26,6 +26,7 @@ class LoginValidation extends BaseController
         }
         }
 
+// ******************************* verifying the username and password ****************************//
         $userModel = new Users();
         //$data = $this->request->getPost();
         if($return_user = $userModel->searchUsers($data)){

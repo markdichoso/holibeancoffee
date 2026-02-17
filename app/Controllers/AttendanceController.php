@@ -8,7 +8,8 @@ use CodeIgniter\I18n\Time;
 
 class AttendanceController extends BaseController
 {
-    
+ 
+// ************************************* old time in *************************************//
     public function TimeIn()
     {
         
@@ -54,7 +55,7 @@ class AttendanceController extends BaseController
             }       
     }
         
-
+// ************************************ old time out ****************************************//
         public function TimeOut()
     {
         
@@ -76,7 +77,7 @@ class AttendanceController extends BaseController
         return view('pages/attendance/time-out');
         
     }
-// for reconstruction direct location used instead //
+// *************************** for reconstruction direct location used instead *****************************//
     public function Location()
     {
     //    helper('form','url');
@@ -102,6 +103,8 @@ class AttendanceController extends BaseController
         }
   // end of Location //      
 
+
+  // ****************   when the employee click the Clock In  **************************//
   public function Send_In()
     {
     $userModel = new Attendance();
@@ -118,6 +121,7 @@ class AttendanceController extends BaseController
         }
     }
 
+   // ****************   when the employee click the Clock Out  **************************//
     public function Send_Out()
     {      
     //$userModel = new Attendance();
@@ -131,9 +135,9 @@ class AttendanceController extends BaseController
         }
     }
 
+    // ****************   uploading captured photo  **************************//
     public function uploadPhoto()
     { 
-    //    alert("ok");     
     $file = $this->request->getPost('photo');
     $filteredData = substr($file, strpos($file, ",") + 1);
     $unencodedData = base64_decode($filteredData);
@@ -148,4 +152,6 @@ class AttendanceController extends BaseController
         }
        // $file->move(WRITEPATH . 'uploads', $newName); 
     }
+
+    //****************** activity logs *******************************//
 }

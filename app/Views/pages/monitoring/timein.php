@@ -507,7 +507,7 @@
                                                         <span class="text-sm font-semibold text-gray-900">Clocked Out</span>
                                                         <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md">July 31, 2025 11:30 AM</span>
                                                     </div>
-                                                    <p class="text-xs text-gray-500"><img src = "<?=base_url('/uploads/69844084e41fb.jpeg')?>"></p>
+                                                    <p class="text-xs text-gray-500"></p>
                                                 </div>
                                             </div>
                                             <div class="flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
@@ -1079,59 +1079,8 @@ ${photoHtml}
         document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
     </script>
 
-    <script id="locationTracking">
-        // let currentPosition = null;
-
-        // function setLocationStatus(status, color, text) {
-        //     const gpsStatus = document.getElementById('gpsStatus');
-        //     const gpsStatusText = document.getElementById('gpsStatusText');
-        //     gpsStatus.className = `w-3 h-3 rounded-full ${status === 'loading' ? 'pulse-animation' : ''} bg-${color}-500`;
-        //     gpsStatusText.textContent = text;
-        //     gpsStatusText.className = `text-sm text-${color}-600`;
-        // }
-
-
-        // function formatCoordinate(coord, isLatitude) {
-        //     const direction = isLatitude ? (coord >= 0 ? 'N' : 'S') : (coord >= 0 ? 'E' : 'W');
-        //     return `${Math.abs(coord).toFixed(4)}° ${direction}`;
-        // }
-
-
-        // async function reverseGeocode(lat, lng) {
-        //     try {
-        //         const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lng}&localityLanguage=en`);
-        //         const data = await response.json();
-        //         const building = data.building || data.house || data.amenity || 'Not available';
-        //         const streetNumber = data.streetNumber || '';
-        //         const streetName = data.streetName || data.road || '';
-        //         const street = `${streetNumber} ${streetName}`.trim() || 'Not available';
-        //         const fullAddress = data.display_name ||
-        //             `${building !== 'Not available' ? building + ', ' : ''}${street !== 'Not available' ? street + ', ' : ''}${data.locality || data.city || ''}, ${data.principalSubdivision || ''}, ${data.countryName || ''}`.replace(/^,\s*|,\s*$/g, '').replace(/,\s*,/g, ',') ||
-        //             `${lat.toFixed(6)}, ${lng.toFixed(6)}`;
-        //         return {
-        //             building: building,
-        //             street: street,
-        //             fullAddress: fullAddress,
-        //             city: data.city || data.locality || 'Unknown',
-        //             region: data.principalSubdivision || data.region || 'Unknown',
-        //             country: data.countryName || 'Unknown',
-        //             postalCode: data.postcode || 'N/A'
-        //         };
-        //     } catch (error) {
-        //         console.error('Reverse geocoding failed:', error);
-        //         return {
-        //             building: 'Not available',
-        //             street: 'Not available',
-        //             fullAddress: `${lat.toFixed(6)}, ${lng.toFixed(6)}`,
-        //             city: 'Unknown',
-        //             region: 'Unknown',
-        //             country: 'Unknown',
-        //             postalCode: 'N/A'
-        //         };
-        //     }
-        // }
-
-        // GET GEO LOCATION -------------------------------------------------------------------------------------------------------
+    <script id="locationTracking">       
+// ******************************** GET GEO LOCATION *******************************************// 
 
         $(document).ready(function() {
             if (navigator.geolocation) {
@@ -1167,7 +1116,6 @@ ${photoHtml}
                 }
             });
         }
-               // GET GEO LOCATION - END --------------------------------------------------------------------------------------------------
 
         function timeIn(address) {
             location_in = address;
@@ -1233,6 +1181,7 @@ ${photoHtml}
 
         }
 
+// ********************************* saving captured photo ****************************************//
         function uploadPhoto(photoData) {
            // $("#checking").html('dsfsfsfsadfsfs');
             activity = "uploadPhoto";
@@ -1276,9 +1225,6 @@ ${photoHtml}
         });
         setInterval(updateCurrentDate, 3600000);
     </script>
-
-
-
 
     <script id="tabNavigation">
         function showTab(tabName) {

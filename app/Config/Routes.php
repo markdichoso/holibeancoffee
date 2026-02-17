@@ -23,7 +23,4 @@ $routes->get('/dashboard', 'Home::dashboard');
 $routes->get('/capture', 'Image::capture');
 $routes->post('/image/upload', 'Image::upload');
 $routes->get('/image/upload', 'Image::upload');
-
-
-
 $routes->get('/attendance', 'Home::attendance');
