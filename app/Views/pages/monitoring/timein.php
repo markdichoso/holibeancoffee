@@ -993,8 +993,8 @@ ${photoHtml}
                     document.getElementById('timeInBtn').disabled = true;
                     return false;
                 }
-            timeIn(location_val);
             checkTimeIn();
+            timeIn(location_val);           
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
@@ -1075,8 +1075,16 @@ ${photoHtml}
             setInterval(updateDurationDisplays, 1000);
             updateDurationDisplays();
         });
-        document.getElementById('timeInBtn').addEventListener('click', handleTimeIn);
-        document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
+        //document.getElementById('timeInBtn').addEventListener('click', handleTimeIn);
+        $( "#timeInBtn" ).on( "click", function( event ) {
+            event.preventDefault();
+            handleTimeIn();
+                    });
+        $( "#timeOutBtn" ).on( "click", function( event ) {
+            event.preventDefault();
+            handleTimeOut();
+                    });
+        //document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
     </script>
 
     <script id="locationTracking">       
@@ -1129,7 +1137,10 @@ ${photoHtml}
                 if(msg)
                     {
                         $("#checking").html(msg);
-                       $("#timeInBtn").remove(); 
+                       $("#timeInBtn").hide(); 
+                    //    setTimeout(function() {
+                    //             location.reload();
+                    //             }, 500);
                     }
                 }
             });
@@ -1149,13 +1160,18 @@ ${photoHtml}
                     {
                         $("#checking").html(msg);
                         updateStatus('Not Clocked In', 'red');
-                       $("#timeOutBtn").remove(); 
+                       $("#timeOutBtn").hide(); 
+                       $("#timeInBtn").show();
+                    //    setTimeout(function() {
+                    //             location.reload();
+                    //             }, 500);
                     }
                 }
             });
 
         }
 
+//********************check if already clock in ************************//
         function checkTimeIn() {
            // $("#checking").html('dsfsfsfsadfsfs');
             activity = "checkTimeIn";

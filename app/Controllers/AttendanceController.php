@@ -3,6 +3,7 @@ namespace App\Controllers;
 namespace App\Filters;
 namespace App\Controllers;
 use App\Models\Attendance;
+use App\Models\Activity;
 use CodeIgniter\I18n\Time;
 
 
@@ -118,7 +119,10 @@ class AttendanceController extends BaseController
         if ($userModel->insert($data)){
         //return redirect()->to('timein')->with('success', 'Successfully Time in!');
         echo "Successfully Clocked In";
+        $action = 'Clock In';        
+        $this->activity($data['location_in'], $action);        
         }
+  
     }
 
    // ****************   when the employee click the Clock Out  **************************//
@@ -132,6 +136,8 @@ class AttendanceController extends BaseController
  
     if ($userModel->time_out($data)){
         echo "Successfully Clocked Out!";
+        $action = 'Clock Out';        
+        $this->activity($data['location_out'], $action);
         }
     }
 
@@ -154,4 +160,24 @@ class AttendanceController extends BaseController
     }
 
     //****************** activity logs *******************************//
+    public function activity($address, $action)
+    {
+
+   // $db = \Config\Database::connect();
+    $activityModel = new Activity();
+    //$data = $this->request->getPost();
+    $data = [];
+    $data['action_taken'] = $action;
+    $data['location'] = $address;
+    $myTime = Time::now('Asia/Manila', 'en_US');
+    $data['date']=$myTime->format("l, F j, Y h:i:s");
+    $data['emp_info_id'] = $_SESSION['emp_info_id'];
+    //$db->table('activity')->insert($data);
+        // // Use the insert() method for new records
+          if ($activityModel->insert($data)){
+        // // //return redirect()->to('timein')->with('success', 'Successfully Time in!');
+        //  echo "Successfully Clocked In";
+          }
+    }
+
 }
