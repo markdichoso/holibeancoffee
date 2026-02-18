@@ -1,0 +1,55 @@
+ERROR - 2026-02-18 01:56:04 --> Error connecting to the database: mysqli_sql_exception: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond in C:\xampp\htdocs\holibeancoffee\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\xampp\htdocs\holibeancoffee\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('153.92.15.19', 'u142516471_hbis', Object(SensitiveParameterValue), 'u142516471_hbis...', 3306, '', 0)
+#1 C:\xampp\htdocs\holibeancoffee\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\xampp\htdocs\holibeancoffee\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\xampp\htdocs\holibeancoffee\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\xampp\htdocs\holibeancoffee\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\holibeancoffee\system\BaseModel.php(679): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\holibeancoffee\app\Models\Attendance.php(49): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\holibeancoffee\app\Controllers\AttendanceController.php(51): App\Models\Attendance->searchAttendance('2')
+#8 C:\xampp\htdocs\holibeancoffee\system\CodeIgniter.php(933): App\Controllers\AttendanceController->CheckTimeIn()
+#9 C:\xampp\htdocs\holibeancoffee\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+#10 C:\xampp\htdocs\holibeancoffee\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\holibeancoffee\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\xampp\htdocs\holibeancoffee\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\xampp\htdocs\holibeancoffee\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond in C:\xampp\htdocs\holibeancoffee\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\xampp\htdocs\holibeancoffee\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\xampp\htdocs\holibeancoffee\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\xampp\htdocs\holibeancoffee\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\xampp\htdocs\holibeancoffee\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\xampp\htdocs\holibeancoffee\system\BaseModel.php(679): CodeIgniter\Model->doFindAll(0, 0)
+#5 C:\xampp\htdocs\holibeancoffee\app\Models\Attendance.php(49): CodeIgniter\BaseModel->findAll()
+#6 C:\xampp\htdocs\holibeancoffee\app\Controllers\AttendanceController.php(51): App\Models\Attendance->searchAttendance('2')
+#7 C:\xampp\htdocs\holibeancoffee\system\CodeIgniter.php(933): App\Controllers\AttendanceController->CheckTimeIn()
+#8 C:\xampp\htdocs\holibeancoffee\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+#9 C:\xampp\htdocs\holibeancoffee\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\holibeancoffee\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\xampp\htdocs\holibeancoffee\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\xampp\htdocs\holibeancoffee\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 {main}
+CRITICAL - 2026-02-18 01:56:04 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond
+[Method: POST, Route: checkTimeIn]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `attendance`
+WHERE `emp_info_id` = :emp_info_id:
+AND `location_out` IS NULL
+AND `location_in` != :location_in:
+AND  `date_in` LIKE :date_in: ESCAPE \'!\'', [...], false)
+ 3 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(679): CodeIgniter\Model->doFindAll(0, 0)
+ 5 APPPATH\Models\Attendance.php(49): CodeIgniter\BaseModel->findAll()
+ 6 APPPATH\Controllers\AttendanceController.php(51): App\Models\Attendance->searchAttendance('2')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AttendanceController->CheckTimeIn()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
