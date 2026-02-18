@@ -162,22 +162,15 @@ class AttendanceController extends BaseController
     //****************** activity logs *******************************//
     public function activity($address, $action)
     {
-
-   // $db = \Config\Database::connect();
     $activityModel = new Activity();
-    //$data = $this->request->getPost();
     $data = [];
     $data['action_taken'] = $action;
     $data['location'] = $address;
     $myTime = Time::now('Asia/Manila', 'en_US');
     $data['date']=$myTime->format("l, F j, Y h:i:s");
     $data['emp_info_id'] = $_SESSION['emp_info_id'];
-    //$db->table('activity')->insert($data);
-        // // Use the insert() method for new records
           if ($activityModel->insert($data)){
-        // // //return redirect()->to('timein')->with('success', 'Successfully Time in!');
-        //  echo "Successfully Clocked In";
-          }
+        }
     }
 
 }
