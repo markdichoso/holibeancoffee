@@ -4,5 +4,6 @@
         echo session()->get('emp_info_id');
         echo anchor('timein', 'Time-In', ['class' => 'btn btn-primary', 'title' => 'Time In'])."<br />";
         echo anchor('timeout', 'Time-Out', ['class' => 'btn btn-primary', 'title' => 'Time Out'])."<br /><br />";
+                echo anchor('attendance', 'Attendance', ['class' => 'btn btn-primary', 'title' => 'Attendance'])."<br /><br />";
         echo anchor('destroy', 'Out na Tayo', ['class' => 'btn btn-primary', 'title' => 'Session Destroy']);
 ?>

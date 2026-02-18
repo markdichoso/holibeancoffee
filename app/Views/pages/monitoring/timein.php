@@ -106,9 +106,11 @@
                             <div class="flex flex-col lg:flex-row items-center lg:justify-between space-y-4 lg:space-y-0">
                                 <div class="flex flex-col sm:flex-row items-center sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 lg:space-x-5 xl:space-x-6 text-center sm:text-left">
                                     <div class="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-20 lg:h-20 xl:w-24 xl:h-24 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl sm:rounded-2xl lg:rounded-3xl flex items-center justify-center shadow-2xl flex-shrink-0">
-                                        <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12 flex items-center justify-center">
+                                    <img src ="img/employee/<?=$_SESSION['emp_info_id']?>.jpg" alt="This is Me!">
+                                    <!-- <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12 flex items-center justify-center">
                                             <i class="ri-user-line text-white text-lg sm:text-2xl lg:text-3xl xl:text-4xl"></i>
-                                        </div>
+                                        </div> -->
+                                        
                                     </div>
                                     <div class="min-w-0">
                                         <h2 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 mb-1">
