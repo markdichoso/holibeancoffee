@@ -1189,7 +1189,7 @@ ${photoHtml}
                if(msg)
                     {
                        $("#timeInBtn").hide();
-                       $("#timeOutBtn").show();
+                       $("#timeOut").show();
                        updateStatus('Clocked In', 'green');
                        document.getElementById('timeOutBtn').disabled = false; 
                     }
