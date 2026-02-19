@@ -496,36 +496,6 @@
                                             <span class="text-xs text-gray-400">Last 5 entries</span>
                                         </div>
                                         <div class="space-y-4" id="actionHistoryList">
-                                            <div class="flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                                                <div class="w-14 h-14 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden flex-shrink-0">
-                                                    <div class="w-full h-full flex items-center justify-center">
-                                                        <div class="w-5 h-5 flex items-center justify-center">
-                                                            <i class="ri-image-line text-gray-400"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                                               
-                                                <div class="flex-1 min-w-0">
-                                                    <div class="flex items-center justify-between mb-2">
-                                                        <span class="text-sm font-semibold text-gray-900">Clocked In</span>
-                                                        <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md">July 31, 2025 8:00 AM</span>
-                                                    </div>
-                                                    <p class="text-xs text-gray-500">No photo captured • Location verified</p>
-                                                </div>
-                                            </div>
-                                            <div class="flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                                                
-                                                <div class="flex-1 min-w-0">
-                                                    <div class="flex items-center justify-between mb-2">
-                                                        <span class="text-sm font-semibold text-gray-900">Clocked Out</span>
-                                                        <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md">July 30, 2025 6:00 PM</span>
-                                                    </div>
-                                                    <p class="text-xs text-gray-500">No photo captured • Day completed</p>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -879,6 +849,7 @@
                     {
                      //$("#photochecking").html(msg);
                      $("#recent_photo").attr("src",msg);
+                     return true;
                     }
                     
                 //return false;
@@ -926,6 +897,7 @@
             const now = new Date();
             const timeString = now.toLocaleTimeString('en-US');
             const dateString = now.toLocaleDateString('en-US', {
+                weekday: 'long',
                 month: 'long',
                 day: 'numeric',
                 year: 'numeric'
@@ -948,9 +920,9 @@ ${photoHtml}
 <div class="flex-1 min-w-0">
 <div class="flex items-center justify-between">
 <span class="text-sm font-medium text-gray-700">${action}</span>
-<span class="text-xs text-gray-500">${dateString} ${timeString}</span>
+<span class="text-xs text-gray-500" id="recentDate">${dateString} ${timeString}</span>
 </div>
-<p class="text-xs text-gray-500 mt-1">${photoData ? 'Photo captured successfully' : 'No photo captured'}</p>
+<p class="text-xs text-gray-500 mt-1" id="recentLocation"></p>
 </div>
 `;
             historyContainer.insertBefore(newActionDiv, historyContainer.firstChild);
@@ -1073,21 +1045,35 @@ ${photoHtml}
         //document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
                 $.ajax({
                 type: 'POST',
+                dataType: "json",
                 url: "history",
-                success: function(msg) {
-                   // if (msg) {
-                        alert(msg);
-                        html = "<div class='flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow'>"                                               
-                                    + "<div class='flex-1 min-w-0'>"
+                success: function(data) {
+                    if (data) {
+                    data.sort((a, b) => a.activity_id - b.activity_id);
+
+                    $.each(data, function(index, item) {
+            // Access properties using dot notation (e.g., item.name)
+            // or bracket notation (e.g., item['name'])
+
+            // Example: Append data to an HTML list
+                    //$("#actionHistoryList").prepend('<li>' + item.date + '</li>'); // Replace 'name' and '#results-list' with your data property and element ID
+                            
+                        // alert(msg);
+                        html = "<div class='flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow'>"
+                                    +   "<div class='w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0'>"
+                                    +   "<img class='w-full h-full object-cover rounded-lg' alt='Captured photo' id='recent_photo' src='http://localhost/holibeancoffee/uploads/69965da614285.jpeg'>"
+                                    +   "</div>"                                               
+                                    +   "<div class='flex-1 min-w-0'>"
                                     +    "<div class='flex items-center justify-between mb-2'>"
-                                    +        "<span class='text-sm font-semibold text-gray-900'>Clocked In New</span>"
-                                    +            "<span class='text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md'>July 31, 2025 8:00 AM New</span>"
+                                    +        "<span class='text-sm font-semibold text-gray-900'>"+ item.action_taken +"</span>"
+                                    +            "<span class='text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md'>" + item.date + "</span>"
                                     +    "</div>"
-                                    +            "<p class='text-xs text-gray-500'>No photo captured • Location verified New</p>"
+                                    +            "<p class='text-xs text-gray-500'>" + item.location + "</p>"
                                     + "</div>"
                                     + "</div>";
                         $("#actionHistoryList").prepend(html);
-                     //  }
+                        });
+                       }
                 }
             });
 
@@ -1143,7 +1129,8 @@ ${photoHtml}
                 if(msg)
                     {
                         $("#checking").html(msg);
-                       $("#timeInBtn").hide(); 
+                       $("#timeInBtn").hide();
+                       $("#recentLocation").html(location_in); 
                     //    setTimeout(function() {
                     //             location.reload();
                     //             }, 500);
@@ -1168,6 +1155,7 @@ ${photoHtml}
                         updateStatus('Not Clocked In', 'red');
                        $("#timeOutBtn").hide(); 
                        $("#timeInBtn").show();
+                       $("#recentLocation").html(location_out);
                     //    setTimeout(function() {
                     //             location.reload();
                     //             }, 500);
@@ -1204,30 +1192,30 @@ ${photoHtml}
         }
 
 // ********************************* saving captured photo ****************************************//
-        function uploadPhoto(photoData) {
-           // $("#checking").html('dsfsfsfsadfsfs');
-            activity = "uploadPhoto";
-            photo = photoData;
-            //$("#checking").append("<p>"+photo+"</p>");
-            $.ajax({
-                type: 'POST',
-                url: activity,
-              //  dataType: "json",
-                data: {
-                       activity: activity,
-                       photo:   photo
-                },
-                success: function() {
-                if(msg)
-                    {
-                     $("#recent_photo").attr("src", "msg");
-                    }
+        // function uploadPhoto(photoData) {
+        //    // $("#checking").html('dsfsfsfsadfsfs');
+        //     activity = "uploadPhoto";
+        //     photo = photoData;
+        //     //$("#checking").append("<p>"+photo+"</p>");
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: activity,
+        //       //  dataType: "json",
+        //         data: {
+        //                activity: activity,
+        //                photo:   photo
+        //         },
+        //         success: function() {
+        //         if(msg)
+        //             {
+        //              $("#recent_photo").attr("src", "msg");
+        //             }
                     
-                //return false;
-                }
-                   });
+        //         //return false;
+        //         }
+        //            });
 
-        }
+        // }
 
  
     </script>

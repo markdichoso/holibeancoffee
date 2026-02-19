@@ -21,7 +21,7 @@ public function recentActivity()
         $emp_info_id = $_SESSION['emp_info_id'];
         return $this->table($this->table)
                 ->where('emp_info_id',$emp_info_id) // Produces WHERE `username` LIKE '%searchTerm%'
-                ->orderBy('date', 'DESC')
+                ->orderBy('activity_id', 'DESC')
                 ->limit(5,0)
                 ->findAll();                    // Retrieves all matching results
         //return $password;
