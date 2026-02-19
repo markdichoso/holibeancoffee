@@ -968,10 +968,10 @@ ${photoHtml}
             document.getElementById('timeInBtn').disabled = true;
            // $(#timeInBtn).disbale();
             document.getElementById('timeOutBtn').disabled = false;
-            // showConfirmation(
-            //     `Successfully clocked in at ${lastActionTime.toLocaleTimeString('en-US')}`,
-            //     'Photo captured • Location verified • Device authenticated'
-            // );
+            showConfirmation(
+                `Successfully clocked in at ${lastActionTime.toLocaleTimeString('en-US')}`,
+                'Photo captured • Location verified • Device authenticated'
+            );
         }
 
         function handleTimeOut() {
@@ -1021,10 +1021,10 @@ ${photoHtml}
             updateLastAction('Clocked Out', photoData);
             document.getElementById('timeInBtn').disabled = false;
             document.getElementById('timeOutBtn').disabled = true;
-          //  showConfirmation(
-            //    `Successfully clocked out at ${lastActionTime.toLocaleTimeString('en-US')}`,
-              //  'Photo captured • Session ended • Data saved'
-            //);
+            showConfirmation(
+                `Successfully clocked out at ${lastActionTime.toLocaleTimeString('en-US')}`,
+                'Photo captured • Session ended • Data saved'
+            );
         }
 
 // ******************************* first load of the page **************************************////        
