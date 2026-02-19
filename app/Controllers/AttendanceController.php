@@ -9,10 +9,7 @@ use CodeIgniter\I18n\Time;
 
 class AttendanceController extends BaseController
 {
-     if (!isset($_SESSION['user_id'])) {
-            // If the user is not logged in, redirect them to the login page
-            return redirect()->to('');
-        }
+ 
 // ************************************* old time in *************************************//
     public function TimeIn()
     {
