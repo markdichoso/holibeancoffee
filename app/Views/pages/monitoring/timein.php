@@ -956,7 +956,7 @@ ${photoHtml}
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
             const photoData = canvas.toDataURL('image/jpeg', 0.8);
-           // savePhotoToLocalStorage('time_in', photoData);
+            savePhotoToLocalStorage('time_in', photoData);
             console.log($("#recent_photo").attr("src"));
             isTimedIn = true;
             currentSessionStart = new Date();
