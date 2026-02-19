@@ -848,8 +848,8 @@
                 if(msg)
                     {
                      //$("#photochecking").html(msg);
-                     $("#recent_photo").attr("src",msg);
-                     return true;
+                     $("#recent_photo").attr('src', msg);
+                     //return msg;
                     }
                     
                 //return false;
@@ -950,14 +950,15 @@ ${photoHtml}
                     return false;
                 }
             checkTimeIn();
-            timeIn(location_val);           
+            //timeIn(location_val);           
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
             const photoData = canvas.toDataURL('image/jpeg', 0.8);
             savePhotoToLocalStorage('time_in', photoData);
-            console.log($("#recent_photo").attr("src"));
+            const imagePath = $("#recent_photo").attr("src");
+            timeIn(location_val,imagePath);
             isTimedIn = true;
             currentSessionStart = new Date();
             lastActionTime = currentSessionStart;
@@ -991,7 +992,7 @@ ${photoHtml}
                     return false;
                 }
             location_val = $('#addressMain').html();
-            timeOut(location_val);
+            //timeOut(location_val);
             if (!currentSessionStart) return;
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
@@ -999,6 +1000,8 @@ ${photoHtml}
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
             const photoData = canvas.toDataURL('image/jpeg', 0.8);
             savePhotoToLocalStorage('time_out', photoData);
+            const imagePath = $("#recent_photo").attr("src");
+            timeOut(location_val,imagePath);
             const sessionEndTime = new Date();
             const sessionDurationMinutes = Math.floor((sessionEndTime - currentSessionStart) / (1000 * 60));
             timeTrackingData.daily += sessionDurationMinutes;
@@ -1062,7 +1065,7 @@ ${photoHtml}
                         // alert(msg);
                         html = "<div class='flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow'>"
                                     +   "<div class='w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0'>"
-                                    +   "<img class='w-full h-full object-cover rounded-lg' alt='Captured photo' id='recent_photo' src='uploads/69966fcc2403e.jpeg'>"
+                                    +   "<img class='w-full h-full object-cover rounded-lg' alt='Captured photo' id='recent_photo' src='"+ item.imagePath +"'>"
                                     +   "</div>"                                               
                                     +   "<div class='flex-1 min-w-0'>"
                                     +    "<div class='flex items-center justify-between mb-2'>"
@@ -1118,13 +1121,14 @@ ${photoHtml}
             });
         }
 
-        function timeIn(address) {
-            location_in = address;
+        function timeIn(location_in,imagePath) {
+            //location_in = address;
             $.ajax({
                 type: 'POST',
                 url: "send_in",
                 data: {
-                      location_in: location_in
+                      location_in: location_in,
+                      imagePath: imagePath
                 },
                 success: function(msg) {
                 if(msg)
@@ -1142,13 +1146,14 @@ ${photoHtml}
 
         }
 
-        function timeOut(address) {
+        function timeOut(address,imagePath) {
             location_out = address;
             $.ajax({
                 type: 'POST',
                 url: "send_out",
                 data: {
-                      location_out: location_out
+                      location_out: location_out,
+                      imagePath: imagePath
                 },
                 success: function(msg) {
                 if(msg)
