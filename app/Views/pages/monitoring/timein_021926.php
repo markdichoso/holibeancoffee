@@ -8,8 +8,6 @@
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="src/jquery/jquery-3.2.1.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.18/dist/sweetalert2.all.min.js"></script>
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.18/dist/sweetalert2.min.css">
     <script>
         tailwind.config = {
             theme: {
@@ -235,6 +233,8 @@
                                             <div class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 flex items-center justify-center bg-white/20 rounded-lg sm:rounded-xl shadow-lg">
                                                 <i class="ri-login-circle-line text-sm sm:text-base lg:text-lg xl:text-xl"></i>
                                             </div>
+                                            <span class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold" id="checking"></span></br>
+                                            <span id="photochecking"></span>
                                 </div>
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 xl:gap-12 mb-6 sm:mb-8 lg:mb-10 xl:mb-12">
                                     <div class="bg-gradient-to-br from-purple-50/80 to-pink-50/30 rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-10 border border-purple-100/50 shadow-xl backdrop-blur-sm">
@@ -835,6 +835,7 @@
         function savePhotoToLocalStorage(type, photoData) {
             activity = "uploadPhoto";
             photo = photoData;
+            //$("#checking").append("<p>"+photo+"</p>");
             $.ajax({
                 type: 'POST',
                 url: activity,
@@ -846,8 +847,9 @@
                 success: function(msg) {
                 if(msg)
                     {
-                    $("#recent_photo").attr('src', msg);
-                     //return msg;
+                     //$("#photochecking").html(msg);
+                     $("#recent_photo").attr("src",msg);
+                     return true;
                     }
                     
                 //return false;
@@ -955,7 +957,7 @@ ${photoHtml}
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
             const photoData = canvas.toDataURL('image/jpeg', 0.8);
             savePhotoToLocalStorage('time_in', photoData);
-            imagePath = $("#recent_photo").attr("src");
+            const imagePath = $("#recent_photo").attr("src");
             timeIn(location_val,imagePath);
             isTimedIn = true;
             currentSessionStart = new Date();
@@ -966,10 +968,10 @@ ${photoHtml}
             document.getElementById('timeInBtn').disabled = true;
            // $(#timeInBtn).disbale();
             document.getElementById('timeOutBtn').disabled = false;
-            // showConfirmation(
-            //     `Successfully clocked in at ${lastActionTime.toLocaleTimeString('en-US')}`,
-            //     'Photo captured • Location verified • Device authenticated'
-            // );
+            showConfirmation(
+                `Successfully clocked in at ${lastActionTime.toLocaleTimeString('en-US')}`,
+                'Photo captured • Location verified • Device authenticated'
+            );
         }
 
         function handleTimeOut() {
@@ -986,7 +988,7 @@ ${photoHtml}
             location_val = $('#addressMain').html();
                 if (location_val === '') {
                     alert('Please wait for the location to show!')
-                    //document.getElementById('timeInBtn').disabled = true;
+                    document.getElementById('timeInBtn').disabled = true;
                     return false;
                 }
             location_val = $('#addressMain').html();
@@ -998,7 +1000,7 @@ ${photoHtml}
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
             const photoData = canvas.toDataURL('image/jpeg', 0.8);
             savePhotoToLocalStorage('time_out', photoData);
-            imagePath = $("#recent_photo").attr("src");
+            const imagePath = $("#recent_photo").attr("src");
             timeOut(location_val,imagePath);
             const sessionEndTime = new Date();
             const sessionDurationMinutes = Math.floor((sessionEndTime - currentSessionStart) / (1000 * 60));
@@ -1019,14 +1021,13 @@ ${photoHtml}
             updateLastAction('Clocked Out', photoData);
             document.getElementById('timeInBtn').disabled = false;
             document.getElementById('timeOutBtn').disabled = true;
-          //  showConfirmation(
-            //    `Successfully clocked out at ${lastActionTime.toLocaleTimeString('en-US')}`,
-              //  'Photo captured • Session ended • Data saved'
-            //);
+            showConfirmation(
+                `Successfully clocked out at ${lastActionTime.toLocaleTimeString('en-US')}`,
+                'Photo captured • Session ended • Data saved'
+            );
         }
 
-// ******************************* first load of the page **************************************////
-        
+// ******************************* first load of the page **************************************////        
         document.addEventListener('DOMContentLoaded', () => {
             resetDailyData();
             resetWeeklyData();
@@ -1036,16 +1037,16 @@ ${photoHtml}
             setInterval(updateDurationDisplays, 1000);
             updateDurationDisplays();
         });
-        document.getElementById('timeInBtn').addEventListener('click', handleTimeIn);
-        // $( "#timeInBtn" ).on( "click", function( event ) {
-        //     event.preventDefault();
-        //     handleTimeIn();
-        //             });
-        // $( "#timeOutBtn" ).on( "click", function( event ) {
-        //     event.preventDefault();
-        //     handleTimeOut();
-        //             });
-        document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
+        //document.getElementById('timeInBtn').addEventListener('click', handleTimeIn);
+        $( "#timeInBtn" ).on( "click", function( event ) {
+            event.preventDefault();
+            handleTimeIn();
+                    });
+        $( "#timeOutBtn" ).on( "click", function( event ) {
+            event.preventDefault();
+            handleTimeOut();
+                    });
+        //document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
                 $.ajax({
                 type: 'POST',
                 dataType: "json",
@@ -1084,7 +1085,7 @@ ${photoHtml}
 
     <script id="locationTracking">       
 // ******************************** GET GEO LOCATION *******************************************// 
-        checkTimeIn();
+        
         $(document).ready(function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showLocation);
@@ -1092,7 +1093,9 @@ ${photoHtml}
             } else {
                 $('#location_in').html('Geolocation is not supported by this browser.');
             }
-                
+
+          checkTimeIn();  
+
         });
 
         function showLocation(position) {
@@ -1119,23 +1122,18 @@ ${photoHtml}
         }
 
         function timeIn(location_in,imagePath) {
-            //location_in = address;
+            location_in = address;
             $.ajax({
                 type: 'POST',
                 url: "send_in",
                 data: {
                       location_in: location_in,
-                      imagePath: imagePath,
+                      imagePath: imagePath
                 },
                 success: function(msg) {
                 if(msg)
                     {
-                     Swal.fire({
-                    title: "Successfully Clocked In!",
-                    icon: "success",
-                    draggable: true
-                    });            
-
+                        $("#checking").html(msg);
                     //   $("#timeInBtn").hide();
                        $("#recentLocation").html(location_in); 
                     //    setTimeout(function() {
@@ -1148,24 +1146,26 @@ ${photoHtml}
 
         }
 
-        function timeOut(address,imagePath) {
+        function timeOut(location_in,imagePath) {
             location_out = address;
             $.ajax({
                 type: 'POST',
                 url: "send_out",
                 data: {
                       location_out: location_out,
-                      imagePath: imagePath,
+                      imagePath: imagePath
                 },
                 success: function(msg) {
                 if(msg)
                     {
-                    Swal.fire({
-                    title: "Successfully Clocked Out!",
-                    icon: "success",
-                    draggable: true
-                    });
+                        $("#checking").html(msg);
+                     //   updateStatus('Not Clocked In', 'red');
+                    //   $("#timeOutBtn").hide(); 
+                     //  $("#timeInBtn").show();
                        $("#recentLocation").html(location_out);
+                    //    setTimeout(function() {
+                    //             location.reload();
+                    //             }, 500);
                     checkTimeIn();
                     }
                 }
@@ -1175,6 +1175,7 @@ ${photoHtml}
 
 //********************check if already clock in ************************//
         function checkTimeIn() {
+           // $("#checking").html('dsfsfsfsadfsfs');
             activity = "checkTimeIn";
             $.ajax({
                 type: 'POST',
@@ -1188,7 +1189,7 @@ ${photoHtml}
                if(msg)
                     {
                        $("#timeInBtn").hide();
-                       $("#timeOutBtn").show();
+                       $("#timeOut").show();
                        updateStatus('Clocked In', 'green');
                        document.getElementById('timeOutBtn').disabled = false; 
                     }
@@ -1206,7 +1207,37 @@ ${photoHtml}
 
         }
 
+<<<<<<< HEAD
 
+=======
+// ********************************* saving captured photo ****************************************//
+        // function uploadPhoto(photoData) {
+        //    // $("#checking").html('dsfsfsfsadfsfs');
+        //     activity = "uploadPhoto";
+        //     photo = photoData;
+        //     //$("#checking").append("<p>"+photo+"</p>");
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: activity,
+        //       //  dataType: "json",
+        //         data: {
+        //                activity: activity,
+        //                photo:   photo
+        //         },
+        //         success: function() {
+        //         if(msg)
+        //             {
+        //              $("#recent_photo").attr("src", "msg");
+        //             }
+                    
+        //         //return false;
+        //         }
+        //            });
+
+        // }
+
+ 
+>>>>>>> parent of 8046dd4 (ok)
     </script>
     <script id="dateUpdater">
         function updateCurrentDate() {

@@ -9,7 +9,6 @@ use CodeIgniter\I18n\Time;
 
 class AttendanceController extends BaseController
 {
- 
 // ************************************* old time in *************************************//
     public function TimeIn()
     {
@@ -165,7 +164,6 @@ class AttendanceController extends BaseController
     $activityModel = new Activity();
     $data = [];
     $data['action_taken'] = $action;
-    $data['imagePath'] = $imagePath;
     $data['location'] = $address;
     $myTime = Time::now('Asia/Manila', 'en_US');
     $data['date']=$myTime->format("l, F j, Y H:i:s");
