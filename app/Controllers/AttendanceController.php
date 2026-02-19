@@ -146,8 +146,10 @@ class AttendanceController extends BaseController
     { 
     $file = $this->request->getPost('photo');
     $filteredData = substr($file, strpos($file, ",") + 1);
+    $myTime1 = Time::now('Asia/Manila', 'en_US');
+    $myTime=$myTime1->format("H:i:s");
     $unencodedData = base64_decode($filteredData);
-    $filename = 'uploads/' . uniqid() . '.jpeg';
+    $filename = 'uploads/' . uniqid() .''.$myTime.'.jpeg';
         if (!is_dir('uploads')) {
             mkdir('uploads', 0755, true);
         }
