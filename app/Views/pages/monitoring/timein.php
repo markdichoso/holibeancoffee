@@ -1085,7 +1085,7 @@ ${photoHtml}
 
     <script id="locationTracking">       
 // ******************************** GET GEO LOCATION *******************************************// 
-
+        checkTimeIn();
         $(document).ready(function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showLocation);
@@ -1094,7 +1094,7 @@ ${photoHtml}
                 $('#location_in').html('Geolocation is not supported by this browser.');
             }
 
-            checkTimeIn();
+            
 
         });
 
@@ -1134,11 +1134,12 @@ ${photoHtml}
                 if(msg)
                     {
                         $("#checking").html(msg);
-                       $("#timeInBtn").hide();
+                    //   $("#timeInBtn").hide();
                        $("#recentLocation").html(location_in); 
                     //    setTimeout(function() {
                     //             location.reload();
                     //             }, 500);
+                    checkTimeIn();
                     }
                 }
             });
@@ -1158,13 +1159,14 @@ ${photoHtml}
                 if(msg)
                     {
                         $("#checking").html(msg);
-                        updateStatus('Not Clocked In', 'red');
-                       $("#timeOutBtn").hide(); 
-                       $("#timeInBtn").show();
+                     //   updateStatus('Not Clocked In', 'red');
+                    //   $("#timeOutBtn").hide(); 
+                     //  $("#timeInBtn").show();
                        $("#recentLocation").html(location_out);
                     //    setTimeout(function() {
                     //             location.reload();
                     //             }, 500);
+                    checkTimeIn();
                     }
                 }
             });
@@ -1186,44 +1188,26 @@ ${photoHtml}
                //$("#checking").html(msg);
                if(msg)
                     {
-                       $("#timeInBtn").remove();
+                       $("#timeInBtn").hide();
+                       $("#timeOut").show();
                        updateStatus('Clocked In', 'green');
                        document.getElementById('timeOutBtn').disabled = false; 
                     }
-                return false;
+                    else
+                    {
+                     $("#timeOutBtn").hide();
+                     $("#timeInBtn").show();
+                       updateStatus('Not Clocked In', 'red');
+                       document.getElementById('timeInBtn').disabled = false;   
+                    }
+                //return false;
                 }
                 //$("#checking").html(msg);
             });
 
         }
 
-// ********************************* saving captured photo ****************************************//
-        // function uploadPhoto(photoData) {
-        //    // $("#checking").html('dsfsfsfsadfsfs');
-        //     activity = "uploadPhoto";
-        //     photo = photoData;
-        //     //$("#checking").append("<p>"+photo+"</p>");
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: activity,
-        //       //  dataType: "json",
-        //         data: {
-        //                activity: activity,
-        //                photo:   photo
-        //         },
-        //         success: function() {
-        //         if(msg)
-        //             {
-        //              $("#recent_photo").attr("src", "msg");
-        //             }
-                    
-        //         //return false;
-        //         }
-        //            });
 
-        // }
-
- 
     </script>
     <script id="dateUpdater">
         function updateCurrentDate() {
