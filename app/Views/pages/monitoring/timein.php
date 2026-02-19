@@ -1197,33 +1197,6 @@ ${photoHtml}
 
         }
 
-// ********************************* saving captured photo ****************************************//
-        // function uploadPhoto(photoData) {
-        //    // $("#checking").html('dsfsfsfsadfsfs');
-        //     activity = "uploadPhoto";
-        //     photo = photoData;
-        //     //$("#checking").append("<p>"+photo+"</p>");
-        //     $.ajax({
-        //         type: 'POST',
-        //         url: activity,
-        //       //  dataType: "json",
-        //         data: {
-        //                activity: activity,
-        //                photo:   photo
-        //         },
-        //         success: function() {
-        //         if(msg)
-        //             {
-        //              $("#recent_photo").attr("src", "msg");
-        //             }
-                    
-        //         //return false;
-        //         }
-        //            });
-
-        // }
-
- 
     </script>
     <script id="dateUpdater">
         function updateCurrentDate() {
