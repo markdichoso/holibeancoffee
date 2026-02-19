@@ -114,3 +114,23 @@ in APPPATH\Controllers\AttendanceController.php on line 123.
  5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
  6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
  7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-19 07:55:29 --> ErrorException: Undefined array key "imagePath"
+[Method: POST, Route: send_in]
+in APPPATH\Controllers\AttendanceController.php on line 123.
+ 1 APPPATH\Controllers\AttendanceController.php(123): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "imagePath"', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\AttendanceController.php', 123)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AttendanceController->Send_In()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-19 07:56:01 --> ErrorException: Undefined array key "imagePath"
+[Method: POST, Route: send_out]
+in APPPATH\Controllers\AttendanceController.php on line 140.
+ 1 APPPATH\Controllers\AttendanceController.php(140): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "imagePath"', 'C:\\xampp\\htdocs\\holibeancoffee\\app\\Controllers\\AttendanceController.php', 140)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\AttendanceController->Send_Out()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AttendanceController))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
