@@ -123,7 +123,7 @@ class AttendanceController extends BaseController
         //return redirect()->to('timein')->with('success', 'Successfully Time in!');
         echo "Successfully Clocked In";
         $action = 'Clock In';        
-        $this->activity($data['location_in'], $action, $data['imagePath']);        
+        $this->activity($data['location_in'], $action);        
         }
   
     }
@@ -140,7 +140,7 @@ class AttendanceController extends BaseController
     if ($userModel->time_out($data)){
         echo "Successfully Clocked Out!";
         $action = 'Clock Out';        
-        $this->activity($data['location_out'], $action,$data['imagePath']);
+        $this->activity($data['location_out'], $action);
         }
     }
 
@@ -163,12 +163,11 @@ class AttendanceController extends BaseController
     }
 
     //****************** activity logs *******************************//
-    public function activity($address, $action,$imagePath)
+    public function activity($address, $action)
     {
     $activityModel = new Activity();
     $data = [];
     $data['action_taken'] = $action;
-    $data['imagePath'] = $imagePath;
     $data['location'] = $address;
     $myTime = Time::now('Asia/Manila', 'en_US');
     $data['date']=$myTime->format("l, F j, Y H:i:s");

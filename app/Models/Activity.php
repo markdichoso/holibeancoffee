@@ -12,7 +12,7 @@ class Activity extends Model
     protected $useAutoIncrement = true;
 
     // Define the fields that are allowed to be mass-assigned
-    protected $allowedFields = ['activity_id', 'action_taken', 'emp_info_id', 'location', 'date', 'imagePath']; 
+    protected $allowedFields = ['activity_id', 'action_taken', 'emp_info_id', 'location', 'date']; 
     
     // You can also use other model features like validation, timestamps, etc.
 
