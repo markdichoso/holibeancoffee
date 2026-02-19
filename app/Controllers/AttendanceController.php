@@ -112,7 +112,7 @@ class AttendanceController extends BaseController
     $data = $this->request->getPost();
     $myTime = Time::now('Asia/Manila', 'en_US');
     //echo $myTime; return false;
-    $data['date_in']=$myTime->format("l, F j, Y h:i:s");
+    $data['date_in']=$myTime->format("l, F j, Y H:i:s");
     $data['emp_info_id'] = $_SESSION['emp_info_id'];
     //print_r($data); return false;
         // Use the insert() method for new records
@@ -131,7 +131,7 @@ class AttendanceController extends BaseController
     //$userModel = new Attendance();
     $data = $this->request->getPost();
     $myTime = Time::now('Asia/Manila', 'en_US');
-    $data['date_out']=$myTime->format("l, F j, Y h:i:s");
+    $data['date_out']=$myTime->format("l, F j, Y H:i:s");
     $userModel = new Attendance();
  
     if ($userModel->time_out($data)){
@@ -167,10 +167,24 @@ class AttendanceController extends BaseController
     $data['action_taken'] = $action;
     $data['location'] = $address;
     $myTime = Time::now('Asia/Manila', 'en_US');
-    $data['date']=$myTime->format("l, F j, Y h:i:s");
+    $data['date']=$myTime->format("l, F j, Y H:i:s");
     $data['emp_info_id'] = $_SESSION['emp_info_id'];
           if ($activityModel->insert($data)){
         }
+    }
+
+    public function history()
+    {
+     $activityModel = new Activity();
+    // $data = [];
+    // $data['action_taken'] = $action;
+    // $data['location'] = $address;
+    // $myTime = Time::now('Asia/Manila', 'en_US');
+    // $data['date']=$myTime->format("l, F j, Y h:i:s");
+    // $data['emp_info_id'] = $_SESSION['emp_info_id'];
+     //   return true;
+
+     echo json_encode($activityModel->recentActivity());
     }
 
 }

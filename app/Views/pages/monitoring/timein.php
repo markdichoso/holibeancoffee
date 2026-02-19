@@ -504,22 +504,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="flex-1 min-w-0">
-                                                    <div class="flex items-center justify-between mb-2">
-                                                        <span class="text-sm font-semibold text-gray-900">Clocked Out</span>
-                                                        <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md">July 31, 2025 11:30 AM</span>
-                                                    </div>
-                                                    <p class="text-xs text-gray-500"></p>
-                                                </div>
+                                                
                                             </div>
                                             <div class="flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                                                <div class="w-14 h-14 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden flex-shrink-0">
-                                                    <div class="w-full h-full flex items-center justify-center">
-                                                        <div class="w-5 h-5 flex items-center justify-center">
-                                                            <i class="ri-image-line text-gray-400"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                               
                                                 <div class="flex-1 min-w-0">
                                                     <div class="flex items-center justify-between mb-2">
                                                         <span class="text-sm font-semibold text-gray-900">Clocked In</span>
@@ -529,13 +517,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-                                                <div class="w-14 h-14 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden flex-shrink-0">
-                                                    <div class="w-full h-full flex items-center justify-center">
-                                                        <div class="w-5 h-5 flex items-center justify-center">
-                                                            <i class="ri-image-line text-gray-400"></i>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                
                                                 <div class="flex-1 min-w-0">
                                                     <div class="flex items-center justify-between mb-2">
                                                         <span class="text-sm font-semibold text-gray-900">Clocked Out</span>
@@ -1068,6 +1050,8 @@ ${photoHtml}
                 'Photo captured • Session ended • Data saved'
             );
         }
+
+// ******************************* first load of the page **************************************////        
         document.addEventListener('DOMContentLoaded', () => {
             resetDailyData();
             resetWeeklyData();
@@ -1087,6 +1071,26 @@ ${photoHtml}
             handleTimeOut();
                     });
         //document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
+                $.ajax({
+                type: 'POST',
+                url: "history",
+                success: function(msg) {
+                   // if (msg) {
+                        alert(msg);
+                        html = "<div class='flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow'>"                                               
+                                    + "<div class='flex-1 min-w-0'>"
+                                    +    "<div class='flex items-center justify-between mb-2'>"
+                                    +        "<span class='text-sm font-semibold text-gray-900'>Clocked In New</span>"
+                                    +            "<span class='text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md'>July 31, 2025 8:00 AM New</span>"
+                                    +    "</div>"
+                                    +            "<p class='text-xs text-gray-500'>No photo captured • Location verified New</p>"
+                                    + "</div>"
+                                    + "</div>";
+                        $("#actionHistoryList").prepend(html);
+                     //  }
+                }
+            });
+
     </script>
 
     <script id="locationTracking">       
