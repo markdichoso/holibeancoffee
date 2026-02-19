@@ -154,7 +154,7 @@ class AttendanceController extends BaseController
         // Save the image file
         if (file_put_contents($filename, $unencodedData)) {
             // Return the image path for display
-          echo base_url($filename); 
+          echo $filename; 
         }
        // $file->move(WRITEPATH . 'uploads', $newName); 
     }

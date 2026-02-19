@@ -956,7 +956,8 @@ ${photoHtml}
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
             const photoData = canvas.toDataURL('image/jpeg', 0.8);
-            savePhotoToLocalStorage('time_in', photoData);
+           // savePhotoToLocalStorage('time_in', photoData);
+            console.log($("#recent_photo").attr("src"));
             isTimedIn = true;
             currentSessionStart = new Date();
             lastActionTime = currentSessionStart;
@@ -1061,7 +1062,7 @@ ${photoHtml}
                         // alert(msg);
                         html = "<div class='flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow'>"
                                     +   "<div class='w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0'>"
-                                    +   "<img class='w-full h-full object-cover rounded-lg' alt='Captured photo' id='recent_photo' src='http://localhost/holibeancoffee/uploads/69965da614285.jpeg'>"
+                                    +   "<img class='w-full h-full object-cover rounded-lg' alt='Captured photo' id='recent_photo' src='uploads/69966fcc2403e.jpeg'>"
                                     +   "</div>"                                               
                                     +   "<div class='flex-1 min-w-0'>"
                                     +    "<div class='flex items-center justify-between mb-2'>"
