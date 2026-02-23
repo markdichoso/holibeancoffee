@@ -324,7 +324,6 @@
                                                     <span>Address</span>
                                                 </span>
                                                 <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="addressMain"></span>
-                                                <input type="hidden" name="imagePathAdd" id="imagePathAdd" />
                                             </div>
                                       
                                             <div class="flex justify-between items-center py-2 sm:py-3">
@@ -742,20 +741,20 @@
             sessions: []
         };
 
-        // function loadTimeTrackingData() {
-        //     const savedData = localStorage.getItem('timeTrackingData');
-        //     if (savedData) {
-        //         timeTrackingData = JSON.parse(savedData);
-        //     }
-        //     const savedSessionStart = localStorage.getItem('currentSessionStart');
-        //     if (savedSessionStart) {
-        //         currentSessionStart = new Date(savedSessionStart);
-        //         isTimedIn = true;
-        //         updateStatus('Clocked In', 'green');
-        //         document.getElementById('timeInBtn').disabled = true;
-        //         document.getElementById('timeOutBtn').disabled = false;
-        //     }
-        //}
+        function loadTimeTrackingData() {
+            const savedData = localStorage.getItem('timeTrackingData');
+            if (savedData) {
+                timeTrackingData = JSON.parse(savedData);
+            }
+            const savedSessionStart = localStorage.getItem('currentSessionStart');
+            if (savedSessionStart) {
+                currentSessionStart = new Date(savedSessionStart);
+                isTimedIn = true;
+                updateStatus('Clocked In', 'green');
+                document.getElementById('timeInBtn').disabled = true;
+                document.getElementById('timeOutBtn').disabled = false;
+            }
+        }
 
         function saveTimeTrackingData() {
             localStorage.setItem('timeTrackingData', JSON.stringify(timeTrackingData));
@@ -833,7 +832,7 @@
             }
         }
 
-        function savePhotoToLocalStorage(type, photoData, location_val) {
+        function savePhotoToLocalStorage(type, photoData) {
             activity = "uploadPhoto";
             photo = photoData;
             $.ajax({
@@ -847,23 +846,13 @@
                 success: function(msg) {
                 if(msg)
                     {
-                        window[type](location_val,msg);                        
-                        //checkTimeIn();
+                    $("#recent_photo").attr('src', msg);
+                     //return msg;
                     }
-                    else {
-                     Swal.fire({
-                    title: "Error Saving Photo, Please try again.",
-                    icon: "error",
-                    draggable: true
-                    });            
-                    
-                    }   
-                    
                     
                 //return false;
                 }
                    });
-                  // return lugar;
         }
         async function initializeCamera() {
             // try {
@@ -901,7 +890,7 @@
             statusIndicator.className = `w-3 h-3 rounded-full pulse-animation bg-${color}-500`;
         }
 
-        function updateLastAction(action, photoData = null, location_val) {
+        function updateLastAction(action, photoData = null) {
             const lastActionElement = document.getElementById('lastAction');
             const now = new Date();
             const timeString = now.toLocaleTimeString('en-US');
@@ -916,7 +905,7 @@
             const newActionDiv = document.createElement('div');
             newActionDiv.className = 'flex items-center space-x-3 p-3 bg-white rounded-lg border border-gray-200';
             const photoHtml = photoData ?
-                `<img src="${photoData}" class="w-full h-full object-cover rounded-lg" alt="Captured photo" id="recent_photo">` :
+                `<img class="w-full h-full object-cover rounded-lg" alt="Captured photo" id="recent_photo">` :
                 `<div class="w-full h-full flex items-center justify-center">
 <div class="w-4 h-4 flex items-center justify-center">
 <i class="ri-image-line text-gray-400"></i>
@@ -931,7 +920,7 @@ ${photoHtml}
 <span class="text-sm font-medium text-gray-700">${action}</span>
 <span class="text-xs text-gray-500" id="recentDate">${dateString} ${timeString}</span>
 </div>
-<p class="text-xs text-gray-500 mt-1" id="recentLocation">${location_val}</p>
+<p class="text-xs text-gray-500 mt-1" id="recentLocation"></p>
 </div>
 `;
             historyContainer.insertBefore(newActionDiv, historyContainer.firstChild);
@@ -955,28 +944,28 @@ ${photoHtml}
             location_val = $('#addressMain').html();
                 if (location_val === '') {
                     alert('Please wait for the location to show!')
-             //       document.getElementById('timeInBtn').disabled = true;
+                    document.getElementById('timeInBtn').disabled = true;
                     return false;
                 }
-            //checkTimeIn();
+            checkTimeIn();
             //timeIn(location_val);           
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
             const photoData = canvas.toDataURL('image/jpeg', 0.8);
-            savePhotoToLocalStorage('timeIn', photoData, location_val)
-            //const imagePath = $("#recent_photo").attr("alt");
-            //timeIn(location_val,imagePath);
-        //     isTimedIn = true;
-        //     currentSessionStart = new Date();
-        //     lastActionTime = currentSessionStart;
-        //     localStorage.setItem('currentSessionStart', currentSessionStart.toISOString());
-        //     updateStatus('Clocked In', 'green');
-             updateLastAction('Clocked In', photoData,location_val);
-        //     document.getElementById('timeInBtn').disabled = true;
-        //    // $(#timeInBtn).disbale();
-        //     document.getElementById('timeOutBtn').disabled = false;
+            savePhotoToLocalStorage('time_in', photoData);
+            imagePath = $("#recent_photo").attr("src");
+            timeIn(location_val,imagePath);
+            isTimedIn = true;
+            currentSessionStart = new Date();
+            lastActionTime = currentSessionStart;
+            localStorage.setItem('currentSessionStart', currentSessionStart.toISOString());
+            updateStatus('Clocked In', 'green');
+            updateLastAction('Clocked In', photoData);
+            document.getElementById('timeInBtn').disabled = true;
+           // $(#timeInBtn).disbale();
+            document.getElementById('timeOutBtn').disabled = false;
             // showConfirmation(
             //     `Successfully clocked in at ${lastActionTime.toLocaleTimeString('en-US')}`,
             //     'Photo captured • Location verified • Device authenticated'
@@ -984,7 +973,6 @@ ${photoHtml}
         }
 
         function handleTimeOut() {
-           // alert('ok');
             const video = document.getElementById('cameraPreview');
             const canvas = document.getElementById('photoCanvas');
             if (video.videoWidth === 0 || video.videoHeight === 0) {
@@ -995,46 +983,42 @@ ${photoHtml}
                 );
                 return;
             }
-            const location_val = $('#addressMain').html();
+            location_val = $('#addressMain').html();
                 if (location_val === '') {
                     alert('Please wait for the location to show!')
                     //document.getElementById('timeInBtn').disabled = true;
                     return false;
                 }
-            //const location_val2 = `${location_val}`;
-            //location_val = $('#addressMain').html();
+            location_val = $('#addressMain').html();
             //timeOut(location_val);
-           // alert(location_val2);
-            //if (!currentSessionStart) return;
+            if (!currentSessionStart) return;
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             context.drawImage(video, 0, 0, canvas.width, canvas.height);
             const photoData = canvas.toDataURL('image/jpeg', 0.8);
-            savePhotoToLocalStorage('timeOut', photoData, location_val);
-            //checkTimeIn();
-            //const imagePath = $("#imagePathAdd").val();  
-            //alert(`${imagePath}`); return false;       
-            //timeOut(location_val,imagePath);
-            // const sessionEndTime = new Date();
-            // const sessionDurationMinutes = Math.floor((sessionEndTime - currentSessionStart) / (1000 * 60));
-            // timeTrackingData.daily += sessionDurationMinutes;
-            // timeTrackingData.weekly += sessionDurationMinutes;
-            // timeTrackingData.monthly += sessionDurationMinutes;
-            // timeTrackingData.sessions.push({
-            //     start: currentSessionStart.toISOString(),
-            //     end: sessionEndTime.toISOString(),
-            //     duration: sessionDurationMinutes
-            //});
-            // saveTimeTrackingData();
-            // isTimedIn = false;
-            // currentSessionStart = null;
-            // lastActionTime = sessionEndTime;
-            // localStorage.removeItem('currentSessionStart');
-            // updateStatus('Not Clocked In', 'red');
-             updateLastAction('Clocked Out', photoData, location_val);
-            // document.getElementById('timeInBtn').disabled = false;
-            // document.getElementById('timeOutBtn').disabled = true;
+            savePhotoToLocalStorage('time_out', photoData);
+            imagePath = $("#recent_photo").attr("src");
+            timeOut(location_val,imagePath);
+            const sessionEndTime = new Date();
+            const sessionDurationMinutes = Math.floor((sessionEndTime - currentSessionStart) / (1000 * 60));
+            timeTrackingData.daily += sessionDurationMinutes;
+            timeTrackingData.weekly += sessionDurationMinutes;
+            timeTrackingData.monthly += sessionDurationMinutes;
+            timeTrackingData.sessions.push({
+                start: currentSessionStart.toISOString(),
+                end: sessionEndTime.toISOString(),
+                duration: sessionDurationMinutes
+            });
+            saveTimeTrackingData();
+            isTimedIn = false;
+            currentSessionStart = null;
+            lastActionTime = sessionEndTime;
+            localStorage.removeItem('currentSessionStart');
+            updateStatus('Not Clocked In', 'red');
+            updateLastAction('Clocked Out', photoData);
+            document.getElementById('timeInBtn').disabled = false;
+            document.getElementById('timeOutBtn').disabled = true;
           //  showConfirmation(
             //    `Successfully clocked out at ${lastActionTime.toLocaleTimeString('en-US')}`,
               //  'Photo captured • Session ended • Data saved'
@@ -1043,26 +1027,25 @@ ${photoHtml}
 
 // ******************************* first load of the page **************************************////
         
-        // document.addEventListener('DOMContentLoaded', () => {
-        //     resetDailyData();
-        //     resetWeeklyData();
-        //     resetMonthlyData();
-        //     loadTimeTrackingData();
-             initializeCamera();
-        //     setInterval(updateDurationDisplays, 1000);
-        //     updateDurationDisplays();
-        // });
-        //document.getElementById('timeInBtn').addEventListener('click', handleTimeIn);
-        $( "#timeInBtn" ).on( "click", function( event ) {
-            event.preventDefault();
-            handleTimeIn();
-                    });
-        $( "#timeOutBtn" ).on( "click", function( event ) {
-            event.preventDefault();
-            handleTimeOut();
-            //checkTimeIn();
-                    });
-        //document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
+        document.addEventListener('DOMContentLoaded', () => {
+            resetDailyData();
+            resetWeeklyData();
+            resetMonthlyData();
+            loadTimeTrackingData();
+            initializeCamera();
+            setInterval(updateDurationDisplays, 1000);
+            updateDurationDisplays();
+        });
+        document.getElementById('timeInBtn').addEventListener('click', handleTimeIn);
+        // $( "#timeInBtn" ).on( "click", function( event ) {
+        //     event.preventDefault();
+        //     handleTimeIn();
+        //             });
+        // $( "#timeOutBtn" ).on( "click", function( event ) {
+        //     event.preventDefault();
+        //     handleTimeOut();
+        //             });
+        document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
                 $.ajax({
                 type: 'POST',
                 dataType: "json",
@@ -1081,7 +1064,7 @@ ${photoHtml}
                         // alert(msg);
                         html = "<div class='flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow'>"
                                     +   "<div class='w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0'>"
-                                    +   "<img class='w-full h-full object-cover rounded-lg' alt='Captured photo' id='recent_photoDB' src='"+ item.imagePath +"'>"
+                                    +   "<img class='w-full h-full object-cover rounded-lg' alt='Captured photo' id='recent_photo' src='"+ item.imagePath +"'>"
                                     +   "</div>"                                               
                                     +   "<div class='flex-1 min-w-0'>"
                                     +    "<div class='flex items-center justify-between mb-2'>"
@@ -1101,9 +1084,8 @@ ${photoHtml}
 
     <script id="locationTracking">       
 // ******************************** GET GEO LOCATION *******************************************// 
-        
-        $(document).ready(function() {
         checkTimeIn();
+        $(document).ready(function() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showLocation);
 
@@ -1143,57 +1125,52 @@ ${photoHtml}
                 url: "send_in",
                 data: {
                       location_in: location_in,
-                      imagePath: imagePath
+                      imagePath: imagePath,
                 },
                 success: function(msg) {
-                if(msg !== false)
+                if(msg)
                     {
-                    //alert('ok');
-                    Swal.fire({
+                     Swal.fire({
                     title: "Successfully Clocked In!",
                     icon: "success",
                     draggable: true
                     });            
+
+                    //   $("#timeInBtn").hide();
+                       $("#recentLocation").html(location_in); 
+                    //    setTimeout(function() {
+                    //             location.reload();
+                    //             }, 500);
                     checkTimeIn();
                     }
                 }
             });
 
         }
-    
+
         function timeOut(address,imagePath) {
-            //alert(imagePath); return false;
             location_out = address;
             $.ajax({
                 type: 'POST',
                 url: "send_out",
                 data: {
                       location_out: location_out,
-                      imagePath: imagePath
+                      imagePath: imagePath,
                 },
                 success: function(msg) {
-                if(msg === 'success')
+                if(msg)
                     {
                     Swal.fire({
                     title: "Successfully Clocked Out!",
                     icon: "success",
                     draggable: true
-                    });                    
-                    $("#timeOutBtn").hide();
-                    $("#timeInBtn").show();
-                    updateStatus('Not Clocked In', 'red');
-                    document.getElementById('timeInBtn').disabled = false; 
-                    }
-                    else {
-                        Swal.fire({
-                    title: "Failed to  Clocked Out!",
-                    icon: "error",
-                    draggable: true
                     });
-                    location.reload();
+                       $("#recentLocation").html(location_out);
+                    checkTimeIn();
                     }
                 }
             });
+
         }
 
 //********************check if already clock in ************************//
@@ -1207,9 +1184,9 @@ ${photoHtml}
                        activity: activity
                 },
                 success: function(msg) {
-               if(msg > 0)
+               //$("#checking").html(msg);
+               if(msg)
                     {
-                       //alert(msg); return false;
                        $("#timeInBtn").hide();
                        $("#timeOutBtn").show();
                        updateStatus('Clocked In', 'green');

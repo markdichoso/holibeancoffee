@@ -32,15 +32,7 @@ class Attendance extends Model
     $builder->where('location_out IS NULL');
     $builder->like('date_in', $currentDate);
     $builder->update();
-   if ($this->db->affectedRows() > 0) {
-    // Rows were successfully updated and changed
-    return true;
-    //echo "Update successful and rows affected.";
-    } else {
-    return false;
-    // Query ran successfully but no data was changed, or no matching record was found
-    //echo "Query successful, but no rows were updated.";
-}
+    return true;   
 
     }
 
@@ -54,10 +46,7 @@ class Attendance extends Model
                     ->where('location_out IS NULL')
                     ->where('location_in !=', '')
                     ->like('date_in', $currentDate) // Produces WHERE `username` LIKE '%searchTerm%'
-                    ->findAll();
-        //$num_rows = $query->getNumRows();
-        //return $num_rows;
-                    // Retrieves all matching results
+                    ->findAll();                    // Retrieves all matching results
         //return $password;
     }
 }
