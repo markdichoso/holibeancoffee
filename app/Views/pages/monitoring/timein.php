@@ -120,7 +120,7 @@
                                         </h2>
                                         <p class="text-xs sm:text-sm lg:text-base xl:text-lg text-gray-600 font-medium">Employee Number : <?php echo $_SESSION['user_id']; ?> • Human Resources</p>
                                         <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 sm:mt-2 font-medium" id="currentDate">Monday, January 26, 2026</p>
-                                        <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 sm:mt-2 font-medium" id="currentDate"><?php echo anchor('destroy', 'LET&#39;S GO!', ['class' => 'btn btn-primary', 'title' => 'Log Out']); ?></p>
+                                        <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 sm:mt-2 font-medium" id="logOut"><?php echo anchor('destroy', 'LET&#39;S GO!', ['class' => 'btn btn-primary', 'title' => 'Log Out']); ?></p>
                                     </div>
                                 </div>
                                 <div class="flex justify-center lg:justify-end">
