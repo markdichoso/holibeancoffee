@@ -954,8 +954,11 @@ ${photoHtml}
             }
             location_val = $('#addressMain').html();
                 if (location_val === '') {
-                    alert('Please wait for the location to show!')
-             //       document.getElementById('timeInBtn').disabled = true;
+                    Swal.fire({
+                    title: "Please wait for the location to load!",
+                    icon: "error",
+                    draggable: true
+                    });    
                     return false;
                 }
             //checkTimeIn();
