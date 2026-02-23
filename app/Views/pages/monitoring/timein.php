@@ -213,7 +213,7 @@
                                 </div>
                                 <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 lg:space-x-6 xl:space-x-8 mb-6 sm:mb-8 lg:mb-10 xl:mb-12">
                                     <button id="timeInBtn" class="group flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold py-3 sm:py-4 lg:py-5 xl:py-6 px-4 sm:px-6 lg:px-8 xl:px-10 !rounded-button transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 shadow-2xl hover:shadow-3xl whitespace-nowrap relative overflow-hidden">
-                                        <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" id="divBtnIn"></div>
+                                        <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                         <div class="flex items-center justify-center space-x-2 sm:space-x-3 lg:space-x-4 relative z-10">
                                             <div class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 flex items-center justify-center bg-white/20 rounded-lg sm:rounded-xl shadow-lg">
                                                 <i class="ri-login-circle-line text-sm sm:text-base lg:text-lg xl:text-xl"></i>
@@ -1046,15 +1046,19 @@ ${photoHtml}
 
 // ******************************* first load of the page **************************************////
         
-        // document.addEventListener('DOMContentLoaded', () => {
+        document.addEventListener('DOMContentLoaded', () => {
         //     resetDailyData();
         //     resetWeeklyData();
         //     resetMonthlyData();
         //     loadTimeTrackingData();
-             initializeCamera();
+               initializeCamera();
         //     setInterval(updateDurationDisplays, 1000);
         //     updateDurationDisplays();
-        // });
+               getHistory();
+               checkTimeIn();
+               setInterval(showLocation, 30000);
+        });
+        
         //document.getElementById('timeInBtn').addEventListener('click', handleTimeIn);
         $( "#timeInBtn" ).on( "click", function( event ) {
             event.preventDefault();
@@ -1063,42 +1067,9 @@ ${photoHtml}
         $( "#timeOutBtn" ).on( "click", function( event ) {
             event.preventDefault();
             handleTimeOut();
-            //checkTimeIn();
-                    });
+                     });
         //document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
-                $.ajax({
-                type: 'POST',
-                dataType: "json",
-                url: "history",
-                success: function(data) {
-                    if (data) {
-                    data.sort((a, b) => a.activity_id - b.activity_id);
 
-                    $.each(data, function(index, item) {
-            // Access properties using dot notation (e.g., item.name)
-            // or bracket notation (e.g., item['name'])
-
-            // Example: Append data to an HTML list
-                    //$("#actionHistoryList").prepend('<li>' + item.date + '</li>'); // Replace 'name' and '#results-list' with your data property and element ID
-                            
-                        // alert(msg);
-                        html = "<div class='flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow'>"
-                                    +   "<div class='w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0'>"
-                                    +   "<img class='w-full h-full object-cover rounded-lg' alt='Captured photo' id='recent_photoDB' src='"+ item.imagePath +"'>"
-                                    +   "</div>"                                               
-                                    +   "<div class='flex-1 min-w-0'>"
-                                    +    "<div class='flex items-center justify-between mb-2'>"
-                                    +        "<span class='text-sm font-semibold text-gray-900'>"+ item.action_taken +"</span>"
-                                    +            "<span class='text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md'>" + item.date + "</span>"
-                                    +    "</div>"
-                                    +            "<p class='text-xs text-gray-500'>" + item.location + "</p>"
-                                    + "</div>"
-                                    + "</div>";
-                        $("#actionHistoryList").prepend(html);
-                        });
-                       }
-                }
-            });
 
     </script>
 
@@ -1106,7 +1077,7 @@ ${photoHtml}
 // ******************************** GET GEO LOCATION *******************************************// 
         
         $(document).ready(function() {
-        checkTimeIn();
+        //checkTimeIn();
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showLocation);
 
@@ -1131,10 +1102,39 @@ ${photoHtml}
                 success: function(msg) {
                     if (msg) {
                         $("#addressMain").html(msg);
-                       document.getElementById('timeInBtn').disabled = false;
+                       //document.getElementById('timeInBtn').disabled = false;
                     } else {
                         $("#addressMain").html('Not Available');
                     }
+                }
+            });
+        }
+
+        function getHistory(){
+                $.ajax({
+                type: 'POST',
+                dataType: "json",
+                url: "history",
+                success: function(data) {
+                    if (data) {
+                    data.sort((a, b) => a.activity_id - b.activity_id);
+
+                    $.each(data, function(index, item) {
+                        html = "<div class='flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow'>"
+                                    +   "<div class='w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0'>"
+                                    +   "<img class='w-full h-full object-cover rounded-lg' alt='Captured photo' id='recent_photoDB' src='"+ item.imagePath +"'>"
+                                    +   "</div>"                                               
+                                    +   "<div class='flex-1 min-w-0'>"
+                                    +    "<div class='flex items-center justify-between mb-2'>"
+                                    +        "<span class='text-sm font-semibold text-gray-900'>"+ item.action_taken +"</span>"
+                                    +            "<span class='text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md'>" + item.date + "</span>"
+                                    +    "</div>"
+                                    +            "<p class='text-xs text-gray-500'>" + item.location + "</p>"
+                                    + "</div>"
+                                    + "</div>";
+                        $("#actionHistoryList").prepend(html);
+                        });
+                       }
                 }
             });
         }
