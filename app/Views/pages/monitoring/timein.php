@@ -742,20 +742,20 @@
             sessions: []
         };
 
-        // function loadTimeTrackingData() {
-        //     const savedData = localStorage.getItem('timeTrackingData');
-        //     if (savedData) {
-        //         timeTrackingData = JSON.parse(savedData);
-        //     }
-        //     const savedSessionStart = localStorage.getItem('currentSessionStart');
-        //     if (savedSessionStart) {
-        //         currentSessionStart = new Date(savedSessionStart);
-        //         isTimedIn = true;
-        //         updateStatus('Clocked In', 'green');
-        //         document.getElementById('timeInBtn').disabled = true;
-        //         document.getElementById('timeOutBtn').disabled = false;
-        //     }
-        //}
+        function loadTimeTrackingData() {
+            const savedData = localStorage.getItem('timeTrackingData');
+            if (savedData) {
+                timeTrackingData = JSON.parse(savedData);
+            }
+            const savedSessionStart = localStorage.getItem('currentSessionStart');
+            if (savedSessionStart) {
+                currentSessionStart = new Date(savedSessionStart);
+                isTimedIn = true;
+               // updateStatus('Clocked In', 'green');
+                //document.getElementById('timeInBtn').disabled = true;
+               // document.getElementById('timeOutBtn').disabled = false;
+            }
+        }
 
         function saveTimeTrackingData() {
             localStorage.setItem('timeTrackingData', JSON.stringify(timeTrackingData));
@@ -971,11 +971,11 @@ ${photoHtml}
             savePhotoToLocalStorage('timeIn', photoData, location_val)
             //const imagePath = $("#recent_photo").attr("alt");
             //timeIn(location_val,imagePath);
-        //     isTimedIn = true;
-        //     currentSessionStart = new Date();
-        //     lastActionTime = currentSessionStart;
-        //     localStorage.setItem('currentSessionStart', currentSessionStart.toISOString());
-        //     updateStatus('Clocked In', 'green');
+             isTimedIn = true;
+             currentSessionStart = new Date();
+             lastActionTime = currentSessionStart;
+             localStorage.setItem('currentSessionStart', currentSessionStart.toISOString());
+             updateStatus('Clocked In', 'green');
              updateLastAction('Clocked In', photoData,location_val);
         //     document.getElementById('timeInBtn').disabled = true;
         //    // $(#timeInBtn).disbale();
@@ -1019,21 +1019,21 @@ ${photoHtml}
             //const imagePath = $("#imagePathAdd").val();  
             //alert(`${imagePath}`); return false;       
             //timeOut(location_val,imagePath);
-            // const sessionEndTime = new Date();
-            // const sessionDurationMinutes = Math.floor((sessionEndTime - currentSessionStart) / (1000 * 60));
-            // timeTrackingData.daily += sessionDurationMinutes;
-            // timeTrackingData.weekly += sessionDurationMinutes;
-            // timeTrackingData.monthly += sessionDurationMinutes;
-            // timeTrackingData.sessions.push({
-            //     start: currentSessionStart.toISOString(),
-            //     end: sessionEndTime.toISOString(),
-            //     duration: sessionDurationMinutes
-            //});
-            // saveTimeTrackingData();
-            // isTimedIn = false;
-            // currentSessionStart = null;
-            // lastActionTime = sessionEndTime;
-            // localStorage.removeItem('currentSessionStart');
+            const sessionEndTime = new Date();
+            const sessionDurationMinutes = Math.floor((sessionEndTime - currentSessionStart) / (1000 * 60));
+            timeTrackingData.daily += sessionDurationMinutes;
+            timeTrackingData.weekly += sessionDurationMinutes;
+            timeTrackingData.monthly += sessionDurationMinutes;
+            timeTrackingData.sessions.push({
+                start: currentSessionStart.toISOString(),
+                end: sessionEndTime.toISOString(),
+                duration: sessionDurationMinutes
+            });
+             saveTimeTrackingData();
+             isTimedIn = false;
+             currentSessionStart = null;
+             lastActionTime = sessionEndTime;
+             localStorage.removeItem('currentSessionStart');
             // updateStatus('Not Clocked In', 'red');
              updateLastAction('Clocked Out', photoData, location_val);
             // document.getElementById('timeInBtn').disabled = false;
@@ -1047,16 +1047,16 @@ ${photoHtml}
 // ******************************* first load of the page **************************************////
         
         document.addEventListener('DOMContentLoaded', () => {
-        //     resetDailyData();
-        //     resetWeeklyData();
-        //     resetMonthlyData();
-        //     loadTimeTrackingData();
-               initializeCamera();
-        //     setInterval(updateDurationDisplays, 1000);
-        //     updateDurationDisplays();
-               getHistory();
-               checkTimeIn();
-               setInterval(showLocation, 30000);
+            resetDailyData();
+            resetWeeklyData();
+            resetMonthlyData();
+            loadTimeTrackingData();
+            initializeCamera();
+            setInterval(updateDurationDisplays, 1000);
+            updateDurationDisplays();
+            getHistory();
+            checkTimeIn();
+            setInterval(showLocation, 30000);
         });
         
         //document.getElementById('timeInBtn').addEventListener('click', handleTimeIn);
