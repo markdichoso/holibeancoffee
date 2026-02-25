@@ -24,7 +24,7 @@ class Attendance extends Model
     //$builder = $db->table('attendance');
     $date_out=$data['date_out'];
     $location_out=$data['location_out'];
-    $currentDate = date('l, F j, Y');
+    $currentDate = date('Y:m:d');
     // $data['date_out']=date("l, F j, Y H:i:s");
     $builder->set('date_out', $date_out);
     $builder->set('location_out', $location_out);
@@ -48,7 +48,7 @@ class Attendance extends Model
     {
         
         $emp_info_id = $data;
-        $currentDate = date('l, F j, Y');
+        $currentDate = date('Y:m:d');
         return $this->table($this->table)
                     ->where('emp_info_id', $emp_info_id)
                     ->where('location_out IS NULL')

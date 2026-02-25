@@ -81,7 +81,8 @@ class AttendanceController extends BaseController
     $data = $this->request->getPost();
     $myTime = Time::now('Asia/Manila', 'en_US');
     //echo $myTime; return false;
-    $data['date_in']=$myTime->format("l, F j, Y H:i:s");
+    //$data['date_in']=$myTime->format("l, F j, Y H:i:s");
+    $data['date_in']=$myTime->format("Y:m:d H:i:s");
     $data['emp_info_id'] = $_SESSION['emp_info_id'];
     $action = 'Clock In';
     //print_r($data); return false;
@@ -105,7 +106,8 @@ class AttendanceController extends BaseController
     $action = 'Clock Out';
     $data = $this->request->getPost();
     $myTime = Time::now('Asia/Manila', 'en_US');
-    $data['date_out']=$myTime->format("l, F j, Y H:i:s");
+    //$data['date_out']=$myTime->format("l, F j, Y H:i:s");
+    $data['date_out']=$myTime->format("Y:m:d H:i:s");
     $userModel = new Attendance();    
     if($userModel->time_out($data)){
     echo "success";
