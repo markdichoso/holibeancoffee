@@ -33,13 +33,9 @@ class Attendance extends Model
     $builder->like('date_in', $currentDate);
     $builder->update();
    if ($this->db->affectedRows() > 0) {
-    // Rows were successfully updated and changed
-    return true;
-    //echo "Update successful and rows affected.";
+     return true;
     } else {
     return false;
-    // Query ran successfully but no data was changed, or no matching record was found
-    //echo "Query successful, but no rows were updated.";
 }
 
     }
@@ -53,12 +49,32 @@ class Attendance extends Model
                     ->where('emp_info_id', $emp_info_id)
                     ->where('location_out IS NULL')
                     ->where('location_in !=', '')
-                    ->like('date_in', $currentDate) // Produces WHERE `username` LIKE '%searchTerm%'
+                    ->like('date_in', $currentDate) 
                     ->findAll();
-        //$num_rows = $query->getNumRows();
-        //return $num_rows;
-                    // Retrieves all matching results
-        //return $password;
+    }
+
+    function getMonthly()
+    {
+    $emp_info_id = $_SESSION['emp_info_id'];
+    $db = \Config\Database::connect();    
+    $sql = 'SELECT SUM(timestampdiff(SECOND, date_in, date_out)/3600) as hours FROM attendance att
+    inner join employee_info ei on ei.emp_info_id = att.emp_info_id WHERE att.emp_info_id = ? 
+    and MONTH(date_in) = MONTH(NOW())';
+    $query = $db->query($sql, [$emp_info_id]); // Use binding for security
+    $result = $query->getRow();
+    return $result;
+    }
+
+    function getWeekly()
+    {
+    $emp_info_id = $_SESSION['emp_info_id'];
+    $db = \Config\Database::connect();    
+    $sql = 'SELECT concat(ei.firstname, " ", ei.lastname) name, SUM(timestampdiff(SECOND, date_in, date_out)/3600) as hours 
+    FROM u142516471_hbishbc.attendance att 
+    inner join employee_info ei on ei.emp_info_id = att.emp_info_id where att.emp_info_id = ? and YEARWEEK(date_in, 1) = YEARWEEK(CURDATE(), 1);';
+    $query = $db->query($sql, [$emp_info_id]); // Use binding for security
+    $result = $query->getRow();
+    return $result;
     }
 }
 

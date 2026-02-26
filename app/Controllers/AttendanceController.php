@@ -69,8 +69,7 @@ class AttendanceController extends BaseController
          $attendanceModel = new Attendance();
          $present = $attendanceModel->searchAttendance($emp_info_id);
          //return json_encode($present);
-         return $present[0]['emp_info_id'];
-         
+         return $present[0]['emp_info_id'];        
      
     }
         
@@ -193,5 +192,21 @@ class AttendanceController extends BaseController
 
         }
   // end of Location // 
+
+     public function getMonthly()
+    {
+     $getMonthly = $this->request->getPost('activity');
+     $activityModel = new Attendance();
+     $data = $activityModel->$getMonthly();
+     return $data->hours;
+    }
+
+     public function getWeekly()
+    {
+     $getWeekly = $this->request->getPost('activity');
+     $activityModel = new Attendance();
+     $data = $activityModel->$getWeekly();
+     return $data->hours;
+    }
 
 }

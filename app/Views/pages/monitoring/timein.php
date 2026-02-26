@@ -376,7 +376,7 @@
                                             </div>
                                             <div class="space-y-3">
                                                 <div class="text-center">
-                                                    <div class="text-4xl font-bold text-blue-900 mb-2" id="dailyHours">0h 0m</div>
+                                                    <div class="text-4xl font-bold text-blue-900 mb-2" id="dailyHours"></div>
                                                     <div class="text-sm text-blue-700 font-medium">Today's Total</div>
                                                 </div>
                                                 <div class="bg-white/70 rounded-xl p-3 border border-blue-100/50">
@@ -398,13 +398,13 @@
                                                             <i class="ri-calendar-week-line text-green-600"></i>
                                                         </div>
                                                     </div>
-                                                    <span class="text-lg font-bold text-green-900">Weekly Time</span>
+                                                    <span class="text-lg font-bold text-green-900">Weekly Time / Hours</span>
                                                 </div>
                                                 <div class="w-2 h-2 bg-green-500 rounded-full shadow-lg pulse-animation"></div>
                                             </div>
                                             <div class="space-y-3">
                                                 <div class="text-center">
-                                                    <div class="text-4xl font-bold text-green-900 mb-2" id="weeklyHours">0h 0m</div>
+                                                    <div class="text-4xl font-bold text-green-900 mb-2" id="weeklyHours"></div>
                                                     <div class="text-sm text-green-700 font-medium">This Week's Total</div>
                                                 </div>
                                                 <div class="bg-white/70 rounded-xl p-3 border border-green-100/50">
@@ -426,14 +426,14 @@
                                                             <i class="ri-calendar-2-line text-purple-600"></i>
                                                         </div>
                                                     </div>
-                                                    <span class="text-lg font-bold text-purple-900">Monthly Time</span>
+                                                    <span class="text-lg font-bold text-purple-900">Monthly Time / Hours</span>
                                                 </div>
                                                 <div class="w-2 h-2 bg-purple-500 rounded-full shadow-lg pulse-animation"></div>
                                             </div>
                                             <div class="space-y-3">
                                                 <div class="text-center">
-                                                    <div class="text-4xl font-bold text-purple-900 mb-2" id="monthlyHours">0h 0m</div>
-                                                    <div class="text-sm text-purple-700 font-medium" id="monthlyLabel">January 2026 Total</div>
+                                                    <div class="text-4xl font-bold text-purple-900 mb-2" id="monthlyHours"></div>
+                                                    <div class="text-sm text-purple-700 font-medium" id="monthlyLabel"></div>
                                                 </div>
                                                 <div class="bg-white/70 rounded-xl p-3 border border-purple-100/50">
                                                     <div class="flex justify-between items-center text-sm">
@@ -777,12 +777,14 @@
             const weeklyMinutes = timeTrackingData.weekly + currentSessionMinutes;
             const monthlyMinutes = timeTrackingData.monthly + currentSessionMinutes;
             document.getElementById('dailyHours').textContent = formatDuration(dailyMinutes);
-            document.getElementById('weeklyHours').textContent = formatDuration(weeklyMinutes);
-            document.getElementById('monthlyHours').textContent = formatDuration(monthlyMinutes);
+            //document.getElementById('weeklyHours').textContent = formatDuration(weeklyMinutes);
+            //document.getElementById('monthlyHours').textContent = formatDuration(monthlyMinutes);
             document.getElementById('sessionDuration').textContent = formatDuration(currentSessionMinutes);
             const dailyProgress = Math.min((dailyMinutes / 480) * 100, 100);
-            const weeklyProgress = Math.min((weeklyMinutes / 2400) * 100, 100);
-            const monthlyProgress = Math.min((monthlyMinutes / 9600) * 100, 100);
+            const weekhours = $('#weeklyHours').html();
+            const weeklyProgress = Math.min((weekhours * 60) / 2400 * 100, 100);
+            const monthhours = $('#monthlyHours').html();
+            const monthlyProgress = Math.min((monthhours * 60) / 9600 * 100, 100);
             document.getElementById('dailyProgress').style.width = `${dailyProgress}%`;
             document.getElementById('weeklyProgress').style.width = `${weeklyProgress}%`;
             document.getElementById('monthlyProgress').style.width = `${monthlyProgress}%`;
@@ -810,27 +812,62 @@
         }
 
         function resetWeeklyData() {
-            const now = new Date();
-            const lastReset = localStorage.getItem('lastWeeklyReset');
-            const weekStart = new Date(now);
-            weekStart.setDate(now.getDate() - now.getDay());
-            const weekKey = weekStart.toDateString();
-            if (lastReset !== weekKey) {
-                timeTrackingData.weekly = 0;
-                localStorage.setItem('lastWeeklyReset', weekKey);
-                saveTimeTrackingData();
-            }
-        }
+            activity = "getWeekly";
+            $.ajax({
+                type: 'POST',
+                url: activity,
+              //  dataType: "json",
+                data: {
+                       activity: activity,
+                },
+                success: function(msg) {
+                if(msg > 0)
+                    {
+                        //window[type](location_val,msg);
+                        $('#weeklyHours').html(msg);                        
+                        //alert(msg);
+                    }
+                }
+                   });
+           //const now = new Date();
+           // const lastReset = localStorage.getItem('lastWeeklyReset');
+           //const weekStart = new Date(now);
+           // weekStart.setDate(now.getDate() - now.getDay());
+           // const weekKey = weekStart.toDateString();
+           // if (lastReset !== weekKey) {
+          //      timeTrackingData.weekly = 0;
+          //      localStorage.setItem('lastWeeklyReset', weekKey);
+          //      saveTimeTrackingData();
+          //  }
+          
 
+        }
         function resetMonthlyData() {
-            const now = new Date();
-            const lastReset = localStorage.getItem('lastMonthlyReset');
-            const monthKey = `${now.getFullYear()}-${now.getMonth()}`;
-            if (lastReset !== monthKey) {
-                timeTrackingData.monthly = 0;
-                localStorage.setItem('lastMonthlyReset', monthKey);
-                saveTimeTrackingData();
-            }
+        activity = "getMonthly";
+            $.ajax({
+                type: 'POST',
+                url: activity,
+              //  dataType: "json",
+                data: {
+                       activity: activity,
+                },
+                success: function(msg) {
+                if(msg > 0)
+                    {
+                        //window[type](location_val,msg);
+                        $('#monthlyHours').html(msg);                        
+                        //alert(msg);
+                    }
+                }
+                   });
+            // const now = new Date();
+            // const lastReset = localStorage.getItem('lastMonthlyReset');
+            // const monthKey = `${now.getFullYear()}-${now.getMonth()}`;
+            // if (lastReset !== monthKey) {
+            //     timeTrackingData.monthly = 0;
+            //     localStorage.setItem('lastMonthlyReset', monthKey);
+            //     saveTimeTrackingData();
+            // }
         }
 
         function savePhotoToLocalStorage(type, photoData, location_val) {
@@ -1056,7 +1093,7 @@ ${photoHtml}
             updateDurationDisplays();
             getHistory();
             checkTimeIn();
-            setInterval(showLocation, 30000);
+           // setInterval(showLocation, 30000);
         });
         
         //document.getElementById('timeInBtn').addEventListener('click', handleTimeIn);
