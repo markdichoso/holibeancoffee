@@ -64,8 +64,7 @@ class AttendanceController extends BaseController
             // If the user is not logged in, redirect them to the login page
             return redirect()->to('');
         }
-         $emp_info_id = $_SESSION['emp_info_id'];
- 
+         $emp_info_id = $_SESSION['emp_info_id']; 
          $attendanceModel = new Attendance();
          $present = $attendanceModel->searchAttendance($emp_info_id);
          //return json_encode($present);
@@ -76,6 +75,7 @@ class AttendanceController extends BaseController
   // ****************   when the employee click the Clock In  **************************//
   public function Send_In()
     {
+    
     $userModel = new Attendance();
     $data = $this->request->getPost();
     $myTime = Time::now('Asia/Manila', 'en_US');
@@ -86,17 +86,13 @@ class AttendanceController extends BaseController
     $action = 'Clock In';
     //print_r($data); return false;
         // Use the insert() method for new records
+    if($userModel->getDaily()){
+        return false;
+    }
     $userModel->insert($data);
     $this->activity($data['location_in'], $action, $data['imagePath']);
-    return true;
-  
-        // if ($userModel->insert($data)){
-        // //return redirect()->to('timein')->with('success', 'Successfully Time in!');
-        // //echo "Successfully Clocked In";                
-        // $this->activity($data['location_in'], $action, $data['imagePath']);        
-        // }
-  
-    }
+    echo "true";
+   }
 
    // ****************   when the employee click the Clock Out  **************************//
     public function Send_Out()
@@ -207,6 +203,14 @@ class AttendanceController extends BaseController
      $activityModel = new Attendance();
      $data = $activityModel->$getWeekly();
      return $data->hours;
+    }
+
+     public function getDaily()
+    {
+     //$getDaily = $this->request->getPost('activity');
+     $activityModel = new Attendance();
+     $data = $activityModel->getDaily();
+     return $data->emp_info_id;
     }
 
 }

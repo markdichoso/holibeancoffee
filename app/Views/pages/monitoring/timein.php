@@ -779,7 +779,7 @@
             document.getElementById('dailyHours').textContent = formatDuration(dailyMinutes);
             //document.getElementById('weeklyHours').textContent = formatDuration(weeklyMinutes);
             //document.getElementById('monthlyHours').textContent = formatDuration(monthlyMinutes);
-            document.getElementById('sessionDuration').textContent = formatDuration(currentSessionMinutes);
+            //document.getElementById('sessionDuration').textContent = formatDuration(currentSessionMinutes);
             const dailyProgress = Math.min((dailyMinutes / 480) * 100, 100);
             const weekhours = $('#weeklyHours').html();
             const weeklyProgress = Math.min((weekhours * 60) / 2400 * 100, 100);
@@ -1186,9 +1186,8 @@ ${photoHtml}
                       imagePath: imagePath
                 },
                 success: function(msg) {
-                if(msg !== false)
+                if(msg == 'true' || msg === true)
                     {
-                    //alert('ok');
                     Swal.fire({
                     title: "Successfully Clocked In!",
                     icon: "success",
@@ -1196,6 +1195,15 @@ ${photoHtml}
                     });            
                     checkTimeIn();
                     }
+                else {
+                    Swal.fire({
+                    title: " Currently Clocked In!",
+                    icon: "error",
+                    draggable: true
+                    });            
+                    checkTimeIn();
+                    }
+                
                 }
             });
 

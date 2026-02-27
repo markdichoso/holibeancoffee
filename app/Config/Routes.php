@@ -19,6 +19,7 @@ $routes->post('/uploadPhoto', 'AttendanceController::uploadPhoto');
 $routes->post('/history', 'AttendanceController::history');
 $routes->post('/getMonthly', 'AttendanceController::getMonthly');
 $routes->post('/getWeekly', 'AttendanceController::getWeekly');
+$routes->add('/getDaily', 'AttendanceController::getDaily');
 
 $routes->post('/loginvalidation', 'LoginValidation::Sign_in');
 $routes->get('/loginvalidation', 'LoginValidation::Sign_in');
