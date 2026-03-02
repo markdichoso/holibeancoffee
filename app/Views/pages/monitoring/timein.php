@@ -215,9 +215,7 @@
                                     <button id="timeInBtn" class="group flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold py-3 sm:py-4 lg:py-5 xl:py-6 px-4 sm:px-6 lg:px-8 xl:px-10 !rounded-button transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 shadow-2xl hover:shadow-3xl whitespace-nowrap relative overflow-hidden">
                                         <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                         <div class="flex items-center justify-center space-x-2 sm:space-x-3 lg:space-x-4 relative z-10">
-                                            <div class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 flex items-center justify-center bg-white/20 rounded-lg sm:rounded-xl shadow-lg">
-                                                <i class="ri-login-circle-line text-sm sm:text-base lg:text-lg xl:text-xl"></i>
-                                            </div>
+                                        
                                             <span class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold">Clock In</span>
                                         </div>
                                     </button>
@@ -232,9 +230,7 @@
                                     </button>
                                 </div>
                                 <div class="flex items-center justify-center space-x-2 sm:space-x-3 lg:space-x-4 relative z-10">
-                                            <div class="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8 flex items-center justify-center bg-white/20 rounded-lg sm:rounded-xl shadow-lg">
-                                                <i class="ri-login-circle-line text-sm sm:text-base lg:text-lg xl:text-xl"></i>
-                                            </div>
+
                                 </div>
                                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 xl:gap-12 mb-6 sm:mb-8 lg:mb-10 xl:mb-12">
                                     <div class="bg-gradient-to-br from-purple-50/80 to-pink-50/30 rounded-xl sm:rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-8 xl:p-10 border border-purple-100/50 shadow-xl backdrop-blur-sm">
