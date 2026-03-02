@@ -370,7 +370,7 @@
                                                             <i class="ri-calendar-line text-blue-600"></i>
                                                         </div>
                                                     </div>
-                                                    <span class="text-lg font-bold text-blue-900">Daily Time</span>
+                                                    <span class="text-lg font-bold text-blue-900">Daily Time / Hours</span>
                                                 </div>
                                                 <div class="w-2 h-2 bg-blue-500 rounded-full shadow-lg pulse-animation"></div>
                                             </div>
@@ -773,14 +773,15 @@
             if (isTimedIn && currentSessionStart) {
                 currentSessionMinutes = Math.floor((now - currentSessionStart) / (1000 * 60));
             }
-            const dailyMinutes = timeTrackingData.daily + currentSessionMinutes;
-            const weeklyMinutes = timeTrackingData.weekly + currentSessionMinutes;
-            const monthlyMinutes = timeTrackingData.monthly + currentSessionMinutes;
-            document.getElementById('dailyHours').textContent = formatDuration(dailyMinutes);
+            //const dailyMinutes = timeTrackingData.daily + currentSessionMinutes;
+            //const weeklyMinutes = timeTrackingData.weekly + currentSessionMinutes;
+            //const monthlyMinutes = timeTrackingData.monthly + currentSessionMinutes;
+            //document.getElementById('dailyHours').textContent = formatDuration(dailyMinutes);
             //document.getElementById('weeklyHours').textContent = formatDuration(weeklyMinutes);
             //document.getElementById('monthlyHours').textContent = formatDuration(monthlyMinutes);
             //document.getElementById('sessionDuration').textContent = formatDuration(currentSessionMinutes);
-            const dailyProgress = Math.min((dailyMinutes / 480) * 100, 100);
+            const dailyHours = $('#dailyHours').html();
+            const dailyProgress = Math.min((dailyHours * 60) / 480 * 100, 100);
             const weekhours = $('#weeklyHours').html();
             const weeklyProgress = Math.min((weekhours * 60) / 2400 * 100, 100);
             const monthhours = $('#monthlyHours').html();
@@ -801,14 +802,20 @@
         }
 
         function resetDailyData() {
-            const now = new Date();
-            const lastReset = localStorage.getItem('lastDailyReset');
-            const today = now.toDateString();
-            if (lastReset !== today) {
-                timeTrackingData.daily = 0;
-                localStorage.setItem('lastDailyReset', today);
-                saveTimeTrackingData();
-            }
+            activity = "getDaily";
+            $.ajax({
+                type: 'POST',
+                url: activity,
+                data: {
+                     activity: activity,
+                },
+                success: function(msg) {
+                if(msg > 0)
+                    {
+                    $('#dailyHours').html(msg); 
+                    }
+                }
+                   });      
         }
 
         function resetWeeklyData() {
@@ -816,58 +823,34 @@
             $.ajax({
                 type: 'POST',
                 url: activity,
-              //  dataType: "json",
                 data: {
-                       activity: activity,
+                     activity: activity,
                 },
                 success: function(msg) {
                 if(msg > 0)
                     {
-                        //window[type](location_val,msg);
-                        $('#weeklyHours').html(msg);                        
-                        //alert(msg);
+                    $('#weeklyHours').html(msg); 
                     }
                 }
-                   });
-           //const now = new Date();
-           // const lastReset = localStorage.getItem('lastWeeklyReset');
-           //const weekStart = new Date(now);
-           // weekStart.setDate(now.getDate() - now.getDay());
-           // const weekKey = weekStart.toDateString();
-           // if (lastReset !== weekKey) {
-          //      timeTrackingData.weekly = 0;
-          //      localStorage.setItem('lastWeeklyReset', weekKey);
-          //      saveTimeTrackingData();
-          //  }
-          
+                   });          
 
         }
+
         function resetMonthlyData() {
         activity = "getMonthly";
             $.ajax({
                 type: 'POST',
                 url: activity,
-              //  dataType: "json",
                 data: {
-                       activity: activity,
+                     activity: activity,
                 },
                 success: function(msg) {
                 if(msg > 0)
                     {
-                        //window[type](location_val,msg);
-                        $('#monthlyHours').html(msg);                        
-                        //alert(msg);
+                    $('#monthlyHours').html(msg);
                     }
                 }
                    });
-            // const now = new Date();
-            // const lastReset = localStorage.getItem('lastMonthlyReset');
-            // const monthKey = `${now.getFullYear()}-${now.getMonth()}`;
-            // if (lastReset !== monthKey) {
-            //     timeTrackingData.monthly = 0;
-            //     localStorage.setItem('lastMonthlyReset', monthKey);
-            //     saveTimeTrackingData();
-            // }
         }
 
         function savePhotoToLocalStorage(type, photoData, location_val) {
@@ -876,32 +859,27 @@
             $.ajax({
                 type: 'POST',
                 url: activity,
-              //  dataType: "json",
                 data: {
-                       activity: activity,
-                       photo:   photo
+                     activity: activity,
+                     photo:   photo
                 },
                 success: function(msg) {
                 if(msg)
                     {
-                        window[type](location_val,msg);                        
-                        //checkTimeIn();
+                    window[type](location_val,msg);    
                     }
                     else {
-                     Swal.fire({
+                    Swal.fire({
                     title: "Error Saving Photo, Please try again.",
                     icon: "error",
                     draggable: true
-                    });            
-                    
+                    });    
                     }   
                     
-                    
-                //return false;
                 }
                    });
-                  // return lugar;
         }
+
         async function initializeCamera() {
             // try {
             stream = await navigator.mediaDevices.getUserMedia({
@@ -1092,6 +1070,7 @@ ${photoHtml}
             setInterval(updateDurationDisplays, 1000);
             updateDurationDisplays();
             getHistory();
+            //$("#timeOutBtn").hide();
             checkTimeIn();
            // setInterval(showLocation, 30000);
         });

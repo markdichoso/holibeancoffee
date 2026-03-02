@@ -8,93 +8,73 @@ use CodeIgniter\I18n\Time;
 
 
 class AttendanceController extends BaseController
-{
- 
+{ 
 // ************************************* old time in *************************************//
     public function TimeIn()
     {
-        
-        if (!isset($_SESSION['user_id'])) {
-            // If the user is not logged in, redirect them to the login page
-            return redirect()->to('');
+    if (!isset($_SESSION['user_id'])) {
+    return redirect()->to('');
         }
-
-         $emp_info_id = $_SESSION['emp_info_id'];
-         //echo $emp_info_id;
-         $attendanceModel = new Attendance();
-        if($attendance = $attendanceModel->searchAttendance($emp_info_id)){
-           // echo $attendance->location_in;
-            $in = [
-                'address' => $attendance[0]["location_in"],
-            ];
-            return view('pages/attendance/time-in',$in);
-            }             
-                else
-            { 
-                return view('pages/attendance/time-in'); 
-            }
-    }
-
-    // ************************************ old time out ****************************************//
-        public function TimeOut()
-    {
-        
-        if (!isset($_SESSION['user_id'])) {
-            // If the user is not logged in, redirect them to the login page
-            return redirect()->to('');
-        }
-        $emp_info_id = $_SESSION['emp_info_id'];
-         //echo $emp_info_id;
-         $attendanceModel = new Attendance();
-        if(!$attendance = $attendanceModel->searchAttendance($emp_info_id)){
-           // echo $attendance->location_in;
-            $in = [
-                'address' => 'You are not yet time in',
-            ];
-        return view('pages/attendance/time-in',$in);
+    $emp_info_id = $_SESSION['emp_info_id'];
+    $attendanceModel = new Attendance();
+    if($attendance = $attendanceModel->searchAttendance($emp_info_id)){
+    $in = [
+          'address' => $attendance[0]["location_in"],
+          ];
+    return view('pages/attendance/time-in',$in);
         }             
-
-        return view('pages/attendance/time-out');
-        
+    else
+        { 
+    return view('pages/attendance/time-in'); 
+        }
+    }
+    // ************************************ old time out ****************************************//
+    public function TimeOut()
+    {        
+    if (!isset($_SESSION['user_id'])) {
+    return redirect()->to('');
+    }
+    $emp_info_id = $_SESSION['emp_info_id'];
+         //echo $emp_info_id;
+    $attendanceModel = new Attendance();
+    if(!$attendance = $attendanceModel->searchAttendance($emp_info_id)){
+    $in = [
+            'address' => 'You are not yet time in',
+          ];
+    return view('pages/attendance/time-in',$in);
+    }             
+    return view('pages/attendance/time-out');
     }
 
     public function CheckTimeIn()
     {
-        if (!isset($_SESSION['user_id'])) {
-            // If the user is not logged in, redirect them to the login page
-            return redirect()->to('');
-        }
-         $emp_info_id = $_SESSION['emp_info_id']; 
-         $attendanceModel = new Attendance();
-         $present = $attendanceModel->searchAttendance($emp_info_id);
-         //return json_encode($present);
-         return $present[0]['emp_info_id'];        
-     
+    if (!isset($_SESSION['user_id'])) {
+    return redirect()->to('');
+    }
+    $emp_info_id = $_SESSION['emp_info_id']; 
+    $attendanceModel = new Attendance();
+    $present = $attendanceModel->searchAttendance($emp_info_id);
+    return $present[0]['emp_info_id'];    
     }
         
-  // ****************   when the employee click the Clock In  **************************//
-  public function Send_In()
-    {
-    
+    // ****************   when the employee click the Clock In  **************************//
+    public function Send_In()
+    {    
     $userModel = new Attendance();
     $data = $this->request->getPost();
     $myTime = Time::now('Asia/Manila', 'en_US');
-    //echo $myTime; return false;
-    //$data['date_in']=$myTime->format("l, F j, Y H:i:s");
     $data['date_in']=$myTime->format("Y:m:d H:i:s");
     $data['emp_info_id'] = $_SESSION['emp_info_id'];
     $action = 'Clock In';
-    //print_r($data); return false;
-        // Use the insert() method for new records
-    if($userModel->getDaily()){
-        return false;
+    if($userModel->checkTimeIn()){
+      return false;
     }
     $userModel->insert($data);
     $this->activity($data['location_in'], $action, $data['imagePath']);
     echo "true";
-   }
+    }
 
-   // ****************   when the employee click the Clock Out  **************************//
+    // ****************   when the employee click the Clock Out  **************************//
     public function Send_Out()
     {      
     //$userModel = new Attendance();
@@ -107,12 +87,10 @@ class AttendanceController extends BaseController
     if($userModel->time_out($data)){
     echo "success";
     $this->activity($data['location_out'], $action,$data['imagePath']);
-    }
+         }
     else {
     echo "error";
-    }
-        //$this->activity($data['location_out'], $action,$data['imagePath']);
-    //echo "Success";
+         }
     }
 
     // ****************   uploading captured photo  **************************//
@@ -145,72 +123,57 @@ class AttendanceController extends BaseController
     $myTime = Time::now('Asia/Manila', 'en_US');
     $data['date']=$myTime->format("l, F j, Y H:i:s");
     $data['emp_info_id'] = $_SESSION['emp_info_id'];
-          if ($activityModel->insert($data)){
+    if ($activityModel->insert($data)){
         }
     }
 
     public function history()
     {
-     $activityModel = new Activity();
-    // $data = [];
-    // $data['action_taken'] = $action;
-    // $data['location'] = $address;
-    // $myTime = Time::now('Asia/Manila', 'en_US');
-    // $data['date']=$myTime->format("l, F j, Y h:i:s");
-    // $data['emp_info_id'] = $_SESSION['emp_info_id'];
-     //   return true;
-
-     echo json_encode($activityModel->recentActivity());
+    $activityModel = new Activity();
+    echo json_encode($activityModel->recentActivity());
     }
 
     // *************************** for reconstruction direct location used instead *****************************//
     public function Location()
     {
-    //    helper('form','url');
-        $latitude = $this->request->getPost('latitude');
-        $longitude = $this->request->getPost('longitude');
-        if(!empty($latitude) && !empty($longitude)){
-     $url = 'https://us1.locationiq.com/v1/reverse?key=pk.35a6dfbc6fb83f3e2bf972bcfdd6ac50&lat='.trim($_POST['latitude']).'&lon='.trim($_POST['longitude']).'&format=json&';
+    $latitude = $this->request->getPost('latitude');
+    $longitude = $this->request->getPost('longitude');
+    if(!empty($latitude) && !empty($longitude)){
+    $url = 'https://us1.locationiq.com/v1/reverse?key=pk.35a6dfbc6fb83f3e2bf972bcfdd6ac50&lat='.trim($_POST['latitude']).'&lon='.trim($_POST['longitude']).'&format=json&';
     $json = @file_get_contents($url);
     $data = json_decode($json);
-      
-    //if request status is successful
     if($data){
-        //get address from json data
         $location = $data->display_name;
-    }else{
+    } 
+    else {
         $location =  '';
     }
-    
-    //return address to ajax 
     echo $location;
-    } 
+        } 
+    }
 
-        }
-  // end of Location // 
-
-     public function getMonthly()
+    public function getMonthly()
     {
-     $getMonthly = $this->request->getPost('activity');
-     $activityModel = new Attendance();
-     $data = $activityModel->$getMonthly();
-     return $data->hours;
+    $getMonthly = $this->request->getPost('activity');
+    $activityModel = new Attendance();
+    $data = $activityModel->$getMonthly();
+    return $data->hours;
     }
 
      public function getWeekly()
     {
-     $getWeekly = $this->request->getPost('activity');
-     $activityModel = new Attendance();
-     $data = $activityModel->$getWeekly();
-     return $data->hours;
+    $getWeekly = $this->request->getPost('activity');
+    $activityModel = new Attendance();
+    $data = $activityModel->$getWeekly();
+    return $data->hours;
     }
 
      public function getDaily()
     {
-     //$getDaily = $this->request->getPost('activity');
-     $activityModel = new Attendance();
-     $data = $activityModel->getDaily();
-     return $data->emp_info_id;
+    $getDaily = $this->request->getPost('activity');
+    $activityModel = new Attendance();
+    $data = $activityModel->$getDaily();
+    return $data->hours;
     }
 
 }
