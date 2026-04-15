@@ -8,8 +8,8 @@
     <script src="https://cdn.tailwindcss.com/3.4.16"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="src/jquery/jquery-3.2.1.min.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.18/dist/sweetalert2.all.min.js"></script>
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.18/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.18/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.18/dist/sweetalert2.min.css">
     <script>
         tailwind.config = {
             theme: {
@@ -108,11 +108,11 @@
                             <div class="flex flex-col lg:flex-row items-center lg:justify-between space-y-4 lg:space-y-0">
                                 <div class="flex flex-col sm:flex-row items-center sm:items-center space-y-4 sm:space-y-0 sm:space-x-4 lg:space-x-5 xl:space-x-6 text-center sm:text-left">
                                     <div class="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 lg:w-20 lg:h-20 xl:w-24 xl:h-24 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl sm:rounded-2xl lg:rounded-3xl flex items-center justify-center shadow-2xl flex-shrink-0">
-                                    <img src ="img/employee/<?=$_SESSION['emp_info_id']?>.jpg" class="rounded-lg" alt="This is Me!">
-                                    <!-- <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12 flex items-center justify-center">
+                                        <img src="img/employee/<?= $_SESSION['emp_info_id'] ?>.jpg" class="rounded-lg" alt="This is Me!">
+                                        <!-- <div class="w-7 h-7 sm:w-8 sm:h-8 md:w-9 md:h-9 lg:w-10 lg:h-10 xl:w-12 xl:h-12 flex items-center justify-center">
                                             <i class="ri-user-line text-white text-lg sm:text-2xl lg:text-3xl xl:text-4xl"></i>
                                         </div> -->
-                                        
+
                                     </div>
                                     <div class="min-w-0">
                                         <h2 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-900 mb-1">
@@ -127,7 +127,7 @@
                                     <div class="flex items-center space-x-2 sm:space-x-3 lg:space-x-4 px-3 sm:px-4 lg:px-5 xl:px-6 py-2 sm:py-3 bg-white/80 backdrop-blur-md rounded-lg sm:rounded-xl lg:rounded-2xl shadow-lg border border-white/20">
                                         <div class="w-3 h-3 sm:w-4 sm:h-4 bg-red-500 rounded-full pulse-animation shadow-lg flex-shrink-0" id="statusIndicator"></div>
                                         <span class="text-xs sm:text-sm lg:text-base xl:text-lg font-bold text-gray-800 whitespace-nowrap" id="statusText">Not Clocked In</span></br>
-                                       
+
                                     </div>
                                 </div>
                             </div>
@@ -215,7 +215,7 @@
                                     <button id="timeInBtn" class="group flex-1 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-bold py-3 sm:py-4 lg:py-5 xl:py-6 px-4 sm:px-6 lg:px-8 xl:px-10 !rounded-button transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-1 shadow-2xl hover:shadow-3xl whitespace-nowrap relative overflow-hidden">
                                         <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                         <div class="flex items-center justify-center space-x-2 sm:space-x-3 lg:space-x-4 relative z-10">
-                                        
+
                                             <span class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold">Clock In</span>
                                         </div>
                                     </button>
@@ -322,7 +322,7 @@
                                                 <span class="text-xs sm:text-sm lg:text-base text-gray-600" id="addressMain"></span>
                                                 <input type="hidden" name="imagePathAdd" id="imagePathAdd" />
                                             </div>
-                                      
+
                                             <div class="flex justify-between items-center py-2 sm:py-3">
                                                 <span class="text-xs sm:text-sm lg:text-base font-medium text-gray-700 flex items-center space-x-2">
                                                     <div class="w-3 h-3 sm:w-4 sm:h-4 flex items-center justify-center">
@@ -747,9 +747,9 @@
             if (savedSessionStart) {
                 currentSessionStart = new Date(savedSessionStart);
                 isTimedIn = true;
-               // updateStatus('Clocked In', 'green');
+                // updateStatus('Clocked In', 'green');
                 //document.getElementById('timeInBtn').disabled = true;
-               // document.getElementById('timeOutBtn').disabled = false;
+                // document.getElementById('timeOutBtn').disabled = false;
             }
         }
 
@@ -775,7 +775,7 @@
             //document.getElementById('dailyHours').textContent = formatDuration(dailyMinutes);
             //document.getElementById('weeklyHours').textContent = formatDuration(weeklyMinutes);
             //document.getElementById('monthlyHours').textContent = formatDuration(monthlyMinutes);
-            //document.getElementById('sessionDuration').textContent = formatDuration(currentSessionMinutes);
+            document.getElementById('sessionDuration').textContent = formatDuration(currentSessionMinutes);
             const dailyHours = $('#dailyHours').html();
             const dailyProgress = Math.min((dailyHours * 60) / 480 * 100, 100);
             const weekhours = $('#weeklyHours').html();
@@ -803,15 +803,14 @@
                 type: 'POST',
                 url: activity,
                 data: {
-                     activity: activity,
+                    activity: activity,
                 },
                 success: function(msg) {
-                if(msg > 0)
-                    {
-                    $('#dailyHours').html(msg); 
+                    if (msg > 0) {
+                        $('#dailyHours').html(msg);
                     }
                 }
-                   });      
+            });
         }
 
         function resetWeeklyData() {
@@ -820,33 +819,31 @@
                 type: 'POST',
                 url: activity,
                 data: {
-                     activity: activity,
+                    activity: activity,
                 },
                 success: function(msg) {
-                if(msg > 0)
-                    {
-                    $('#weeklyHours').html(msg); 
+                    if (msg > 0) {
+                        $('#weeklyHours').html(msg);
                     }
                 }
-                   });          
+            });
 
         }
 
         function resetMonthlyData() {
-        activity = "getMonthly";
+            activity = "getMonthly";
             $.ajax({
                 type: 'POST',
                 url: activity,
                 data: {
-                     activity: activity,
+                    activity: activity,
                 },
                 success: function(msg) {
-                if(msg > 0)
-                    {
-                    $('#monthlyHours').html(msg);
+                    if (msg > 0) {
+                        $('#monthlyHours').html(msg);
                     }
                 }
-                   });
+            });
         }
 
         function savePhotoToLocalStorage(type, photoData, location_val) {
@@ -856,24 +853,22 @@
                 type: 'POST',
                 url: activity,
                 data: {
-                     activity: activity,
-                     photo:   photo
+                    activity: activity,
+                    photo: photo
                 },
                 success: function(msg) {
-                if(msg)
-                    {
-                    window[type](location_val,msg);    
+                    if (msg) {
+                        window[type](location_val, msg);
+                    } else {
+                        Swal.fire({
+                            title: "Error Saving Photo, Please try again.",
+                            icon: "error",
+                            draggable: true
+                        });
                     }
-                    else {
-                    Swal.fire({
-                    title: "Error Saving Photo, Please try again.",
-                    icon: "error",
-                    draggable: true
-                    });    
-                    }   
-                    
+
                 }
-                   });
+            });
         }
 
         async function initializeCamera() {
@@ -964,14 +959,14 @@ ${photoHtml}
                 return;
             }
             location_val = $('#addressMain').html();
-                if (location_val === '') {
-                    Swal.fire({
+            if (location_val === '') {
+                Swal.fire({
                     title: "Please wait for the location to load!",
                     icon: "error",
                     draggable: true
-                    });    
-                    return false;
-                }
+                });
+                return false;
+            }
             //checkTimeIn();
             //timeIn(location_val);           
             const context = canvas.getContext('2d');
@@ -982,15 +977,15 @@ ${photoHtml}
             savePhotoToLocalStorage('timeIn', photoData, location_val)
             //const imagePath = $("#recent_photo").attr("alt");
             //timeIn(location_val,imagePath);
-             isTimedIn = true;
-             currentSessionStart = new Date();
-             lastActionTime = currentSessionStart;
-             localStorage.setItem('currentSessionStart', currentSessionStart.toISOString());
-             updateStatus('Clocked In', 'green');
-             updateLastAction('Clocked In', photoData,location_val);
-        //     document.getElementById('timeInBtn').disabled = true;
-        //    // $(#timeInBtn).disbale();
-        //     document.getElementById('timeOutBtn').disabled = false;
+            isTimedIn = true;
+            currentSessionStart = new Date();
+            lastActionTime = currentSessionStart;
+            localStorage.setItem('currentSessionStart', currentSessionStart.toISOString());
+            updateStatus('Clocked In', 'green');
+            updateLastAction('Clocked In', photoData, location_val);
+            //     document.getElementById('timeInBtn').disabled = true;
+            //    // $(#timeInBtn).disbale();
+            //     document.getElementById('timeOutBtn').disabled = false;
             // showConfirmation(
             //     `Successfully clocked in at ${lastActionTime.toLocaleTimeString('en-US')}`,
             //     'Photo captured • Location verified • Device authenticated'
@@ -998,7 +993,7 @@ ${photoHtml}
         }
 
         function handleTimeOut() {
-           // alert('ok');
+            // alert('ok');
             const video = document.getElementById('cameraPreview');
             const canvas = document.getElementById('photoCanvas');
             if (video.videoWidth === 0 || video.videoHeight === 0) {
@@ -1010,15 +1005,15 @@ ${photoHtml}
                 return;
             }
             const location_val = $('#addressMain').html();
-                if (location_val === '') {
-                    alert('Please wait for the location to show!')
-                    //document.getElementById('timeInBtn').disabled = true;
-                    return false;
-                }
+            if (location_val === '') {
+                alert('Please wait for the location to show!')
+                //document.getElementById('timeInBtn').disabled = true;
+                return false;
+            }
             //const location_val2 = `${location_val}`;
             //location_val = $('#addressMain').html();
             //timeOut(location_val);
-           // alert(location_val2);
+            // alert(location_val2);
             //if (!currentSessionStart) return;
             const context = canvas.getContext('2d');
             canvas.width = video.videoWidth;
@@ -1040,23 +1035,23 @@ ${photoHtml}
                 end: sessionEndTime.toISOString(),
                 duration: sessionDurationMinutes
             });
-             saveTimeTrackingData();
-             isTimedIn = false;
-             currentSessionStart = null;
-             lastActionTime = sessionEndTime;
-             localStorage.removeItem('currentSessionStart');
+            saveTimeTrackingData();
+            isTimedIn = false;
+            currentSessionStart = null;
+            lastActionTime = sessionEndTime;
+            localStorage.removeItem('currentSessionStart');
             // updateStatus('Not Clocked In', 'red');
-             updateLastAction('Clocked Out', photoData, location_val);
+            updateLastAction('Clocked Out', photoData, location_val);
             // document.getElementById('timeInBtn').disabled = false;
             // document.getElementById('timeOutBtn').disabled = true;
-          //  showConfirmation(
+            //  showConfirmation(
             //    `Successfully clocked out at ${lastActionTime.toLocaleTimeString('en-US')}`,
-              //  'Photo captured • Session ended • Data saved'
+            //  'Photo captured • Session ended • Data saved'
             //);
         }
 
-// ******************************* first load of the page **************************************////
-        
+        // ******************************* first load of the page **************************************////
+
         document.addEventListener('DOMContentLoaded', () => {
             resetDailyData();
             resetWeeklyData();
@@ -1068,35 +1063,33 @@ ${photoHtml}
             getHistory();
             //$("#timeOutBtn").hide();
             checkTimeIn();
-           // setInterval(showLocation, 30000);
+            // setInterval(showLocation, 30000);
         });
-        
+
         //document.getElementById('timeInBtn').addEventListener('click', handleTimeIn);
-        $( "#timeInBtn" ).on( "click", function( event ) {
+        $("#timeInBtn").on("click", function(event) {
             event.preventDefault();
             handleTimeIn();
-                    });
-        $( "#timeOutBtn" ).on( "click", function( event ) {
+        });
+        $("#timeOutBtn").on("click", function(event) {
             event.preventDefault();
             handleTimeOut();
-                     });
+        });
         //document.getElementById('timeOutBtn').addEventListener('click', handleTimeOut);
-
-
     </script>
 
-    <script id="locationTracking">       
-// ******************************** GET GEO LOCATION *******************************************// 
-        
+    <script id="locationTracking">
+        // ******************************** GET GEO LOCATION *******************************************// 
+
         $(document).ready(function() {
-        //checkTimeIn();
+            //checkTimeIn();
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showLocation);
 
             } else {
                 $('#location_in').html('Geolocation is not supported by this browser.');
             }
-                
+
         });
 
         function showLocation(position) {
@@ -1114,7 +1107,7 @@ ${photoHtml}
                 success: function(msg) {
                     if (msg) {
                         $("#addressMain").html(msg);
-                       //document.getElementById('timeInBtn').disabled = false;
+                        //document.getElementById('timeInBtn').disabled = false;
                     } else {
                         $("#addressMain").html('Not Available');
                     }
@@ -1122,137 +1115,128 @@ ${photoHtml}
             });
         }
 
-        function getHistory(){
-                $.ajax({
+        function getHistory() {
+            $.ajax({
                 type: 'POST',
                 dataType: "json",
                 url: "history",
                 success: function(data) {
                     if (data) {
-                    data.sort((a, b) => a.activity_id - b.activity_id);
+                        data.sort((a, b) => a.activity_id - b.activity_id);
 
-                    $.each(data, function(index, item) {
-                        html = "<div class='flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow'>"
-                                    +   "<div class='w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0'>"
-                                    +   "<img class='w-full h-full object-cover rounded-lg' alt='Captured photo' id='recent_photoDB' src='"+ item.imagePath +"'>"
-                                    +   "</div>"                                               
-                                    +   "<div class='flex-1 min-w-0'>"
-                                    +    "<div class='flex items-center justify-between mb-2'>"
-                                    +        "<span class='text-sm font-semibold text-gray-900'>"+ item.action_taken +"</span>"
-                                    +            "<span class='text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md'>" + item.date + "</span>"
-                                    +    "</div>"
-                                    +            "<p class='text-xs text-gray-500'>" + item.location + "</p>"
-                                    + "</div>"
-                                    + "</div>";
-                        $("#actionHistoryList").prepend(html);
+                        $.each(data, function(index, item) {
+                            html = "<div class='flex items-center space-x-4 p-4 bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow'>" +
+                                "<div class='w-12 h-12 bg-gray-200 rounded-lg overflow-hidden flex-shrink-0'>" +
+                                "<img class='w-full h-full object-cover rounded-lg' alt='Captured photo' id='recent_photoDB' src='" + item.imagePath + "'>" +
+                                "</div>" +
+                                "<div class='flex-1 min-w-0'>" +
+                                "<div class='flex items-center justify-between mb-2'>" +
+                                "<span class='text-sm font-semibold text-gray-900'>" + item.action_taken + "</span>" +
+                                "<span class='text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-md'>" + item.date + "</span>" +
+                                "</div>" +
+                                "<p class='text-xs text-gray-500'>" + item.location + "</p>" +
+                                "</div>" +
+                                "</div>";
+                            $("#actionHistoryList").prepend(html);
                         });
-                       }
+                    }
                 }
             });
         }
 
-        function timeIn(location_in,imagePath) {
+        function timeIn(location_in, imagePath) {
             //location_in = address;
             $.ajax({
                 type: 'POST',
                 url: "send_in",
                 data: {
-                      location_in: location_in,
-                      imagePath: imagePath
+                    location_in: location_in,
+                    imagePath: imagePath
                 },
                 success: function(msg) {
-                if(msg == 'true' || msg === true)
-                    {
-                    Swal.fire({
-                    title: "Successfully Clocked In!",
-                    icon: "success",
-                    draggable: true
-                    });            
-                    checkTimeIn();
+                    if (msg == 'true' || msg === true) {
+                        Swal.fire({
+                            title: "Successfully Clocked In!",
+                            icon: "success",
+                            draggable: true
+                        });
+                        checkTimeIn();
+                    } else {
+                        Swal.fire({
+                            title: " Currently Clocked In!",
+                            icon: "error",
+                            draggable: true
+                        });
+                        checkTimeIn();
                     }
-                else {
-                    Swal.fire({
-                    title: " Currently Clocked In!",
-                    icon: "error",
-                    draggable: true
-                    });            
-                    checkTimeIn();
-                    }
-                
+
                 }
             });
 
         }
-    
-        function timeOut(address,imagePath) {
+
+        function timeOut(address, imagePath) {
             //alert(imagePath); return false;
             location_out = address;
             $.ajax({
                 type: 'POST',
                 url: "send_out",
                 data: {
-                      location_out: location_out,
-                      imagePath: imagePath
+                    location_out: location_out,
+                    imagePath: imagePath
                 },
                 success: function(msg) {
-                if(msg === 'success')
-                    {
-                    Swal.fire({
-                    title: "Successfully Clocked Out!",
-                    icon: "success",
-                    draggable: true
-                    });                    
-                    $("#timeOutBtn").hide();
-                    $("#timeInBtn").show();
-                    updateStatus('Not Clocked In', 'red');
-                    document.getElementById('timeInBtn').disabled = false; 
-                    }
-                    else {
+                    if (msg === 'success') {
                         Swal.fire({
-                    title: "Failed to  Clocked Out!",
-                    icon: "error",
-                    draggable: true
-                    });
-                    location.reload();
+                            title: "Successfully Clocked Out!",
+                            icon: "success",
+                            draggable: true
+                        });
+                        $("#timeOutBtn").hide();
+                        $("#timeInBtn").show();
+                        updateStatus('Not Clocked In', 'red');
+                        document.getElementById('timeInBtn').disabled = false;
+                    } else {
+                        Swal.fire({
+                            title: "Failed to  Clocked Out!",
+                            icon: "error",
+                            draggable: true
+                        });
+                        location.reload();
                     }
                 }
             });
         }
 
-//********************check if already clock in ************************//
+        //********************check if already clock in ************************//
         function checkTimeIn() {
             activity = "checkTimeIn";
             $.ajax({
                 type: 'POST',
                 url: activity,
-              //  dataType: "json",
+                //  dataType: "json",
                 data: {
-                       activity: activity
+                    activity: activity
                 },
                 success: function(msg) {
-               if(msg > 0)
-                    {
-                       //alert(msg); return false;
-                       $("#timeInBtn").hide();
-                       $("#timeOutBtn").show();
-                       updateStatus('Clocked In', 'green');
-                       document.getElementById('timeOutBtn').disabled = false; 
+                    if (msg > 0) {
+                        //alert(msg); return false;
+                        $("#timeInBtn").hide();
+                        $("#timeOutBtn").show();
+                        updateStatus('Clocked In', 'green');
+                        document.getElementById('timeOutBtn').disabled = false;
+                    } else {
+                        $("#timeOutBtn").hide();
+                        $("#timeInBtn").show();
+                        updateStatus('Not Clocked In', 'red');
+                        document.getElementById('timeInBtn').disabled = false;
                     }
-                    else
-                    {
-                     $("#timeOutBtn").hide();
-                     $("#timeInBtn").show();
-                       updateStatus('Not Clocked In', 'red');
-                       document.getElementById('timeInBtn').disabled = false;   
-                    }
-                //return false;
+                    //return false;
                 }
                 //$("#checking").html(msg);
             });
 
         }
-
-
     </script>
     <script id="dateUpdater">
         function updateCurrentDate() {
