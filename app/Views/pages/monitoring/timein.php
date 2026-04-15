@@ -983,13 +983,13 @@ ${photoHtml}
             localStorage.setItem('currentSessionStart', currentSessionStart.toISOString());
             updateStatus('Clocked In', 'green');
             updateLastAction('Clocked In', photoData, location_val);
-            //     document.getElementById('timeInBtn').disabled = true;
-            //    // $(#timeInBtn).disbale();
-            //     document.getElementById('timeOutBtn').disabled = false;
-            // showConfirmation(
-            //     `Successfully clocked in at ${lastActionTime.toLocaleTimeString('en-US')}`,
-            //     'Photo captured • Location verified • Device authenticated'
-            // );
+            document.getElementById('timeInBtn').disabled = true;
+            $(#timeInBtn).disbale();
+            document.getElementById('timeOutBtn').disabled = false;
+            showConfirmation(
+                `Successfully clocked in at ${lastActionTime.toLocaleTimeString('en-US')}`,
+                'Photo captured • Location verified • Device authenticated'
+            );
         }
 
         function handleTimeOut() {
