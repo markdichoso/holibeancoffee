@@ -984,7 +984,7 @@ ${photoHtml}
             updateStatus('Clocked In', 'green');
             updateLastAction('Clocked In', photoData, location_val);
             document.getElementById('timeInBtn').disabled = true;
-            $(timeInBtn).disable();
+           // $('timeInBtn').disable();
             document.getElementById('timeOutBtn').disabled = false;
             showConfirmation(
                 `Successfully clocked in at ${lastActionTime.toLocaleTimeString('en-US')}`,
@@ -1061,7 +1061,7 @@ ${photoHtml}
             setInterval(updateDurationDisplays, 1000);
             updateDurationDisplays();
             getHistory();
-            //$("#timeOutBtn").hide();
+            $("#timeOutBtn").hide();
             checkTimeIn();
             // setInterval(showLocation, 30000);
         });
