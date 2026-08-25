@@ -764,9 +764,6 @@
         }
 
         function updateDurationDisplays() {
-            resetDailyData();
-            resetWeeklyData();
-            resetMonthlyData();
             const now = new Date();
             let currentSessionMinutes = 0;
             if (isTimedIn && currentSessionStart) {
