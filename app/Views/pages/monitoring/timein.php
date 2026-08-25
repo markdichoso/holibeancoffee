@@ -1053,7 +1053,6 @@ ${photoHtml}
         // ******************************* first load of the page **************************************////
 
         document.addEventListener('DOMContentLoaded', () => {
-            alert("ok");
             resetDailyData();
             resetWeeklyData();
             resetMonthlyData();
